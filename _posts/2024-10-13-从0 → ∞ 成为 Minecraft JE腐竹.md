@@ -311,9 +311,9 @@ pause
 >
 > 尽管有扩展名，server.properties文件只是一个普通的UTF-8编码文本文件，因此可以使用任何文本编辑器进行编辑，比如Windows上的记事本、macOS上的TextEdit或者Linux上的nano和vim。
 
-下面是server.properties配置文件的重要部分的注释，还有一部分翻译一下就出来了
+下面是server.properties配置文件的重要部分的注释，还有一部分翻译一下就出来了~~(blog好像炸了)~~
 
-```json
+```text
 #Minecraft server properties
 #（文件修改时间戳）
 enable-jmx-monitoring=false

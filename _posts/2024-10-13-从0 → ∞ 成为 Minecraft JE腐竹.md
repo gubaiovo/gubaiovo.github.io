@@ -1,4 +1,3 @@
-```text
 ---
 layout:     post
 title:      从0 → ∞ 成为 Minecraft JE腐竹
@@ -10,7 +9,7 @@ catalog:   true
 tags:
     - Minecraft-JE-Server
 ---
-```
+
 
 # 从0 → ∞ 成为 Minecraft JE腐竹
 

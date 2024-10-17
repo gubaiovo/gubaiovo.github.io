@@ -1,16 +1,15 @@
-```text
 ---
 layout:     post
 title:      从 0 → int a = INT_MIN - 1 成为CTFer
-subtitle:   CTF
+subtitle:   网安永无止境！
 date:       2024-10-10
 author:     顾白
-header-img: img/the-first.png
-catalog:   true
+header-img: img/post-bg-recitewords.jpg
+catalog: false
 tags:
     - CTF
 ---
-```
+
 
 # 从 0 → int a = INT_MIN - 1 成为CTFer
 

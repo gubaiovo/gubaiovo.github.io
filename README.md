@@ -1,9 +1,3 @@
-项目来源：三叶草国际语
-
-三叶草国际语已更名为“格罗比言·全球语”，新的项目地址为：
-
-* 中文版：https://gitee.com/globien/globien
-* 英文版：https://github.com/globien/globien.github.io
 
 ### 致谢
 

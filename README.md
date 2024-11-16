@@ -6,10 +6,11 @@
 # 链接
 
 博客已同步至 vercel(推荐使用该路线，hexo url 已重定向到 vercel)
-|github(均无加速)|vercel|
-|------------------|------------------------------------------------|
-|gubaiovo.github.io|[原始含墙路线](gubaiovo-github-io-vtup.vercel.app)|
-|www.gubaiovo.com|[vercel cdn 加速路线](vercel.gubaiovo.com)|
+|路线|链接|
+|---|---|
+|github 路线(blog)|[https://gubaiovo.github.io/](https://gubaiovo.github.io/)|
+|vercel 路线(主页)|[https://www.gubaiovo.com/](http://www.gubaiovo.com/)|
+|vercel 路线(blog)|[https://blog.gubaiovo.com/](https://blog.gubaiovo.com/)|
 
 # 同步 Vercel 教程
 

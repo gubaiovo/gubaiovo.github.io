@@ -225,21 +225,14 @@
   </url>
   
   <url>
+    <loc>https://vercel.gubaiovo.com/tags/Minecraft/</loc>
+    <lastmod>2024-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://vercel.gubaiovo.com/tags/Python/</loc>
-    <lastmod>2024-11-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://vercel.gubaiovo.com/tags/Markdown/</loc>
-    <lastmod>2024-11-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://vercel.gubaiovo.com/tags/%E5%A4%96%E6%8C%82%E6%A0%87%E7%AD%BE/</loc>
     <lastmod>2024-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -260,7 +253,14 @@
   </url>
   
   <url>
-    <loc>https://vercel.gubaiovo.com/tags/Minecraft/</loc>
+    <loc>https://vercel.gubaiovo.com/tags/Markdown/</loc>
+    <lastmod>2024-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://vercel.gubaiovo.com/tags/%E5%A4%96%E6%8C%82%E6%A0%87%E7%AD%BE/</loc>
     <lastmod>2024-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -276,14 +276,14 @@
   </url>
   
   <url>
-    <loc>https://vercel.gubaiovo.com/categories/Python/</loc>
+    <loc>https://vercel.gubaiovo.com/categories/Minecraft/</loc>
     <lastmod>2024-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://vercel.gubaiovo.com/categories/%E6%A1%88%E4%BE%8B%E6%BC%94%E7%A4%BA/</loc>
+    <loc>https://vercel.gubaiovo.com/categories/Python/</loc>
     <lastmod>2024-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -304,7 +304,7 @@
   </url>
   
   <url>
-    <loc>https://vercel.gubaiovo.com/categories/Minecraft/</loc>
+    <loc>https://vercel.gubaiovo.com/categories/%E6%A1%88%E4%BE%8B%E6%BC%94%E7%A4%BA/</loc>
     <lastmod>2024-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

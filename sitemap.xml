@@ -225,20 +225,6 @@
   </url>
   
   <url>
-    <loc>https://blog.gubaiovo.com/tags/Python/</loc>
-    <lastmod>2024-11-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.gubaiovo.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2024-11-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.gubaiovo.com/tags/Markdown/</loc>
     <lastmod>2024-11-16</lastmod>
     <changefreq>weekly</changefreq>
@@ -254,6 +240,20 @@
   
   <url>
     <loc>https://blog.gubaiovo.com/tags/CTF/</loc>
+    <lastmod>2024-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.gubaiovo.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2024-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.gubaiovo.com/tags/Python/</loc>
     <lastmod>2024-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -276,7 +276,14 @@
   </url>
   
   <url>
-    <loc>https://blog.gubaiovo.com/categories/Python/</loc>
+    <loc>https://blog.gubaiovo.com/categories/%E6%A1%88%E4%BE%8B%E6%BC%94%E7%A4%BA/</loc>
+    <lastmod>2024-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.gubaiovo.com/categories/CTF/</loc>
     <lastmod>2024-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -290,14 +297,7 @@
   </url>
   
   <url>
-    <loc>https://blog.gubaiovo.com/categories/%E6%A1%88%E4%BE%8B%E6%BC%94%E7%A4%BA/</loc>
-    <lastmod>2024-11-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.gubaiovo.com/categories/CTF/</loc>
+    <loc>https://blog.gubaiovo.com/categories/Python/</loc>
     <lastmod>2024-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

@@ -7764,7 +7764,7 @@ input#pic-link {
 }
 
 /* 导航栏显示标题 */
-#page-name::before {
+/* #page-name::before {
   font-size: 18px;
   position: absolute;
   width: 100%;
@@ -7781,9 +7781,10 @@ input#pic-link {
   -ms-transition: all 0.3s;
   -o-transition: all 0.3s;
   opacity: 0;
-  box-shadow: 0 0 3px var(--theme-color) !important;
-  line-height: 45px; /*如果垂直位置不居中可以微调此值，也可以删了*/
-}
+  box-shadow: 0 0 3px var(--theme-color) !important; */
+  /*line-height: 45px; 如果垂直位置不居中可以微调此值，也可以删了*/
+/*}*/
+
 #page-name:hover:before {
   opacity: 1;
 }

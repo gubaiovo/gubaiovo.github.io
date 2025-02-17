@@ -13,15 +13,15 @@
 <meta property="og:site_name" content="GuBai">
 <meta property="og:description" content="🥧有没有更简单强势的语言(?)">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www.gubaiovo.com/assets/post_img/dev/Screenshot_20250209_085812.jpg">
-<meta property="og:image" content="https://www.gubaiovo.com/assets/post_img/dev/image-20250209091439376.png">
-<meta property="og:image" content="https://www.gubaiovo.com/assets/post_img/dev/Screenshot_20250209_092427.jpg">
+<meta property="og:image" content="https://www.gubaiovo.com/assets/post_img/dev/%E5%AE%89%E5%8D%93%E7%8E%AF%E5%A2%83%E4%B8%8BLua%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91%E5%88%9D%E4%BD%93%E9%AA%8C/Screenshot_20250209_085812.jpg">
+<meta property="og:image" content="https://www.gubaiovo.com/assets/post_img/dev/%E5%AE%89%E5%8D%93%E7%8E%AF%E5%A2%83%E4%B8%8BLua%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91%E5%88%9D%E4%BD%93%E9%AA%8C/image-20250209091439376.png">
+<meta property="og:image" content="https://www.gubaiovo.com/assets/post_img/dev/%E5%AE%89%E5%8D%93%E7%8E%AF%E5%A2%83%E4%B8%8BLua%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91%E5%88%9D%E4%BD%93%E9%AA%8C/Screenshot_20250209_092427.jpg">
 <meta property="article:published_time" content="2025-02-09T02:41:30.000Z">
-<meta property="article:modified_time" content="2025-02-12T14:34:36.216Z">
+<meta property="article:modified_time" content="2025-02-17T14:30:26.546Z">
 <meta property="article:author" content="gubai">
-<meta property="article:tag" content="开发">
+<meta property="article:tag" content="Dev">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.gubaiovo.com/assets/post_img/dev/Screenshot_20250209_085812.jpg">
+<meta name="twitter:image" content="https://www.gubaiovo.com/assets/post_img/dev/%E5%AE%89%E5%8D%93%E7%8E%AF%E5%A2%83%E4%B8%8BLua%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91%E5%88%9D%E4%BD%93%E9%AA%8C/Screenshot_20250209_085812.jpg">
     
     
       
@@ -157,14 +157,14 @@
       
     <div class="article-category">
         <i class="fa-solid fa-archive"></i>
-        <a class="category-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a>
+        <a class="category-link" href="/categories/Dev/">Dev</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fa-solid fa-tag"></i>
-        <a class="p-category" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a>
+        <a class="p-category" href="/tags/Dev/" rel="tag">Dev</a>
     </div>
 
 
@@ -186,11 +186,11 @@
 <p><strong>目标安卓版本</strong>：安卓9 &amp; 安卓12</p>
 <h2 id="创建项目">创建项目</h2>
 <p>进入 NeLuaJ+ ，右上角 <code>竖着的三个点</code> 选择 <code>项目...</code> → <code>创建项目</code></p>
-<p><img src="/assets/post_img/dev/Screenshot_20250209_085812.jpg" alt="Screenshot_20250209_085812"></p>
+<p><img src="/assets/post_img/dev/%E5%AE%89%E5%8D%93%E7%8E%AF%E5%A2%83%E4%B8%8BLua%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91%E5%88%9D%E4%BD%93%E9%AA%8C/Screenshot_20250209_085812.jpg" alt="Screenshot_20250209_085812"></p>
 <p>根据需要修改软件名称和包名，选择需要的模块。以 <code>一键清空图片/视频</code> 为例，修改名字后直接创建</p>
 <p>起名为 <code>imgCleaner</code> ，右上角 <code>横着的三条杠</code> 下进入根目录 <code>/storage/emulated/0/LuaJ/Project/imgCleaner/</code></p>
 <p>下文所有 <code>./</code> 即为 <code>/storage/emulated/0/LuaJ/Project/imgCleaner/</code>，也就是项目根目录下</p>
-<p><img src="/assets/post_img/dev/image-20250209091439376.png" alt="image-20250209091439376"></p>
+<p><img src="/assets/post_img/dev/%E5%AE%89%E5%8D%93%E7%8E%AF%E5%A2%83%E4%B8%8BLua%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91%E5%88%9D%E4%BD%93%E9%AA%8C/image-20250209091439376.png" alt="image-20250209091439376"></p>
 <h2 id="编写布局">编写布局</h2>
 <p>预期效果为：两个按钮，一个一键删掉图片，一个一键删掉视频</p>
 <p>先创建两个按钮(Button)，进入 <code>./res/layout/main.lua</code> ，这里编写布局</p>
@@ -199,7 +199,7 @@
 <p>删掉文本，添加两个Button控件</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import <span class="string">&quot;android.widget.*&quot;</span>, <span class="string">&quot;androidx.appcompat.widget.*&quot;</span>;</span><br><span class="line"><span class="keyword">return</span> &#123;</span><br><span class="line">  LinearLayout, <span class="comment">--线性布局</span></span><br><span class="line">  orientation=<span class="string">&quot;vertical&quot;</span>, <span class="comment">--竖向排列</span></span><br><span class="line">  layout_width=<span class="string">&quot;match&quot;</span>, <span class="comment">--宽度最大</span></span><br><span class="line">  layout_height=<span class="string">&quot;match&quot;</span>, <span class="comment">--高度最大</span></span><br><span class="line">  gravity=<span class="string">&quot;center&quot;</span>, <span class="comment">--子空间居中</span></span><br><span class="line">  &#123;</span><br><span class="line">    Button, <span class="comment">--按钮控件</span></span><br><span class="line">    text=<span class="string">&quot;清理图片&quot;</span>, <span class="comment">--按钮显示的文字(可选，没有text的话会显示没有文字的按钮)</span></span><br><span class="line">    id=<span class="string">&quot;imgclean&quot;</span>, <span class="comment">--按钮id，这个id是独一无二指向这个button，支持中文(不建议中文编程)</span></span><br><span class="line">    layout_width = <span class="string">&quot;200dp&quot;</span>, <span class="comment">--按钮宽度(可选)</span></span><br><span class="line">    layout_height = <span class="string">&quot;100dp&quot;</span>, <span class="comment">--按钮高度(可选)</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    Button,</span><br><span class="line">    text=<span class="string">&quot;清理视频&quot;</span>,</span><br><span class="line">    id=<span class="string">&quot;movclean&quot;</span>,</span><br><span class="line">    layout_width = <span class="string">&quot;200dp&quot;</span>,</span><br><span class="line">    layout_height = <span class="string">&quot;100dp&quot;</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>添加好控件后尝试运行，成功显示两个按钮</p>
-<p><img src="/assets/post_img/dev/Screenshot_20250209_092427.jpg" alt="Screenshot_20250209_092427"></p>
+<p><img src="/assets/post_img/dev/%E5%AE%89%E5%8D%93%E7%8E%AF%E5%A2%83%E4%B8%8BLua%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91%E5%88%9D%E4%BD%93%E9%AA%8C/Screenshot_20250209_092427.jpg" alt="Screenshot_20250209_092427"></p>
 <h2 id="编写逻辑">编写逻辑</h2>
 <p>现在按钮没有功能，需要返回到 <code>./main.lua</code> 编写</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import <span class="string">&quot;java.lang.*&quot;</span>,<span class="string">&quot;java.util.*&quot;</span></span><br><span class="line">import <span class="string">&quot;android.os.*&quot;</span>,<span class="string">&quot;android.app.*&quot;</span></span><br><span class="line">import <span class="string">&quot;android.content.*&quot;</span>,<span class="string">&quot;android.provider.*&quot;</span></span><br><span class="line">activity &#123;</span><br><span class="line">  Title = res.<span class="built_in">string</span>.app_title,</span><br><span class="line">  ContentView = res.layout.main</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>

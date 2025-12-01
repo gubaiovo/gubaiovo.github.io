@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="🥧爬爬爬，我最会爬了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爬取绿盟漏洞通报">
+<meta property="og:url" content="https://www.gubaiovo.com/posts/9b196f56.html">
+<meta property="og:site_name" content="GuBai">
+<meta property="og:description" content="🥧爬爬爬，我最会爬了">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E7%88%AC%E5%8F%96%E7%BB%BF%E7%9B%9F%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/image-20250227124753933.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E7%88%AC%E5%8F%96%E7%BB%BF%E7%9B%9F%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/image-20250227125237532.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E7%88%AC%E5%8F%96%E7%BB%BF%E7%9B%9F%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/image-20250227125932943.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E7%88%AC%E5%8F%96%E7%BB%BF%E7%9B%9F%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/image-20250227125821724.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E7%88%AC%E5%8F%96%E7%BB%BF%E7%9B%9F%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/image-20250227152835130.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E7%88%AC%E5%8F%96%E7%BB%BF%E7%9B%9F%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/image-20250227153045845.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E7%88%AC%E5%8F%96%E7%BB%BF%E7%9B%9F%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/image-20250227153525580.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E7%88%AC%E5%8F%96%E7%BB%BF%E7%9B%9F%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/image-20250227153921548.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E7%88%AC%E5%8F%96%E7%BB%BF%E7%9B%9F%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/image-20250227160420685.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E7%88%AC%E5%8F%96%E7%BB%BF%E7%9B%9F%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/image-20250227160802972.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E7%88%AC%E5%8F%96%E7%BB%BF%E7%9B%9F%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/image-20250227161131105.png">
+<meta property="article:published_time" content="2025-02-27T09:34:41.000Z">
+<meta property="article:modified_time" content="2025-12-01T15:30:07.963Z">
+<meta property="article:author" content="gubai">
+<meta property="article:tag" content="Dev">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E7%88%AC%E5%8F%96%E7%BB%BF%E7%9B%9F%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/image-20250227124753933.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>爬取绿盟漏洞通报</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/posts/ec277bd3.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/posts/a6f3e185.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/9b196f56.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/9b196f56.html&text=爬取绿盟漏洞通报"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/9b196f56.html&title=爬取绿盟漏洞通报"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/9b196f56.html&is_video=false&description=爬取绿盟漏洞通报"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=爬取绿盟漏洞通报&body=Check out this article: https://www.gubaiovo.com/posts/9b196f56.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/9b196f56.html&title=爬取绿盟漏洞通报"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/9b196f56.html&title=爬取绿盟漏洞通报"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/9b196f56.html&title=爬取绿盟漏洞通报"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/9b196f56.html&title=爬取绿盟漏洞通报"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/9b196f56.html&name=爬取绿盟漏洞通报&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/9b196f56.html&t=爬取绿盟漏洞通报"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">爬取绿盟漏洞通报</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-1-%E8%8E%B7%E5%8F%96%E9%A1%B5%E6%8A%A5%E5%91%8A%E5%88%97%E8%A1%A8-test-py"><span class="toc-number">1.1.</span> <span class="toc-text">Step.1 获取页报告列表 (test.py)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step2-%E8%8E%B7%E5%8F%96%E6%8A%A5%E5%91%8A%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF-detail-py"><span class="toc-number">1.2.</span> <span class="toc-text">Step2. 获取报告详细信息 (detail.py)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step3-%E5%86%99%E5%85%A5%E6%96%87%E4%BB%B6"><span class="toc-number">1.3.</span> <span class="toc-text">Step3. 写入文件</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        爬取绿盟漏洞通报
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">gubai</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-02-27T09:34:41.000Z" class="dt-published" itemprop="datePublished">2025-02-27</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Dev/">Dev</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Dev/" rel="tag">Dev</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1>爬取绿盟漏洞通报</h1>
+<p><a target="_blank" rel="noopener" href="https://avd.aliyun.com/high-risk/list">阿里云漏洞库</a>url有加密，目前还没研究出怎么绕过。<a target="_blank" rel="noopener" href="https://www.cnnvd.org.cn/">cnnvd</a>虽然公开xml文件，但是xml里的信息不全，没有漏洞修复建议。对爬虫了解不多，只会request。既想好爬又要信息全面，看了好几个漏洞库后发现<a target="_blank" rel="noopener" href="http://www.nsfocus.net/index.php?act=sec_bug">绿盟</a>完美符合这两大要求。</p>
+<h2 id="Step-1-获取页报告列表-test-py">Step.1 获取页报告列表 (<a target="_blank" rel="noopener" href="http://test.py">test.py</a>)</h2>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E7%88%AC%E5%8F%96%E7%BB%BF%E7%9B%9F%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/image-20250227124753933.png" alt="image-20250227124753933"></p>
+<p>列表页url结构：<code>http://www.nsfocus.net/index.php?act=sec_bug&amp;type_id=&amp;os=&amp;keyword=&amp;page=</code> + <code>页数</code></p>
+<p>修改page参数即可爬取对应页的通报列表。</p>
+<p>先尝试打印一下</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E7%88%AC%E5%8F%96%E7%BB%BF%E7%9B%9F%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/image-20250227125237532.png" alt="image-20250227125237532"></p>
+<p>中文乱码，设置编码utf-8，再用bs解析一下</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E7%88%AC%E5%8F%96%E7%BB%BF%E7%9B%9F%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/image-20250227125932943.png" alt="image-20250227125932943"></p>
+<p>成功获取页面内容，现在需要筛选 <code>日期(date)</code> <code>链接(link)</code> <code>标题(title)</code></p>
+<p>列表在 <code>vul_list</code> 下的 <code>&lt;li&gt;</code> 内</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E7%88%AC%E5%8F%96%E7%BB%BF%E7%9B%9F%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/image-20250227125821724.png" alt="image-20250227125821724"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span> = soup.find(<span class="string">&#x27;ul&#x27;</span>, class_=<span class="string">&#x27;vul_list&#x27;</span>).find_all(<span class="string">&#x27;li&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E7%88%AC%E5%8F%96%E7%BB%BF%E7%9B%9F%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/image-20250227152835130.png" alt="image-20250227152835130"></p>
+<p>提取三个信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> vul <span class="keyword">in</span> <span class="built_in">list</span>:</span><br><span class="line">    date = vul.find(<span class="string">&#x27;span&#x27;</span>).text</span><br><span class="line">    title = vul.find(<span class="string">&#x27;a&#x27;</span>).text</span><br><span class="line">    link = vul.find(<span class="string">&#x27;a&#x27;</span>)[<span class="string">&#x27;href&#x27;</span>]</span><br><span class="line">    <span class="built_in">print</span>(date, title, link)</span><br></pre></td></tr></table></figure>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E7%88%AC%E5%8F%96%E7%BB%BF%E7%9B%9F%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/image-20250227153045845.png" alt="image-20250227153045845"></p>
+<h2 id="Step2-获取报告详细信息-detail-py">Step2. 获取报告详细信息 (<a target="_blank" rel="noopener" href="http://detail.py">detail.py</a>)</h2>
+<p>为了让结构更清晰，在新的文件 <code>detail.py</code> 编写</p>
+<p>报告页面url结构：<code>http://www.nsfocus.net</code> + <code>link</code></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E7%88%AC%E5%8F%96%E7%BB%BF%E7%9B%9F%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/image-20250227153525580.png" alt="image-20250227153525580"></p>
+<p>先随意打印一页，能够正常抓取</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E7%88%AC%E5%8F%96%E7%BB%BF%E7%9B%9F%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/image-20250227153921548.png" alt="image-20250227153921548"></p>
+<p>期望获得的内容为：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>标题(title)(可选，因为上一步已经获取到了)</p>
+</li>
+<li class="lvl-2">
+<p>受影响的系统(affected_systems)</p>
+</li>
+<li class="lvl-2">
+<p>描述(description)</p>
+</li>
+<li class="lvl-2">
+<p>建议(suggestion)</p>
+</li>
+</ul>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E7%88%AC%E5%8F%96%E7%BB%BF%E7%9B%9F%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/image-20250227160420685.png" alt="image-20250227160420685"></p>
+<p>title和affected_systems很好获得</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">title = soup.find(<span class="string">&#x27;div&#x27;</span>, align=<span class="string">&#x27;center&#x27;</span>).text</span><br><span class="line">affected_systems = soup.find(<span class="string">&#x27;blockquote&#x27;</span>).text.strip()</span><br></pre></td></tr></table></figure>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E7%88%AC%E5%8F%96%E7%BB%BF%E7%9B%9F%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/image-20250227160802972.png" alt="image-20250227160802972"></p>
+<p>但是其他内容没有很明显的标志，基本都是 <code>br</code> ，通过 <code>split()</code> 分割会更简单</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">text = soup.find(<span class="string">&#x27;div&#x27;</span>, class_=<span class="string">&#x27;vulbar&#x27;</span>).text</span><br><span class="line">description = text.split(<span class="string">&#x27;描述：&#x27;</span>)[<span class="number">1</span>].split(<span class="string">&#x27;&lt;**&gt;&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line">suggestion = text.split(<span class="string">&#x27;&lt;**&gt;&#x27;</span>)[<span class="number">1</span>].split(<span class="string">&#x27;浏览次数&#x27;</span>)[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E7%88%AC%E5%8F%96%E7%BB%BF%E7%9B%9F%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/image-20250227161131105.png" alt="image-20250227161131105"></p>
+<p>将整个 <code>greb()</code> 函数修改为一个类 <code>Detail</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">headers = &#123;<span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:88.0) Gecko/20100101 Firefox/88.0&#x27;</span>&#125;</span><br><span class="line">base_url = <span class="string">r&#x27;http://www.nsfocus.net&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Detail</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, url</span>):</span><br><span class="line">        <span class="variable language_">self</span>.url = base_url + url</span><br><span class="line">        response = requests.get(<span class="variable language_">self</span>.url, headers=headers)</span><br><span class="line">        response.encoding = <span class="string">&#x27;utf-8&#x27;</span></span><br><span class="line">        <span class="variable language_">self</span>.soup = BeautifulSoup(response.text, <span class="string">&quot;html.parser&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.vulbar = <span class="variable language_">self</span>.soup.find(<span class="string">&#x27;div&#x27;</span>, class_=<span class="string">&#x27;vulbar&#x27;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.text = <span class="variable language_">self</span>.vulbar.text</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_title</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.soup.find(<span class="string">&#x27;div&#x27;</span>, align=<span class="string">&#x27;center&#x27;</span>).text</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_affected_systems</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.soup.find(<span class="string">&#x27;blockquote&#x27;</span>).text.strip()</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_description</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.text.split(<span class="string">&#x27;描述：&#x27;</span>)[<span class="number">1</span>].split(<span class="string">&#x27;建议：&#x27;</span>)[<span class="number">0</span>].replace(<span class="string">&#x27;&lt;*&#x27;</span>, <span class="string">&#x27;&#x27;</span>).replace(<span class="string">&#x27;*&gt;&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_suggestion</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.text.split(<span class="string">&#x27;*&gt;建议：&#x27;</span>)[<span class="number">1</span>].split(<span class="string">&#x27;浏览次数&#x27;</span>)[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<p>这样只需要调用访问函数即可</p>
+<h2 id="Step3-写入文件">Step3. 写入文件</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">from</span> detail <span class="keyword">import</span> Detail</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</span><br><span class="line"><span class="keyword">from</span> docx <span class="keyword">import</span> Document</span><br><span class="line"><span class="keyword">from</span> docx.oxml.ns <span class="keyword">import</span> qn</span><br><span class="line"><span class="keyword">from</span> docx.oxml <span class="keyword">import</span> OxmlElement</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pages = <span class="number">5</span></span><br><span class="line">output_dir = <span class="string">&#x27;output&#x27;</span></span><br><span class="line">os.makedirs(output_dir, exist_ok=<span class="literal">True</span>)</span><br><span class="line">headers = &#123;<span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:88.0) Gecko/20100101 Firefox/88.0&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">add_paragraph_with_font</span>(<span class="params">document, text</span>):</span><br><span class="line">    paragraph = document.add_paragraph(text)</span><br><span class="line">    </span><br><span class="line">    run = paragraph.runs[<span class="number">0</span>]</span><br><span class="line">    run.font.name = <span class="string">&#x27;宋体&#x27;</span></span><br><span class="line">    run._element.rPr.rFonts.<span class="built_in">set</span>(qn(<span class="string">&#x27;w:eastAsia&#x27;</span>), <span class="string">&#x27;宋体&#x27;</span>)</span><br><span class="line">    run._element.rPr.rFonts.<span class="built_in">set</span>(qn(<span class="string">&#x27;w:ascii&#x27;</span>), <span class="string">&#x27;宋体&#x27;</span>)</span><br><span class="line">    run._element.rPr.rFonts.<span class="built_in">set</span>(qn(<span class="string">&#x27;w:hAnsi&#x27;</span>), <span class="string">&#x27;宋体&#x27;</span>)</span><br><span class="line">    run._element.rPr.rFonts.<span class="built_in">set</span>(qn(<span class="string">&#x27;w:cs&#x27;</span>), <span class="string">&#x27;宋体&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> page <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, pages+<span class="number">1</span>):</span><br><span class="line">    url = <span class="string">r&#x27;http://www.nsfocus.net/index.php?act=sec_bug&amp;type_id=&amp;os=&amp;keyword=&amp;page=&#x27;</span>+<span class="built_in">str</span>(page)</span><br><span class="line">    response = requests.get(url, headers=headers)</span><br><span class="line">    response.encoding = <span class="string">&#x27;utf-8&#x27;</span>  </span><br><span class="line">    soup = BeautifulSoup(response.text, <span class="string">&quot;html.parser&quot;</span>)</span><br><span class="line">    <span class="built_in">list</span> = soup.find(<span class="string">&#x27;ul&#x27;</span>, class_=<span class="string">&#x27;vul_list&#x27;</span>).find_all(<span class="string">&#x27;li&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> vul <span class="keyword">in</span> <span class="built_in">list</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line"></span><br><span class="line">            date = vul.find(<span class="string">&#x27;span&#x27;</span>).text</span><br><span class="line">            title = vul.find(<span class="string">&#x27;a&#x27;</span>).text</span><br><span class="line">            link = vul.find(<span class="string">&#x27;a&#x27;</span>)[<span class="string">&#x27;href&#x27;</span>]</span><br><span class="line">            sleep(<span class="number">3</span>)</span><br><span class="line">            detail = Detail(link)</span><br><span class="line">            document = Document()</span><br><span class="line"></span><br><span class="line">            core_properties = document.core_properties</span><br><span class="line">            core_properties.author = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">            heading = document.add_heading(title, level=<span class="number">0</span>)</span><br><span class="line">            heading_run = heading.runs[<span class="number">0</span>]</span><br><span class="line">            heading_run.font.name = <span class="string">&#x27;宋体&#x27;</span></span><br><span class="line">            r = heading_run._element</span><br><span class="line">            rPr = r.get_or_add_rPr()</span><br><span class="line">            eastAsia = OxmlElement(<span class="string">&#x27;w:eastAsia&#x27;</span>)</span><br><span class="line">            eastAsia.<span class="built_in">set</span>(qn(<span class="string">&#x27;w:val&#x27;</span>), <span class="string">&#x27;宋体&#x27;</span>)</span><br><span class="line">            rPr.append(eastAsia)</span><br><span class="line">            <span class="comment"># sleep(1)</span></span><br><span class="line">            add_paragraph_with_font(document, <span class="string">&#x27;受影响版本：&#x27;</span>)</span><br><span class="line">            add_paragraph_with_font(document, detail.get_affected_systems())</span><br><span class="line">            document.add_paragraph(<span class="string">&#x27;&#x27;</span>) </span><br><span class="line">            <span class="comment"># sleep(1)</span></span><br><span class="line">            add_paragraph_with_font(document, <span class="string">&#x27;描述：&#x27;</span>)</span><br><span class="line">            add_paragraph_with_font(document, detail.get_description())</span><br><span class="line">            <span class="comment"># sleep(1)</span></span><br><span class="line">            add_paragraph_with_font(document, <span class="string">&#x27;建议：\n&#x27;</span>)</span><br><span class="line">            add_paragraph_with_font(document, detail.get_suggestion())</span><br><span class="line">            document.save(os.path.join(output_dir, <span class="string">f&quot;<span class="subst">&#123;date&#125;</span>-<span class="subst">&#123;title&#125;</span>.docx&quot;</span>))</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;发生错误: <span class="subst">&#123;title&#125;</span>  <span class="subst">&#123;link&#125;</span>, Error: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">continue</span></span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">文章</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+          <li><a href="/categories/">分类</a></li>
+        
+          <li><a href="/links/">链接</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">爬取绿盟漏洞通报</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-1-%E8%8E%B7%E5%8F%96%E9%A1%B5%E6%8A%A5%E5%91%8A%E5%88%97%E8%A1%A8-test-py"><span class="toc-number">1.1.</span> <span class="toc-text">Step.1 获取页报告列表 (test.py)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step2-%E8%8E%B7%E5%8F%96%E6%8A%A5%E5%91%8A%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF-detail-py"><span class="toc-number">1.2.</span> <span class="toc-text">Step2. 获取报告详细信息 (detail.py)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step3-%E5%86%99%E5%85%A5%E6%96%87%E4%BB%B6"><span class="toc-number">1.3.</span> <span class="toc-text">Step3. 写入文件</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/9b196f56.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/9b196f56.html&text=爬取绿盟漏洞通报"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/9b196f56.html&title=爬取绿盟漏洞通报"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/9b196f56.html&is_video=false&description=爬取绿盟漏洞通报"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=爬取绿盟漏洞通报&body=Check out this article: https://www.gubaiovo.com/posts/9b196f56.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/9b196f56.html&title=爬取绿盟漏洞通报"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/9b196f56.html&title=爬取绿盟漏洞通报"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/9b196f56.html&title=爬取绿盟漏洞通报"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/9b196f56.html&title=爬取绿盟漏洞通报"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/9b196f56.html&name=爬取绿盟漏洞通报&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/9b196f56.html&t=爬取绿盟漏洞通报"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2025
+    gubai
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

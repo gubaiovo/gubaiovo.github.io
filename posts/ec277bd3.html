@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="🥧固执地倒放着未完成的愿望">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MCDR-让你的MC服务器接入AI">
+<meta property="og:url" content="https://www.gubaiovo.com/posts/ec277bd3.html">
+<meta property="og:site_name" content="GuBai">
+<meta property="og:description" content="🥧固执地倒放着未完成的愿望">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E8%AE%A9%E4%BD%A0%E7%9A%84MC%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A5%E5%85%A5AI/image-20250301201042941.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E8%AE%A9%E4%BD%A0%E7%9A%84MC%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A5%E5%85%A5AI/image-20250301201259105.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E8%AE%A9%E4%BD%A0%E7%9A%84MC%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A5%E5%85%A5AI/image-20250301202714803.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E8%AE%A9%E4%BD%A0%E7%9A%84MC%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A5%E5%85%A5AI/image-20250301203949118.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E8%AE%A9%E4%BD%A0%E7%9A%84MC%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A5%E5%85%A5AI/image-20250301204154692.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E8%AE%A9%E4%BD%A0%E7%9A%84MC%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A5%E5%85%A5AI/image-20250301204236532.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E8%AE%A9%E4%BD%A0%E7%9A%84MC%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A5%E5%85%A5AI/image-20250301204301717.png">
+<meta property="article:published_time" content="2025-03-01T13:03:11.000Z">
+<meta property="article:modified_time" content="2025-12-01T15:30:07.963Z">
+<meta property="article:author" content="gubai">
+<meta property="article:tag" content="Minecraft">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="Dev">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E8%AE%A9%E4%BD%A0%E7%9A%84MC%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A5%E5%85%A5AI/image-20250301201042941.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>MCDR-让你的MC服务器接入AI</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/posts/c8ff3ca7.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/posts/9b196f56.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/ec277bd3.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/ec277bd3.html&text=MCDR-让你的MC服务器接入AI"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/ec277bd3.html&title=MCDR-让你的MC服务器接入AI"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/ec277bd3.html&is_video=false&description=MCDR-让你的MC服务器接入AI"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MCDR-让你的MC服务器接入AI&body=Check out this article: https://www.gubaiovo.com/posts/ec277bd3.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/ec277bd3.html&title=MCDR-让你的MC服务器接入AI"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/ec277bd3.html&title=MCDR-让你的MC服务器接入AI"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/ec277bd3.html&title=MCDR-让你的MC服务器接入AI"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/ec277bd3.html&title=MCDR-让你的MC服务器接入AI"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/ec277bd3.html&name=MCDR-让你的MC服务器接入AI&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/ec277bd3.html&t=MCDR-让你的MC服务器接入AI"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">[MCDR] 让你的MC服务器接入AI</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E6%AC%A1%E5%AF%B9%E8%AF%9D"><span class="toc-number">1.1.</span> <span class="toc-text">单次对话</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E8%BD%AE%E5%AF%B9%E8%AF%9D"><span class="toc-number">1.2.</span> <span class="toc-text">多轮对话</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ALL-CODES"><span class="toc-number">1.3.</span> <span class="toc-text">ALL CODES</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ENDS"><span class="toc-number">1.4.</span> <span class="toc-text">ENDS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Update"><span class="toc-number">1.5.</span> <span class="toc-text">Update</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        MCDR-让你的MC服务器接入AI
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">gubai</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-03-01T13:03:11.000Z" class="dt-published" itemprop="datePublished">2025-03-01</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Dev/">Dev</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/AI/" rel="tag">AI</a>, <a class="p-category" href="/tags/Dev/" rel="tag">Dev</a>, <a class="p-category" href="/tags/Minecraft/" rel="tag">Minecraft</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1>[MCDR] 让你的MC服务器接入AI</h1>
+<blockquote>
+<p>DeepSeek API终于恢复正常了。在ChatGPT刚出的时候就有过将GPT加入到MC服务器的想法，但是受限于当时的Java水平和财力，放弃了这个想法。今天下午看到DeepSeek API 开放充值了，决定实现一下曾经的想法</p>
+</blockquote>
+<p>这篇文章只是v1.0.0版，更新请移步github</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/gubaiovo/MCDR_chat_with_ai">github</a></p>
+<p><a target="_blank" rel="noopener" href="https://platform.deepseek.com/">DeepSeek 开放平台</a></p>
+<p><a target="_blank" rel="noopener" href="https://api-docs.deepseek.com/zh-cn/">DeepSeek API文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.mcdreforged.com/zh-cn/latest/plugin_dev/index.html">MCDR 插件开发</a></p>
+<p>其实之前<a target="_blank" rel="noopener" href="https://blog.gubaiovo.com/posts/693deb78.html">调用Ollama API</a>时积累了很多经验，核心交互基本都是照搬</p>
+<p>个人感觉MCDR官方文档写的过于简略了，写插件时磕磕碰碰的…</p>
+<p>首先到ds开放平台申请一个 API key，这里不做演示了</p>
+<p>基础核心逻辑为：<code>获取用户输入</code>→<code>发给ai，获得响应</code>→<code>把响应发给用户</code></p>
+<h2 id="单次对话">单次对话</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> mcdreforged.api.<span class="built_in">all</span> <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI</span><br><span class="line"></span><br><span class="line">PLUGIN_METADATA = &#123;</span><br><span class="line">    <span class="string">&#x27;id&#x27;</span>: <span class="string">&#x27;chat_with_ds&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;version&#x27;</span>: <span class="string">&#x27;1.0.0&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Chat with DeepSeek&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;description&#x27;</span>: <span class="string">&#x27;Let your server chat with DeepSeek!&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;author&#x27;</span>: <span class="string">&#x27;gubai&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ds_key = <span class="string">&quot;your-key&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">on_load</span>(<span class="params">server: ServerInterface, old_module</span>):</span><br><span class="line">    server.register_help_message(<span class="string">&#x27;!!ds &lt;message&gt;&#x27;</span>, <span class="string">&#x27;与DeepSeek对话&#x27;</span>)</span><br><span class="line">	<span class="comment"># 注册命令</span></span><br><span class="line">    server.register_command(</span><br><span class="line">        <span class="type">Literal</span>(<span class="string">&#x27;!!ds&#x27;</span>).then(</span><br><span class="line">            GreedyText(<span class="string">&#x27;msg&#x27;</span>).runs(get_user_content)</span><br><span class="line">        )</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_user_content</span>(<span class="params">source: CommandSource, context: CommandContext</span>):</span><br><span class="line">    msg = context[<span class="string">&#x27;msg&#x27;</span>]</span><br><span class="line">    <span class="keyword">if</span> source.is_player:</span><br><span class="line">        <span class="comment"># 给玩家直接回复</span></span><br><span class="line">        source.reply(<span class="string">f&quot;§a[DeepSeek]§r 收到你的消息：<span class="subst">&#123;msg&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="comment"># DeepSeek回复</span></span><br><span class="line">        source.reply(<span class="string">f&quot;§a[DeepSeek]§r <span class="subst">&#123;send_message_to_ds(msg)&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="comment"># 广播给所有玩家</span></span><br><span class="line">        <span class="comment"># source.get_server().execute(f&#x27;tellraw @a &#123;&#123;&quot;text&quot;:&quot;§6[系统广播]§r &#123;source.player&#125; 对DeepSeek说：&#123;msg&#125;&quot;&#125;&#125;&#x27;)</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        source.reply(<span class="string">&quot;§c该命令只能由玩家使用&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">send_message_to_ds</span>(<span class="params">msg: <span class="built_in">str</span></span>):</span><br><span class="line">    client = OpenAI(api_key=ds_key, base_url=<span class="string">&quot;https://api.deepseek.com&quot;</span>)</span><br><span class="line">    response = client.chat.completions.create(</span><br><span class="line">    model=<span class="string">&quot;deepseek-chat&quot;</span>,</span><br><span class="line">    messages=[</span><br><span class="line">        &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;system&quot;</span>, <span class="string">&quot;content&quot;</span>: <span class="string">&quot;You are a helpful assistant&quot;</span>&#125;,</span><br><span class="line">        &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>, <span class="string">&quot;content&quot;</span>: msg&#125;,</span><br><span class="line">    ],</span><br><span class="line">    stream=<span class="literal">False</span></span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">return</span> response.choices[<span class="number">0</span>].message.content</span><br></pre></td></tr></table></figure>
+<p>逻辑很简单，在入口注册命令 <code>!!ds &lt;message&gt;</code>，其中<code>&lt;message&gt;</code> 是玩家向ai发送的内容，调用 <code>get_user_content</code> ，将<code>&lt;message&gt;</code> 作为参数传入。</p>
+<p><code>GreedyText('msg')</code> 可以理解为 <code>&lt;message&gt;</code> 的key是 <code>msg</code> 。<code>context['msg']</code> 就是 <code>&lt;message&gt;</code> 。</p>
+<p><code>send_message_to_ds</code> 参考ds api文档</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E8%AE%A9%E4%BD%A0%E7%9A%84MC%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A5%E5%85%A5AI/image-20250301201042941.png" alt="image-20250301201042941"></p>
+<p>这样实现最简单的单次对话。将.py文件放入插件文件夹并重载，尝试第一次对话</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E8%AE%A9%E4%BD%A0%E7%9A%84MC%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A5%E5%85%A5AI/image-20250301201259105.png" alt="image-20250301201259105"></p>
+<h2 id="多轮对话">多轮对话</h2>
+<p>参考之前调用 Ollama API的经历，实际上就是把每次的输入和输出拼起来一起发给ai</p>
+<p>为了保证每次关服不丢失历史数据，且让玩家数据隔离，可以通过文件存储，其中文件以玩家名命名~~(为什么不用uuid？因为不知道MCDR uuid的接口是什么…)~~</p>
+<p>既然要实现多轮对话，那么查看对话历史和清空对话历史便是标配了。先在入口注册这几个命令。为了区分，用 <code>dsp</code> 作为主命令~~(deepseek plus)~~</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">on_load</span>(<span class="params">server: ServerInterface, old_module</span>):</span><br><span class="line">    server.register_help_message(<span class="string">&#x27;!!ds &lt;message&gt;&#x27;</span>, <span class="string">&#x27;与DeepSeek对话&#x27;</span>)</span><br><span class="line">    <span class="comment"># 使用现代命令构建方式</span></span><br><span class="line">    server.register_command(</span><br><span class="line">        <span class="type">Literal</span>(<span class="string">&#x27;!!dsp&#x27;</span>).then(</span><br><span class="line">            <span class="type">Literal</span>(<span class="string">&#x27;help&#x27;</span>).runs(get_help)</span><br><span class="line">        ).then(</span><br><span class="line">            <span class="type">Literal</span>(<span class="string">&#x27;history&#x27;</span>).runs(get_history)</span><br><span class="line">        ).then(</span><br><span class="line">            <span class="type">Literal</span>(<span class="string">&#x27;clear&#x27;</span>).runs(clear_history)</span><br><span class="line">        ).then(</span><br><span class="line">            GreedyText(<span class="string">&#x27;message&#x27;</span>).runs(get_user_content)</span><br><span class="line">        )</span><br><span class="line">    )</span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_help</span>(<span class="params">source: CommandSource</span>):</span><br><span class="line">    source.reply(<span class="string">&quot;§a[DeepSeek]§r 命令：\n&quot;</span></span><br><span class="line">                 <span class="string">&quot;§6!!dsp help§r 查看帮助\n&quot;</span></span><br><span class="line">                 <span class="string">&quot;§6!!dsp history§r 查看历史消息\n&quot;</span></span><br><span class="line">                 <span class="string">&quot;§6!!dsp clear§r 清空历史消息\n&quot;</span></span><br><span class="line">                 <span class="string">&quot;§6!!dsp &lt;message&gt;§r 与DeepSeek对话&quot;</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_history</span>(<span class="params">source: CommandSource</span>):</span><br><span class="line">	...</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">clear_history</span>(<span class="params">source: CommandSource</span>):</span><br><span class="line">	...</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_user_content</span>(<span class="params">source: CommandSource, context: CommandContext</span>):</span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
+<p>一定要注意的是注册命令顺序，<code>help</code> <code>history</code> <code>clear</code> 三个是并列的，但 <code>GreedyText</code> 属于 <strong>贪婪的文本参数</strong>，MCDR描述如下</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E8%AE%A9%E4%BD%A0%E7%9A%84MC%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A5%E5%85%A5AI/image-20250301202714803.png" alt="image-20250301202714803"></p>
+<p>如果把 <code>GreedyText('message').runs(get_user_content)</code> 放到第一个注册，那么会覆盖后面所有待注册的命令，也就是说，后面所有命令都将无效。</p>
+<p>为了让结构更清晰，我们可以定义一个数据管理类，专门对数据进行操作。</p>
+<p>MCDR 插件数据保存位置为根目录下的 <code>config</code> 文件夹下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path = <span class="string">&#x27;./config/DeepSeek/&#x27;</span> <span class="comment"># 这里DeepSeek代指插件文件夹</span></span><br></pre></td></tr></table></figure>
+<p>假设一个玩家叫 name，那么完整路径可以写为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path = <span class="string">&#x27;./config/DeepSeek/&#x27;</span> + name + <span class="string">&#x27;.json&#x27;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">DataManager</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, source: CommandSource, name: <span class="built_in">str</span></span>):</span><br><span class="line">        <span class="variable language_">self</span>.initial_message = [&#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;system&quot;</span>, <span class="string">&quot;content&quot;</span>: <span class="string">&quot;你是一个Minecraft助手，负责解答玩家关于Minecraft相关问题。解答问题时，要联系上下文，给出精确的答案。&quot;</span>&#125;]</span><br><span class="line">        <span class="variable language_">self</span>.source = source</span><br><span class="line">        <span class="variable language_">self</span>.name = name</span><br><span class="line">        <span class="variable language_">self</span>.history_path = <span class="string">&#x27;./config/DeepSeek/&#x27;</span> + name + <span class="string">&#x27;.json&#x27;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(<span class="variable language_">self</span>.history_path):</span><br><span class="line">            os.makedirs(os.path.dirname(<span class="variable language_">self</span>.history_path), exist_ok=<span class="literal">True</span>)</span><br><span class="line">            <span class="keyword">with</span> <span class="built_in">open</span>(<span class="variable language_">self</span>.history_path, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">                json.dump(<span class="variable language_">self</span>.initial_message, file)</span><br><span class="line">    <span class="comment"># 获取拼接好的message</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_send_message</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="variable language_">self</span>.history_path, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">            messages =  json.load(file)</span><br><span class="line">        <span class="keyword">return</span> messages</span><br><span class="line">	<span class="comment"># 获取历史消息</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_history</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="variable language_">self</span>.history_path, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">            messages =  json.load(file)</span><br><span class="line">        history = <span class="string">&quot;\n--------------------history--------------------\n&quot;</span></span><br><span class="line">        <span class="keyword">for</span> index, message <span class="keyword">in</span> <span class="built_in">enumerate</span>(messages):</span><br><span class="line">            history += <span class="string">f&quot;##<span class="subst">&#123;index&#125;</span>##: <span class="subst">&#123;message[<span class="string">&#x27;role&#x27;</span>]&#125;</span>: <span class="subst">&#123;message[<span class="string">&#x27;content&#x27;</span>]&#125;</span>\n&quot;</span></span><br><span class="line">        history += <span class="string">&quot;-----------------------------------------------\n&quot;</span></span><br><span class="line">        <span class="variable language_">self</span>.source.reply(history)</span><br><span class="line">    <span class="comment"># 向文件添加消息</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">add_message</span>(<span class="params">self, role: <span class="built_in">str</span>, user_input: <span class="built_in">str</span></span>):</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="variable language_">self</span>.history_path, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">            messages = json.load(file)</span><br><span class="line">        messages.append(&#123;<span class="string">&quot;role&quot;</span>: role, <span class="string">&quot;content&quot;</span>: user_input&#125;)</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="variable language_">self</span>.history_path, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">            json.dump(messages, file)</span><br><span class="line">    <span class="comment"># 清空历史</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">clear_history</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="variable language_">self</span>.history_path, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">            json.dump(<span class="variable language_">self</span>.initial_message, file)</span><br><span class="line">        <span class="variable language_">self</span>.source.reply(<span class="string">&quot;Clear history&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>因为向ai发送的请求中，message是一个列表，所以我们存储也应当是一个列表，这样只需要简单读取发送即可，而不需要考虑格式问题。关于 <code>role</code> <code>system</code> 等参数，参考调用Ollama API那篇文章</p>
+<p>这样命令的函数便很好写了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_history</span>(<span class="params">source: CommandSource</span>):</span><br><span class="line">    player_data = DataManager(source, source.player)</span><br><span class="line">    player_data.get_history()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">clear_history</span>(<span class="params">source: CommandSource</span>):</span><br><span class="line">    player_data = DataManager(source, source.player)</span><br><span class="line">    player_data.clear_history()</span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_user_content</span>(<span class="params">source: CommandSource, context: CommandContext</span>):</span><br><span class="line">    message = context[<span class="string">&#x27;message&#x27;</span>]</span><br><span class="line">    <span class="keyword">if</span> source.is_player:</span><br><span class="line">        player_data = DataManager(source, source.player)</span><br><span class="line">        player_data.add_message(<span class="string">&quot;user&quot;</span>, message)</span><br><span class="line">        source.reply(<span class="string">f&quot;§a[DeepSeek]§r 收到你的消息：<span class="subst">&#123;message&#125;</span>&quot;</span>)</span><br><span class="line">        send_message = player_data.get_send_message() <span class="comment"># 获取拼接好的message</span></span><br><span class="line">        response = send_message_to_ds(send_message)</span><br><span class="line">        source.reply(<span class="string">f&quot;§a[DeepSeek]§r <span class="subst">&#123;response&#125;</span>&quot;</span>)</span><br><span class="line">        player_data.add_message(<span class="string">&quot;assistant&quot;</span>, response)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        source.reply(<span class="string">&quot;§c该命令只能由玩家使用&quot;</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">send_message_to_ds</span>(<span class="params">send_message: <span class="built_in">str</span></span>):</span><br><span class="line">    client = OpenAI(api_key=key, base_url=<span class="string">&quot;https://api.deepseek.com&quot;</span>)</span><br><span class="line">    response = client.chat.completions.create(</span><br><span class="line">    model=<span class="string">&quot;deepseek-chat&quot;</span>,</span><br><span class="line">    messages=send_message,</span><br><span class="line">    stream=<span class="literal">False</span></span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">return</span> response.choices[<span class="number">0</span>].message.content</span><br></pre></td></tr></table></figure>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E8%AE%A9%E4%BD%A0%E7%9A%84MC%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A5%E5%85%A5AI/image-20250301203949118.png" alt="image-20250301203949118"></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E8%AE%A9%E4%BD%A0%E7%9A%84MC%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A5%E5%85%A5AI/image-20250301204154692.png" alt="image-20250301204154692"></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E8%AE%A9%E4%BD%A0%E7%9A%84MC%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A5%E5%85%A5AI/image-20250301204236532.png" alt="image-20250301204236532"></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E8%AE%A9%E4%BD%A0%E7%9A%84MC%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A5%E5%85%A5AI/image-20250301204301717.png" alt="image-20250301204301717"></p>
+<h2 id="ALL-CODES">ALL CODES</h2>
+<p>单次对话</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> mcdreforged.api.<span class="built_in">all</span> <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI</span><br><span class="line"></span><br><span class="line">PLUGIN_METADATA = &#123;</span><br><span class="line">    <span class="string">&#x27;id&#x27;</span>: <span class="string">&#x27;chat_with_ds&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;version&#x27;</span>: <span class="string">&#x27;1.0.0&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Chat with DeepSeek&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;description&#x27;</span>: <span class="string">&#x27;Let your server chat with DeepSeek!&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;author&#x27;</span>: <span class="string">&#x27;gubai&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ds_key = <span class="string">&quot;YOUR_API_KEY&quot;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">on_load</span>(<span class="params">server: ServerInterface, old_module</span>):</span><br><span class="line">    server.register_help_message(<span class="string">&#x27;!!ds &lt;message&gt;&#x27;</span>, <span class="string">&#x27;与DeepSeek对话&#x27;</span>)</span><br><span class="line">    server.register_command(</span><br><span class="line">        <span class="type">Literal</span>(<span class="string">&#x27;!!ds&#x27;</span>).then(</span><br><span class="line">            GreedyText(<span class="string">&#x27;msg&#x27;</span>).runs(get_user_content)</span><br><span class="line">        )</span><br><span class="line">    )</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_user_content</span>(<span class="params">source: CommandSource, context: CommandContext</span>):</span><br><span class="line">    msg = context[<span class="string">&#x27;msg&#x27;</span>]</span><br><span class="line">    <span class="keyword">if</span> source.is_player:</span><br><span class="line">        source.reply(<span class="string">f&quot;§a[DeepSeek]§r 收到你的消息：<span class="subst">&#123;msg&#125;</span>&quot;</span>)</span><br><span class="line">        source.reply(<span class="string">f&quot;§a[DeepSeek]§r <span class="subst">&#123;send_message_to_ds(msg)&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        source.reply(<span class="string">&quot;§c该命令只能由玩家使用&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">send_message_to_ds</span>(<span class="params">msg: <span class="built_in">str</span></span>):</span><br><span class="line">    client = OpenAI(api_key=ds_key, base_url=<span class="string">&quot;https://api.deepseek.com&quot;</span>)</span><br><span class="line">    response = client.chat.completions.create(</span><br><span class="line">    model=<span class="string">&quot;deepseek-chat&quot;</span>,</span><br><span class="line">    messages=[</span><br><span class="line">        &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;system&quot;</span>, <span class="string">&quot;content&quot;</span>: <span class="string">&quot;You are a helpful assistant&quot;</span>&#125;,</span><br><span class="line">        &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>, <span class="string">&quot;content&quot;</span>: msg&#125;,</span><br><span class="line">    ],</span><br><span class="line">    stream=<span class="literal">False</span></span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">return</span> response.choices[<span class="number">0</span>].message.content</span><br></pre></td></tr></table></figure>
+<p>多轮对话</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> mcdreforged.api.<span class="built_in">all</span> <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line">PLUGIN_METADATA = &#123;</span><br><span class="line">    <span class="string">&#x27;id&#x27;</span>: <span class="string">&#x27;chat_with_AI&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;version&#x27;</span>: <span class="string">&#x27;1.0.0&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Chat with AI&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;description&#x27;</span>: <span class="string">&#x27;Let your server chat with AI&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;author&#x27;</span>: <span class="string">&#x27;gubai&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">key = <span class="string">&quot;YOUR_API_KEY&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DataManager</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, source: CommandSource, name: <span class="built_in">str</span></span>):</span><br><span class="line">        <span class="variable language_">self</span>.initial_message = [&#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;system&quot;</span>, <span class="string">&quot;content&quot;</span>: <span class="string">&quot;你是一个Minecraft助手，负责解答玩家关于Minecraft相关问题。解答问题时，要联系上下文，给出精确的答案。&quot;</span>&#125;]</span><br><span class="line">        <span class="variable language_">self</span>.source = source</span><br><span class="line">        <span class="variable language_">self</span>.name = name</span><br><span class="line">        <span class="variable language_">self</span>.history_path = <span class="string">&#x27;./config/DeepSeek/&#x27;</span> + name + <span class="string">&#x27;.json&#x27;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(<span class="variable language_">self</span>.history_path):</span><br><span class="line">            os.makedirs(os.path.dirname(<span class="variable language_">self</span>.history_path), exist_ok=<span class="literal">True</span>)</span><br><span class="line">            <span class="keyword">with</span> <span class="built_in">open</span>(<span class="variable language_">self</span>.history_path, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">                json.dump(<span class="variable language_">self</span>.initial_message, file)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_send_message</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="variable language_">self</span>.history_path, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">            messages =  json.load(file)</span><br><span class="line">        <span class="keyword">return</span> messages</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_history</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="variable language_">self</span>.history_path, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">            messages =  json.load(file)</span><br><span class="line">        history = <span class="string">&quot;\n--------------------history--------------------\n&quot;</span></span><br><span class="line">        <span class="keyword">for</span> index, message <span class="keyword">in</span> <span class="built_in">enumerate</span>(messages):</span><br><span class="line">            history += <span class="string">f&quot;##<span class="subst">&#123;index&#125;</span>##: <span class="subst">&#123;message[<span class="string">&#x27;role&#x27;</span>]&#125;</span>: <span class="subst">&#123;message[<span class="string">&#x27;content&#x27;</span>]&#125;</span>\n&quot;</span></span><br><span class="line">        history += <span class="string">&quot;-----------------------------------------------\n&quot;</span></span><br><span class="line">        <span class="variable language_">self</span>.source.reply(history)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">add_message</span>(<span class="params">self, role: <span class="built_in">str</span>, user_input: <span class="built_in">str</span></span>):</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="variable language_">self</span>.history_path, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">            messages = json.load(file)</span><br><span class="line">        messages.append(&#123;<span class="string">&quot;role&quot;</span>: role, <span class="string">&quot;content&quot;</span>: user_input&#125;)</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="variable language_">self</span>.history_path, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">            json.dump(messages, file)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">clear_history</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="variable language_">self</span>.history_path, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">            json.dump(<span class="variable language_">self</span>.initial_message, file)</span><br><span class="line">        <span class="variable language_">self</span>.source.reply(<span class="string">&quot;Clear history&quot;</span>)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">on_load</span>(<span class="params">server: ServerInterface, old_module</span>):</span><br><span class="line">    server.register_help_message(<span class="string">&#x27;!!ds &lt;message&gt;&#x27;</span>, <span class="string">&#x27;与DeepSeek对话&#x27;</span>)</span><br><span class="line">    <span class="comment"># 使用现代命令构建方式</span></span><br><span class="line">    server.register_command(</span><br><span class="line">        <span class="type">Literal</span>(<span class="string">&#x27;!!dsp&#x27;</span>).then(</span><br><span class="line">            <span class="type">Literal</span>(<span class="string">&#x27;help&#x27;</span>).runs(get_help)</span><br><span class="line">        ).then(</span><br><span class="line">            <span class="type">Literal</span>(<span class="string">&#x27;history&#x27;</span>).runs(get_history)</span><br><span class="line">        ).then(</span><br><span class="line">            <span class="type">Literal</span>(<span class="string">&#x27;clear&#x27;</span>).runs(clear_history)</span><br><span class="line">        ).then(</span><br><span class="line">            GreedyText(<span class="string">&#x27;message&#x27;</span>).runs(get_user_content)</span><br><span class="line">        )</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_help</span>(<span class="params">source: CommandSource</span>):</span><br><span class="line">    source.reply(<span class="string">&quot;§a[DeepSeek]§r 命令：\n&quot;</span></span><br><span class="line">                 <span class="string">&quot;§6!!dsp help§r 查看帮助\n&quot;</span></span><br><span class="line">                 <span class="string">&quot;§6!!dsp history§r 查看历史消息\n&quot;</span></span><br><span class="line">                 <span class="string">&quot;§6!!dsp clear§r 清空历史消息\n&quot;</span></span><br><span class="line">                 <span class="string">&quot;§6!!dsp &lt;message&gt;§r 与DeepSeek对话&quot;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_user_content</span>(<span class="params">source: CommandSource, context: CommandContext</span>):</span><br><span class="line">    message = context[<span class="string">&#x27;message&#x27;</span>]</span><br><span class="line">    <span class="keyword">if</span> source.is_player:</span><br><span class="line">        player_data = DataManager(source, source.player)</span><br><span class="line">        player_data.add_message(<span class="string">&quot;user&quot;</span>, message)</span><br><span class="line">        <span class="comment"># 给玩家直接回复</span></span><br><span class="line">        source.reply(<span class="string">f&quot;§a[DeepSeek]§r 收到你的消息：<span class="subst">&#123;message&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="comment"># DeepSeek回复</span></span><br><span class="line">        send_message = player_data.get_send_message()</span><br><span class="line">        response = send_message_to_ds(send_message)</span><br><span class="line">        source.reply(<span class="string">f&quot;§a[DeepSeek]§r <span class="subst">&#123;response&#125;</span>&quot;</span>)</span><br><span class="line">        player_data.add_message(<span class="string">&quot;assistant&quot;</span>, response)</span><br><span class="line">        <span class="comment"># 广播给所有玩家</span></span><br><span class="line">        <span class="comment"># source.get_server().execute(f&#x27;tellraw @a &#123;&#123;&quot;text&quot;:&quot;§6[系统广播]§r &#123;source.player&#125; 对DeepSeek说：&#123;message&#125;&quot;&#125;&#125;&#x27;)</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        source.reply(<span class="string">&quot;§c该命令只能由玩家使用&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_history</span>(<span class="params">source: CommandSource</span>):</span><br><span class="line">    player_data = DataManager(source, source.player)</span><br><span class="line">    player_data.get_history()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">clear_history</span>(<span class="params">source: CommandSource</span>):</span><br><span class="line">    player_data = DataManager(source, source.player)</span><br><span class="line">    player_data.clear_history()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">send_message_to_ds</span>(<span class="params">send_message: <span class="built_in">str</span></span>):</span><br><span class="line">    client = OpenAI(api_key=key, base_url=<span class="string">&quot;https://api.deepseek.com&quot;</span>)</span><br><span class="line">    response = client.chat.completions.create(</span><br><span class="line">    model=<span class="string">&quot;deepseek-chat&quot;</span>,</span><br><span class="line">    messages=send_message,</span><br><span class="line">    stream=<span class="literal">False</span></span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">return</span> response.choices[<span class="number">0</span>].message.content</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="ENDS">ENDS</h2>
+<p>水平有限，代码写的很粗糙，但是也算是实现了曾经的愿望…</p>
+<blockquote>
+<p>世界生成算法吞下了我的十七岁。</p>
+<p>那封没寄出的信还在末地折跃门边缘，</p>
+<p>漂浮如未完成的红石电路。</p>
+<p>当第一个AI村民说出预设外的对白，</p>
+<p>我忽然听见2022年的自己，</p>
+<p>在矿洞深处敲打铁轨的节奏。</p>
+<p>那些被放弃的坐标参数，</p>
+<p>正在基岩层下重新编译春天。</p>
+</blockquote>
+<h2 id="Update">Update</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>2025.3.1   v1.0.0发布</p>
+</li>
+<li class="lvl-2">
+<p>2025.3.2   v1.1.0发布，更改架构为多文件，允许使用配置文件</p>
+</li>
+<li class="lvl-2">
+<p>2025.3.2   v1.2.0发布，支持修改前缀，删除多余提示</p>
+</li>
+<li class="lvl-2">
+<p>2025.3.2   v1.3.0发布，支持玩家自定义前缀/预设，优化命令注册，使用uuid存储</p>
+</li>
+<li class="lvl-2">
+<p>2025.3.3   v1.4.0发布，将对话移入单独的线程，支持多语言，使用uuid存储，优化显示，支持权限管理</p>
+</li>
+<li class="lvl-2">
+<p>2025.3.13  v1.4.1发布，修复了检索不到玩家的UUID时，玩家无法使用插件功能的bug</p>
+</li>
+<li class="lvl-2">
+<p>2025.3.13  v1.4.2发布，优化了 KeyError 的问题</p>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">文章</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+          <li><a href="/categories/">分类</a></li>
+        
+          <li><a href="/links/">链接</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">[MCDR] 让你的MC服务器接入AI</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E6%AC%A1%E5%AF%B9%E8%AF%9D"><span class="toc-number">1.1.</span> <span class="toc-text">单次对话</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E8%BD%AE%E5%AF%B9%E8%AF%9D"><span class="toc-number">1.2.</span> <span class="toc-text">多轮对话</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ALL-CODES"><span class="toc-number">1.3.</span> <span class="toc-text">ALL CODES</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ENDS"><span class="toc-number">1.4.</span> <span class="toc-text">ENDS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Update"><span class="toc-number">1.5.</span> <span class="toc-text">Update</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/ec277bd3.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/ec277bd3.html&text=MCDR-让你的MC服务器接入AI"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/ec277bd3.html&title=MCDR-让你的MC服务器接入AI"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/ec277bd3.html&is_video=false&description=MCDR-让你的MC服务器接入AI"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MCDR-让你的MC服务器接入AI&body=Check out this article: https://www.gubaiovo.com/posts/ec277bd3.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/ec277bd3.html&title=MCDR-让你的MC服务器接入AI"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/ec277bd3.html&title=MCDR-让你的MC服务器接入AI"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/ec277bd3.html&title=MCDR-让你的MC服务器接入AI"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/ec277bd3.html&title=MCDR-让你的MC服务器接入AI"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/ec277bd3.html&name=MCDR-让你的MC服务器接入AI&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/ec277bd3.html&t=MCDR-让你的MC服务器接入AI"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2025
+    gubai
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

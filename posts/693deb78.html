@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="🥧开荒">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ollama API &amp; DeepSeek API 综合利用">
+<meta property="og:url" content="https://www.gubaiovo.com/posts/693deb78.html">
+<meta property="og:site_name" content="GuBai">
+<meta property="og:description" content="🥧开荒">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/Ollama_API_&amp;_DeepSeek_API_%E7%BB%BC%E5%90%88%E5%88%A9%E7%94%A8/model_list.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/Ollama_API_&amp;_DeepSeek_API_%E7%BB%BC%E5%90%88%E5%88%A9%E7%94%A8/model_info.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/Ollama_API_&amp;_DeepSeek_API_%E7%BB%BC%E5%90%88%E5%88%A9%E7%94%A8/preferences.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/Ollama_API_&amp;_DeepSeek_API_%E7%BB%BC%E5%90%88%E5%88%A9%E7%94%A8/test_stream.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/Ollama_API_&amp;_DeepSeek_API_%E7%BB%BC%E5%90%88%E5%88%A9%E7%94%A8/test_stream2.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/Ollama_API_&amp;_DeepSeek_API_%E7%BB%BC%E5%90%88%E5%88%A9%E7%94%A8/python_test.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/Ollama_API_&amp;_DeepSeek_API_%E7%BB%BC%E5%90%88%E5%88%A9%E7%94%A8/why_delta.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/Ollama_API_&amp;_DeepSeek_API_%E7%BB%BC%E5%90%88%E5%88%A9%E7%94%A8/test.png">
+<meta property="article:published_time" content="2025-02-17T14:27:50.000Z">
+<meta property="article:modified_time" content="2026-02-15T09:20:27.317Z">
+<meta property="article:author" content="gubai">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="Dev">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image.gubaiovo.com/blog/post_img/dev/Ollama_API_&amp;_DeepSeek_API_%E7%BB%BC%E5%90%88%E5%88%A9%E7%94%A8/model_list.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Ollama API &amp; DeepSeek API 综合利用</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/posts/a6f3e185.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/posts/4338f95.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/693deb78.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/693deb78.html&text=Ollama API &amp; DeepSeek API 综合利用"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/693deb78.html&title=Ollama API &amp; DeepSeek API 综合利用"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/693deb78.html&is_video=false&description=Ollama API &amp; DeepSeek API 综合利用"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Ollama API &amp; DeepSeek API 综合利用&body=Check out this article: https://www.gubaiovo.com/posts/693deb78.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/693deb78.html&title=Ollama API &amp; DeepSeek API 综合利用"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/693deb78.html&title=Ollama API &amp; DeepSeek API 综合利用"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/693deb78.html&title=Ollama API &amp; DeepSeek API 综合利用"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/693deb78.html&title=Ollama API &amp; DeepSeek API 综合利用"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/693deb78.html&name=Ollama API &amp; DeepSeek API 综合利用&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/693deb78.html&t=Ollama API &amp; DeepSeek API 综合利用"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Ollama API &amp; DeepSeek API 综合利用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-number">1.1.</span> <span class="toc-text">环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">1.2.</span> <span class="toc-text">创建客户端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AE%E5%AE%9A%E6%A8%A1%E5%9E%8B%E4%BF%A1%E6%81%AF"><span class="toc-number">1.3.</span> <span class="toc-text">确定模型信息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E5%87%BA%E6%9C%AC%E5%9C%B0%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">列出本地模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E6%A8%A1%E5%9E%8B%E4%BF%A1%E6%81%AF"><span class="toc-number">1.3.0.2.</span> <span class="toc-text">显示模型信息</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E5%AF%B9%E8%AF%9D%E6%B5%8B%E8%AF%95"><span class="toc-number">1.4.</span> <span class="toc-text">简单对话测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#POST"><span class="toc-number">1.4.1.</span> <span class="toc-text">POST</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#python"><span class="toc-number">1.4.2.</span> <span class="toc-text">python</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E6%B5%81%E5%BC%8F"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">非流式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%81%E5%BC%8F"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">流式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number">1.5.</span> <span class="toc-text">扩展上下文</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Ollama API &amp; DeepSeek API 综合利用
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">gubai</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-02-17T14:27:50.000Z" class="dt-published" itemprop="datePublished">2025-02-17</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Dev/">Dev</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/AI/" rel="tag">AI</a>, <a class="p-category" href="/tags/Dev/" rel="tag">Dev</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1>Ollama API &amp; DeepSeek API 综合利用</h1>
+<blockquote>
+<p>小道消息知道学校拿ollama跑满血deepseek r1和v3，但是学校没有做ui，ds官方api也不能完全用到ollama上，于是自己探索了下ollama api文档，初步实现多轮交互、历史记录查询</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://api-docs.deepseek.com/zh-cn/">deepseek api文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.llamafactory.cn/ollama-docs/">ollama api文档中文翻译</a></p>
+<h2 id="环境">环境</h2>
+<p><strong>工具</strong>：python+ide，一个能发各种请求的工具(这里用的 <a target="_blank" rel="noopener" href="https://insomnia.rest/download">Insomnia</a> )</p>
+<p>核心python库：<strong>openai</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install openai</span><br></pre></td></tr></table></figure>
+<p>deepseek 兼容 openai，ollama 也兼容 openai，所以用 openai 发请求比直接发 post 方便很多</p>
+<h2 id="创建客户端">创建客户端</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI</span><br><span class="line"></span><br><span class="line">client = OpenAI(api_key=<span class="string">&quot;666&quot;</span>, base_url=<span class="string">&quot;http://xx.xx.xx.xx:11434/v1&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><code>api_key</code> 是令牌内容，本地部署的 ollama 一般没有令牌限制，所以可以随意填</p>
+<p><code>base_url</code> 是目标ollama所在服务器ip，<code>11434</code> 为ollama默认端口，<code>/v1</code> 是根据deepseek api描述，用来兼容openai。原文如下</p>
+<blockquote>
+<p>出于与 OpenAI 兼容考虑，您也可以将 <code>base_url</code> 设置为 <code>https://api.deepseek.com/v1</code> 来使用，但注意，此处 <code>v1</code> 与模型版本无关。</p>
+</blockquote>
+<h2 id="确定模型信息">确定模型信息</h2>
+<blockquote>
+<h4 id="列出本地模型">列出本地模型</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /api/tags</span><br></pre></td></tr></table></figure>
+<h4 id="显示模型信息">显示模型信息</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST /api/show</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>首先 GET 查看有哪些模型（这一步可以不用请求工具，直接访问 <code>/api/tags</code> 也会有回显）</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/Ollama_API_&amp;_DeepSeek_API_%E7%BB%BC%E5%90%88%E5%88%A9%E7%94%A8/model_list.png" alt="image-20250217195231884"></p>
+<p>可以看到这台机子跑了一个 <code>deepseek-v3:latest</code>，参数 671b</p>
+<p>(可选)查看模型信息</p>
+<p>发送 post 到 <code>/api/show</code></p>
+<p>body填入：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;model&quot;</span><span class="punctuation">:</span> <span class="string">&quot;要查询的模型&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>会得到非常长的一个响应，模型主要信息在下面</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/Ollama_API_&amp;_DeepSeek_API_%E7%BB%BC%E5%90%88%E5%88%A9%E7%94%A8/model_info.png" alt="image-20250217195510361"></p>
+<h2 id="简单对话测试">简单对话测试</h2>
+<p>确定好模型信息，就可以向 <code>/api/chat</code> 发一个简单的对话测试了。可以通过post发送，也可以python发送</p>
+<h3 id="POST">POST</h3>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;model&quot;</span><span class="punctuation">:</span> <span class="string">&quot;deepseek-v3:latest&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;messages&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;role&quot;</span><span class="punctuation">:</span> <span class="string">&quot;system&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;content&quot;</span><span class="punctuation">:</span> <span class="string">&quot;你是一名高级Java程序员，擅长处理各种BUG以及编写高质量代码&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;role&quot;</span><span class="punctuation">:</span> <span class="string">&quot;user&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;content&quot;</span><span class="punctuation">:</span> <span class="string">&quot;请帮我使用Java写一个HelloWorld示例&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;stream&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;temperature&quot;</span><span class="punctuation">:</span> <span class="number">0.2</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p><code>model</code> 填入目标模型名(必填)</p>
+<p><code>messages</code> 为发送的内容</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>role</code> 为角色。<code>system</code> 可以直接理解为人设，<code>user</code> 可以直接理解为用户。这里的写法和 ollama 的 Modelfile 很相似。</p>
+</li>
+<li class="lvl-2">
+<p><code>content</code> 代表内容</p>
+</li>
+</ul>
+<p><code>stream</code> 为是否启用字节流。启用字节流的效果为将输出分为多个数据块，也就是ai边想边输出。不启用则为ai响应完毕后，将内容合并一整块返回</p>
+<p><code>options</code> 为一些附加选项，可以不写此项。这里写的 <code>temperature</code> 可以认为 “严肃程度”，这个值越高，得到的内容越丰富(发散)</p>
+<p>还有一些选项，可以完全按照 ollama 的 Modelfile 填写</p>
+<p>发送post请求响应可能会很久，但是Insomnia默认超过30s就是请求超时，所以需要调整一下最大等待时间</p>
+<p>Insomnia右上角 <code>Application</code> → <code>Preferences</code> 进入 <code>General</code> 选项卡，下滑，将 <code>Request timeout</code> 改为0(即为不限制超时)</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/Ollama_API_&amp;_DeepSeek_API_%E7%BB%BC%E5%90%88%E5%88%A9%E7%94%A8/preferences.png" alt="image-20250217201332940"></p>
+<p>现在尝试发送请求</p>
+<p>stream true：</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/Ollama_API_&amp;_DeepSeek_API_%E7%BB%BC%E5%90%88%E5%88%A9%E7%94%A8/test_stream.png" alt="image-20250217201511278"></p>
+<p>stream false：</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/Ollama_API_&amp;_DeepSeek_API_%E7%BB%BC%E5%90%88%E5%88%A9%E7%94%A8/test_stream2.png" alt="image-20250217201653861"></p>
+<p>ai 可以正常回显，接下来尝试python发送请求(openai)</p>
+<h3 id="python">python</h3>
+<h4 id="非流式">非流式</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI</span><br><span class="line"></span><br><span class="line">client = OpenAI(api_key=<span class="string">&quot;666&quot;</span>, base_url=<span class="string">&quot;http://xx.xx.xx.xx:11434/v1&quot;</span>)</span><br><span class="line"></span><br><span class="line">response = client.chat.completions.create(</span><br><span class="line">    model=<span class="string">&quot;deepseek-v3:latest&quot;</span>,</span><br><span class="line">    messages=[</span><br><span class="line">        &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;system&quot;</span>, <span class="string">&quot;content&quot;</span>: <span class="string">&quot;You are a helpful assistant&quot;</span>&#125;,</span><br><span class="line">        &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>, <span class="string">&quot;content&quot;</span>: <span class="string">&quot;Hello&quot;</span>&#125;,</span><br><span class="line">    ],</span><br><span class="line">    stream=<span class="literal">False</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(response.choices[<span class="number">0</span>].message.content)</span><br></pre></td></tr></table></figure>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/Ollama_API_&amp;_DeepSeek_API_%E7%BB%BC%E5%90%88%E5%88%A9%E7%94%A8/python_test.png" alt="image-20250217202528348"></p>
+<h4 id="流式">流式</h4>
+<p>和非流式的输出有所不同，需要添加一个循环，逐个打印字节流</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI</span><br><span class="line"></span><br><span class="line">client = OpenAI(api_key=<span class="string">&quot;666&quot;</span>, base_url=<span class="string">&quot;http://xx.xx.xx.xx:11434/v1&quot;</span>)</span><br><span class="line"></span><br><span class="line">response = client.chat.completions.create(</span><br><span class="line">    model=<span class="string">&quot;deepseek-v3:latest&quot;</span>,</span><br><span class="line">    messages=[</span><br><span class="line">        &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;system&quot;</span>, <span class="string">&quot;content&quot;</span>: <span class="string">&quot;You are a helpful assistant&quot;</span>&#125;,</span><br><span class="line">        &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>, <span class="string">&quot;content&quot;</span>: <span class="string">&quot;Hello&quot;</span>&#125;,</span><br><span class="line">    ],</span><br><span class="line">    stream=<span class="literal">True</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> chunk <span class="keyword">in</span> response:</span><br><span class="line">    <span class="built_in">print</span>(chunk.choices[<span class="number">0</span>].delta.content, end=<span class="string">&#x27;&#x27;</span>, flush=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p>这里的 <code>chunk</code> 是 openai 中的 “块”，参考上方 POST 发送流式请求，chunk代表每一个数据块。</p>
+<p><code>choices</code>是 openai 响应中的第一个 <code>choice</code> 对象。<code>choices</code>是一个列表，包含了包含增量更新的内容。</p>
+<blockquote>
+<p>也许会疑惑，在上面的 post 请求中没有看到choices和delta，他们是从哪来的</p>
+<p>实际上这是openai的问题，我们使用的是兼容openai的 /v1 端点，实际上，请求发送到了 /v1/chat/completions</p>
+<p>为了进一步探究这个问题，我们可以向 /v1/chat/completions 发送 post</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/Ollama_API_&amp;_DeepSeek_API_%E7%BB%BC%E5%90%88%E5%88%A9%E7%94%A8/why_delta.png" alt="image-20250217203822560"></p>
+<p>单独看一个数据块</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data<span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="attr">&quot;id&quot;</span><span class="punctuation">:</span><span class="string">&quot;chatcmpl-977&quot;</span><span class="punctuation">,</span><span class="attr">&quot;object&quot;</span><span class="punctuation">:</span><span class="string">&quot;chat.completion.chunk&quot;</span><span class="punctuation">,</span><span class="attr">&quot;created&quot;</span><span class="punctuation">:</span><span class="number">1739795748</span><span class="punctuation">,</span><span class="attr">&quot;model&quot;</span><span class="punctuation">:</span><span class="string">&quot;deepseek-v3:latest&quot;</span><span class="punctuation">,</span><span class="attr">&quot;system_fingerprint&quot;</span><span class="punctuation">:</span><span class="string">&quot;fp_ollama&quot;</span><span class="punctuation">,</span><span class="attr">&quot;choices&quot;</span><span class="punctuation">:</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="attr">&quot;index&quot;</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">,</span><span class="attr">&quot;delta&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span><span class="attr">&quot;role&quot;</span><span class="punctuation">:</span><span class="string">&quot;assistant&quot;</span><span class="punctuation">,</span><span class="attr">&quot;content&quot;</span><span class="punctuation">:</span><span class="string">&quot;当然&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span><span class="attr">&quot;finish_reason&quot;</span><span class="punctuation">:</span><span class="literal"><span class="keyword">null</span></span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>稍微修正一下(去掉data:后json格式化)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;chatcmpl-977&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;object&quot;</span><span class="punctuation">:</span> <span class="string">&quot;chat.completion.chunk&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;created&quot;</span><span class="punctuation">:</span> <span class="number">1739795748</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;model&quot;</span><span class="punctuation">:</span> <span class="string">&quot;deepseek-v3:latest&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;system_fingerprint&quot;</span><span class="punctuation">:</span> <span class="string">&quot;fp_ollama&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;choices&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;index&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;delta&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;role&quot;</span><span class="punctuation">:</span> <span class="string">&quot;assistant&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;content&quot;</span><span class="punctuation">:</span> <span class="string">&quot;当然&quot;</span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;finish_reason&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>这样就很清楚了，这一整块就是所谓的 <code>chunk</code>，<code>choices[0]</code> 指的是第一组花括号的内容，delta.content就是这个字节流的内容。</p>
+<p>于是，chunk.choices[0].delta.content 就可以访问到这个字节流的内容。由于print默认结尾为回车，需要指定为空字符来避免每个字节流都换行。最后的flush用来刷新缓冲区。</p>
+<p>也许会有怀疑，这是真流式还是假流式，是真的ai一边想一边输出，还是主动将输出分割成一个个小块然后伪造流式输出的样子。其实可以比较输出时间，非流式输出响应时间很长很长，而流式输出响应很快。这里不做演示，可以自行尝试。</p>
+</blockquote>
+<h2 id="扩展上下文">扩展上下文</h2>
+<p>多尝试几次简单对话可以发现，ai本身没有记忆上下文，每次都是新的对话</p>
+<p>deepseek api文档对此也有介绍：</p>
+<blockquote>
+<p>DeepSeek <code>/chat/completions</code> API 是一个“无状态” API，即服务端不记录用户请求的上下文，用户在每次请求时，<strong>需将之前所有对话历史拼接好后</strong>，传递给对话 API。</p>
+</blockquote>
+<p>文档中保持上下文的示例：</p>
+<blockquote>
+<p>在<strong>第一轮</strong>请求时，传递给 API 的 <code>messages</code> 为：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span><span class="attr">&quot;role&quot;</span><span class="punctuation">:</span> <span class="string">&quot;user&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;content&quot;</span><span class="punctuation">:</span> <span class="string">&quot;What&#x27;s the highest mountain in the world?&quot;</span><span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+<p>在<strong>第二轮</strong>请求时：</p>
+<ol>
+<li class="lvl-3">
+<p>要将第一轮中模型的输出添加到 <code>messages</code> 末尾</p>
+</li>
+<li class="lvl-3">
+<p>将新的提问添加到 <code>messages</code> 末尾</p>
+</li>
+</ol>
+<p>最终传递给 API 的 <code>messages</code> 为：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span><span class="attr">&quot;role&quot;</span><span class="punctuation">:</span> <span class="string">&quot;user&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;content&quot;</span><span class="punctuation">:</span> <span class="string">&quot;What&#x27;s the highest mountain in the world?&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span><span class="attr">&quot;role&quot;</span><span class="punctuation">:</span> <span class="string">&quot;assistant&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;content&quot;</span><span class="punctuation">:</span> <span class="string">&quot;The highest mountain in the world is Mount Everest.&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span><span class="attr">&quot;role&quot;</span><span class="punctuation">:</span> <span class="string">&quot;user&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;content&quot;</span><span class="punctuation">:</span> <span class="string">&quot;What is the second?&quot;</span><span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>所以需要做的就是，记录每一次输入和输出作为 <code>old_message</code>，追加新的 <code>user content</code>，构成一个新的 <code>message</code> 发送给ai，记录 <code>ai content</code>，追加到 <code>message</code> 尾部，如此循环。</p>
+<p>先定义一个初始message</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">messages = [&#123;</span><br><span class="line">    <span class="string">&quot;role&quot;</span>: <span class="string">&quot;system&quot;</span>, </span><br><span class="line">    <span class="string">&quot;content&quot;</span>: <span class="string">&quot;你需严格跟踪对话历史（位于[系统消息]之后），始终保持对话连贯性。响应时需主动关联先前讨论内容。&quot;</span></span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
+<p>进入Q&amp;A循环</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    user_input = <span class="built_in">input</span>(<span class="string">&quot;##user##: &quot;</span>)</span><br><span class="line">    </span><br><span class="line">    messages.append(&#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>, <span class="string">&quot;content&quot;</span>: user_input&#125;)</span><br><span class="line"></span><br><span class="line">    response = client.chat.completions.create(  <span class="comment"># 生成对话</span></span><br><span class="line">        model=<span class="string">&quot;deepseek-v3:latest&quot;</span>,</span><br><span class="line">        messages=messages,</span><br><span class="line">        stream=<span class="literal">True</span>     <span class="comment"># 流式对话</span></span><br><span class="line">    )</span><br><span class="line">	<span class="comment"># 打印对话</span></span><br><span class="line">	<span class="comment"># 添加对话记录</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>这里用的是流式对话，参考上方流式对话示例，定义一个新的函数 <code>print_messages()</code> 用于打印流式响应内容</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">print_messages</span>(<span class="params">response</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;##ds##: &quot;</span>, end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span> chunk <span class="keyword">in</span> response:</span><br><span class="line">        <span class="built_in">print</span>(chunk.choices[<span class="number">0</span>].delta.content, end=<span class="string">&#x27;&#x27;</span>, flush=<span class="literal">True</span>)</span><br><span class="line">    <span class="built_in">print</span>()</span><br></pre></td></tr></table></figure>
+<p>为了方便，将流式相应内容收集为一整个内容，在 <code>print_messages()</code> 内添加一个 <code>assistant_reply</code> 变量，每获取到新的字节流就追加，这样获得完整响应</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">print_messages</span>(<span class="params">response</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;##ds##: &quot;</span>, end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    assistant_reply = <span class="string">&quot;&quot;</span>  <span class="comment"># 收集各个chunk的回复</span></span><br><span class="line">    <span class="keyword">for</span> chunk <span class="keyword">in</span> response:</span><br><span class="line">        <span class="built_in">print</span>(chunk.choices[<span class="number">0</span>].delta.content, end=<span class="string">&#x27;&#x27;</span>, flush=<span class="literal">True</span>)</span><br><span class="line">        assistant_reply += chunk.choices[<span class="number">0</span>].delta.content</span><br><span class="line">    <span class="built_in">print</span>()</span><br><span class="line">    <span class="keyword">return</span> assistant_reply</span><br></pre></td></tr></table></figure>
+<p>这样继续修改程序，在循环中调用 <code>print_messages</code> 函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assistant_reply = print_messages(response) <span class="comment"># 打印对话</span></span><br></pre></td></tr></table></figure>
+<p>在循环最后追加  <code>ai content</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">messages.append(&#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;assistant&quot;</span>, <span class="string">&quot;content&quot;</span>: assistant_reply&#125;)</span><br></pre></td></tr></table></figure>
+<p>完整程序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI</span><br><span class="line"></span><br><span class="line">client = OpenAI(api_key=<span class="string">&quot;666&quot;</span>, base_url=<span class="string">&quot;http://xx.xx.xx.xx:11434/v1&quot;</span>) <span class="comment"># 创建客户端</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">print_history</span>(<span class="params">messages</span>): <span class="comment"># 打印对话记录</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;\n--------------------history--------------------&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> index, message <span class="keyword">in</span> <span class="built_in">enumerate</span>(messages):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;##<span class="subst">&#123;index&#125;</span>##: <span class="subst">&#123;message[<span class="string">&#x27;role&#x27;</span>]&#125;</span>: <span class="subst">&#123;message[<span class="string">&#x27;content&#x27;</span>]&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;-----------------------------------------------\n&quot;</span>)</span><br><span class="line">        </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">print_messages</span>(<span class="params">response</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;##ds##: &quot;</span>, end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    assistant_reply = <span class="string">&quot;&quot;</span>  <span class="comment"># 收集各个chunk的回复</span></span><br><span class="line">    <span class="keyword">for</span> chunk <span class="keyword">in</span> response:</span><br><span class="line">        <span class="built_in">print</span>(chunk.choices[<span class="number">0</span>].delta.content, end=<span class="string">&#x27;&#x27;</span>, flush=<span class="literal">True</span>)</span><br><span class="line">        assistant_reply += chunk.choices[<span class="number">0</span>].delta.content</span><br><span class="line">    <span class="built_in">print</span>()</span><br><span class="line">    <span class="keyword">return</span> assistant_reply</span><br><span class="line"></span><br><span class="line">messages = [&#123;</span><br><span class="line">    <span class="string">&quot;role&quot;</span>: <span class="string">&quot;system&quot;</span>, </span><br><span class="line">    <span class="string">&quot;content&quot;</span>: <span class="string">&quot;你需严格跟踪对话历史（位于[系统消息]之后），始终保持对话连贯性。响应时需主动关联先前讨论内容。&quot;</span></span><br><span class="line">&#125;]</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    user_input = <span class="built_in">input</span>(<span class="string">&quot;##user##: &quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> user_input.lower() == <span class="string">&quot;q&quot;</span>: <span class="comment"># 按q退出</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">if</span> user_input.lower() == <span class="string">&quot;h&quot;</span>: <span class="comment"># 按h打印对话记录</span></span><br><span class="line">        print_history(messages)</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">    messages.append(&#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>, <span class="string">&quot;content&quot;</span>: user_input&#125;)</span><br><span class="line"></span><br><span class="line">    response = client.chat.completions.create(  <span class="comment"># 生成对话</span></span><br><span class="line">        model=<span class="string">&quot;deepseek-v3:latest&quot;</span>,</span><br><span class="line">        messages=messages,</span><br><span class="line">        stream=<span class="literal">True</span>     <span class="comment"># 流式对话</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    assistant_reply = print_messages(response) <span class="comment"># 打印对话</span></span><br><span class="line">    messages.append(&#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;assistant&quot;</span>, <span class="string">&quot;content&quot;</span>: assistant_reply&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/Ollama_API_&amp;_DeepSeek_API_%E7%BB%BC%E5%90%88%E5%88%A9%E7%94%A8/test.png" alt="image-20250217222357183"></p>
+<p>实际上，上下文效果并不好，可能需要更严格的设定，但目前也勉强算有上下文衔接了</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">文章</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+          <li><a href="/categories/">分类</a></li>
+        
+          <li><a href="/links/">链接</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Ollama API &amp; DeepSeek API 综合利用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-number">1.1.</span> <span class="toc-text">环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">1.2.</span> <span class="toc-text">创建客户端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AE%E5%AE%9A%E6%A8%A1%E5%9E%8B%E4%BF%A1%E6%81%AF"><span class="toc-number">1.3.</span> <span class="toc-text">确定模型信息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E5%87%BA%E6%9C%AC%E5%9C%B0%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">列出本地模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E6%A8%A1%E5%9E%8B%E4%BF%A1%E6%81%AF"><span class="toc-number">1.3.0.2.</span> <span class="toc-text">显示模型信息</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E5%AF%B9%E8%AF%9D%E6%B5%8B%E8%AF%95"><span class="toc-number">1.4.</span> <span class="toc-text">简单对话测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#POST"><span class="toc-number">1.4.1.</span> <span class="toc-text">POST</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#python"><span class="toc-number">1.4.2.</span> <span class="toc-text">python</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E6%B5%81%E5%BC%8F"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">非流式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%81%E5%BC%8F"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">流式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number">1.5.</span> <span class="toc-text">扩展上下文</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/693deb78.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/693deb78.html&text=Ollama API &amp; DeepSeek API 综合利用"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/693deb78.html&title=Ollama API &amp; DeepSeek API 综合利用"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/693deb78.html&is_video=false&description=Ollama API &amp; DeepSeek API 综合利用"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Ollama API &amp; DeepSeek API 综合利用&body=Check out this article: https://www.gubaiovo.com/posts/693deb78.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/693deb78.html&title=Ollama API &amp; DeepSeek API 综合利用"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/693deb78.html&title=Ollama API &amp; DeepSeek API 综合利用"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/693deb78.html&title=Ollama API &amp; DeepSeek API 综合利用"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/693deb78.html&title=Ollama API &amp; DeepSeek API 综合利用"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/693deb78.html&name=Ollama API &amp; DeepSeek API 综合利用&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/693deb78.html&t=Ollama API &amp; DeepSeek API 综合利用"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2026
+    gubai
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

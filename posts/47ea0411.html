@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="🥧github action太棒了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何优雅的部署 Hexo">
+<meta property="og:url" content="https://www.gubaiovo.com/posts/47ea0411.html">
+<meta property="og:site_name" content="GuBai">
+<meta property="og:description" content="🥧github action太棒了">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201201744014.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201201737000.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201201945411.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201203430169.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201203527277.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201203640395.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201203851863.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201204032964.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201204246410.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201204436832.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201204743978.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201205425275.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201205603089.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201205838620.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201210055813.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201211658401.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201211801863.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201212050815.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201212157920.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201212226422.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201212938159.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201213151507.png">
+<meta property="article:published_time" content="2025-12-01T14:11:55.000Z">
+<meta property="article:modified_time" content="2026-02-15T09:20:27.318Z">
+<meta property="article:author" content="gubai">
+<meta property="article:tag" content="Dev">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201201744014.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>如何优雅的部署 Hexo</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/posts/7e474cc5.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/47ea0411.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/47ea0411.html&text=如何优雅的部署 Hexo"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/47ea0411.html&title=如何优雅的部署 Hexo"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/47ea0411.html&is_video=false&description=如何优雅的部署 Hexo"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=如何优雅的部署 Hexo&body=Check out this article: https://www.gubaiovo.com/posts/47ea0411.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/47ea0411.html&title=如何优雅的部署 Hexo"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/47ea0411.html&title=如何优雅的部署 Hexo"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/47ea0411.html&title=如何优雅的部署 Hexo"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/47ea0411.html&title=如何优雅的部署 Hexo"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/47ea0411.html&name=如何优雅的部署 Hexo&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/47ea0411.html&t=如何优雅的部署 Hexo"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">如何优雅的部署 Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-0-%E8%B4%AD%E4%B9%B0%E5%9F%9F%E5%90%8D"><span class="toc-number">1.1.</span> <span class="toc-text">Step 0. 购买域名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-1-Vercel-%E5%8A%A0%E9%80%9F"><span class="toc-number">1.2.</span> <span class="toc-text">Step 1. Vercel 加速</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-2-Cloudflare-R2-%E5%9B%BE%E5%BA%8A"><span class="toc-number">1.3.</span> <span class="toc-text">Step 2. Cloudflare R2 图床</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-3-Github-Action-%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2"><span class="toc-number">1.4.</span> <span class="toc-text">Step 3. Github Action 自动部署</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        如何优雅的部署 Hexo
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">gubai</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-12-01T14:11:55.000Z" class="dt-published" itemprop="datePublished">2025-12-01</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Dev/">Dev</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Dev/" rel="tag">Dev</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1>如何优雅的部署 Hexo</h1>
+<blockquote>
+<p>其实部署hexo的教程已经很多了，大多数都是hexo + github pages。很多教程早已随着版本迭代而过时。本篇文章写于2025.12.1，而我的博客搭建于一年前，今天将博客改为github action构建。这篇文章的目的，就是总结一下hexo的使用经验和一些使用技巧。</p>
+</blockquote>
+<p>我的博客架构历程为：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>初期：hexo + github pages + 域名</p>
+</li>
+<li class="lvl-2">
+<p>中期：hexo + github pages + 域名 + vercel</p>
+</li>
+<li class="lvl-2">
+<p>现在：hexo + github pages + 域名(迁移到cloudflare) + vercel + github action + cloudflare r2</p>
+</li>
+</ul>
+<p>如果只是想凑合用，那么 <code>hexo + github pages</code> 无疑是最好的选择，因为不需要花钱，但是从使用体验上和维护难度上都不尽人意。大体上有如下问题：</p>
+<ol>
+<li class="lvl-3">
+<p>github的国内高延迟使得大多数情况下不得不使用代理</p>
+</li>
+<li class="lvl-3">
+<p>更换开发环境时，本地环境需要重新安装一遍</p>
+</li>
+<li class="lvl-3">
+<p>没有稳定好用的图床，多平台发布文章时不能很好的处理图片问题</p>
+</li>
+</ol>
+<p><code>hexo + github pages</code> 搭建部分不再赘述，网络上的教程已经非常详细，下面内容均以 <strong>已经有一个hexo + github pages 环境，且有访问外网的能力</strong> 为基础。<strong>如果不具备购买能力，可能只有 Step 3 对你有用。</strong></p>
+<h2 id="Step-0-购买域名">Step 0. 购买域名</h2>
+<p>直接到<a target="_blank" rel="noopener" href="https://wanwang.aliyun.com/">阿里云万网</a>或者其他云服务商买一个自己喜欢且价格能够接受的域名就可以。<strong>尽量不要使用 .cn 域名，.cn 域名会泄露个人信息。39元购买的CNNIC .cn隐私保护并不彻底，使用国内 Whois 会进行隐私保护，但是使用国外 Whois 仍然可以正常查询，如下面几张图</strong></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201201744014.png" alt="image-20251201201744014"></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201201737000.png" alt="image-20251201201737000"></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201201945411.png" alt="image-20251201201945411"></p>
+<p>购买好域名后，就可以给github pages添加域名了。但是这并不会优化访问速度，只是让你的访问链接从 <code>github名.github.io</code> 变为 <code>你的域名</code>。想要优化国内访问速度，就可以使用 <code>vercel</code> 。</p>
+<p>如果你不需要优化国内访问速度，只想改一下访问链接，那么参考这篇文章：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/1886365022571176637%E3%80%82">https://zhuanlan.zhihu.com/p/1886365022571176637。</a>(这篇文章使用的是 Cloudflare，实际上各大云服务商都大差不差。如果这篇文章已经过时，那么请自行查找其他文章，此类文章非常非常多，关键词：<code>github pages 绑定域名</code>)</p>
+<p>这里可以稍微暂停一下，如果打算使用cloudflare r2作为图床（建议先去看Step 2的注意事项），需要先将域名迁移到 cloudflare。具体迁移方式，网络上教程很多，不再赘述。</p>
+<h2 id="Step-1-Vercel-加速">Step 1. Vercel 加速</h2>
+<blockquote>
+<p><strong>Vercel</strong> 是一个用于前端开发者快速部署网站和 Web 应用的平台，它提供了无服务器架构、自动 CI/CD 部署、全球 CDN 加速、Serverless Functions 等服务，帮助开发者将本地项目轻松上线。</p>
+</blockquote>
+<p>访问<a target="_blank" rel="noopener" href="https://vercel.com/">Vercel</a>，登录github pages对应的账号，添加项目</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201203430169.png" alt="image-20251201203430169"></p>
+<p>导入 <code>github名.github.io</code></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201203527277.png" alt="image-20251201203527277"></p>
+<p>设置如下，<code>Project Name</code> 任意即可，<code>Framework Preset</code> 选择 <code>Other</code>，然后 <code>Deploy</code>，等待，即可看到博客的缩略图</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201203640395.png" alt="image-20251201203640395"></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201203851863.png" alt="image-20251201203851863"></p>
+<p>返回到主页，就可以看到刚才导入的博客。vercel 会实时同步 github 仓库的内容，也就是说，对github仓库进行的任何修改都会被自动同步到 vercel 中，不需要手动修改 vercel 中的内容。</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201204032964.png" alt="image-20251201204032964"></p>
+<p>点击进入项目主页，点击 <code>Domains</code> 进行域名设置</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201204246410.png" alt="image-20251201204246410"></p>
+<p>这里可以看到 vercel 提供的一个免费二级域名，该域名对国内加速并不友好，但是可以作为测试域名。点击 <code>Add Domain</code> 添加刚才购买的域名</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201204436832.png" alt="image-20251201204436832"></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201204743978.png" alt="image-20251201204743978"></p>
+<p>这里有两个选择</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>如果想要使用类似于 <code>https://blog.域名</code> 来访问博客，那么这里输入 <code>你想要的前缀.域名</code>，比如<code>blog.gubaiovo.com</code>，下面选项保持默认即可</p>
+</li>
+<li class="lvl-2">
+<p>如果想要使用 <code>https://www.域名</code> 或者直接用 <code>https://域名</code> 来访问你的博客，那么需要下面两步</p>
+<ol>
+<li class="lvl-5">先添加 <code>www.域名</code>，比如 <code>www.gubaiovo.com</code>，下面选项保持默认</li>
+<li class="lvl-5">再添加 <code>域名</code>，比如 <code>gubaiovo.com</code>，下面选项选择第二个 <code>Redirect to Another Domain</code> ，第一个框选择 <code>308 Permanent Redirect</code>，第二个填入 <code>www.域名</code></li>
+</ol>
+</li>
+</ul>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201205425275.png" alt="image-20251201205425275"></p>
+<p>添加后如下</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201205603089.png" alt="image-20251201205603089"></p>
+<p>返回到域名解析，添加解析：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>解析类型：CNAME</p>
+</li>
+<li class="lvl-2">
+<p>名称/主机记录：</p>
+<ul class="lvl-2">
+<li class="lvl-4">如果是选择类似于 <code>https://前缀.域名</code> 来访问博客，那么就直接填入前缀即可，这里就是用<code>https://test.gubaiovo.com</code></li>
+<li class="lvl-4">如果是选择第二种以 <code>https://www.域名</code> 或者 <code>https://域名</code> 来访问，那么按照  <code>https://前缀.域名</code>  的方式，添加两条记录，名称分别为<code>www</code>和<code>@</code></li>
+<li class="lvl-4">上面两种方式的记录值均为 <code>cname-china.vercel-dns.com</code></li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>目标/记录值：<code>cname-china.vercel-dns.com</code></p>
+</li>
+</ul>
+<p>这是cloudflare添加方式，注意cloudflare代理状态为 <code>仅 DNS</code>：</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201205838620.png" alt="image-20251201205838620"></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201210055813.png" alt="image-20251201210055813"></p>
+<p>DNS记录有一定的生效时间。添加好后，稍等一段时间，访问你的域名即可。此时使用的是 vercel 的国内加速</p>
+<h2 id="Step-2-Cloudflare-R2-图床">Step 2. Cloudflare R2 图床</h2>
+<p><strong>注意，使用 Cloudflare R2 需要绑定海外支付方式，如果没有海外支付方式，请跳过此步，选择其他图床。也可以选择去购物平台购买虚拟卡</strong></p>
+<blockquote>
+<p>R2 是Cloudflare推出的对象存储服务，主打零出口费用（也就是免流量费）和与 Amazon S3 兼容的 API，适合存储大量数据且需频繁访问的场景，完美解决传统图床的痛点：</p>
+<p>✅ 不怕被刷流量：下载请求1000万次/月免费，超限后仅$0.36/百万次<br>
+✅ 全球加速：虽不及国内CDN，但实测白天可达50MB/s（速度测试截图）<br>
+✅ 完全兼容S3 API：适配所有主流图床工具（如PicGo、WordPress插件）</p>
+</blockquote>
+<p>首先需要一个 Cloudflare 账号和海外支付方式，而且需要在 Cloudflare 下有一个可用的域名。可以将 Step 0 中购买的域名转移到 Cloudflare 下(修改DNS即可)，网络教程很多，这里不赘述了。</p>
+<p>在左侧找到 <code>R2 对象存储</code>，点击 <code>概述</code>，右上角 <code>创建存储桶</code></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201211658401.png" alt="image-20251201211658401"></p>
+<p>存储桶的名称可以填自己喜欢的，位置选择亚太即可，存储类按照提示选择，一般选择标准即可</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201211801863.png" alt="image-20251201211801863"></p>
+<p>这里创建一个名为 <code>www</code> 桶作为示例，并且在里面添加了目录 <code>blog</code></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201212050815.png" alt="image-20251201212050815"></p>
+<p>此时桶里的文件还不能被公开访问，点击设置中的自定义域，点击 <code>添加</code></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201212157920.png" alt="image-20251201212157920"></p>
+<p>这里要填写的 <code>域</code> 是完整域名，以 <code>files.gubaiovo.com</code> 为例，以后想要获取桶内 <code>blog</code> 文件夹名为 <code>1.png</code> 的文件，就需要访问如下链接 <code>https://files.gubaiovo.com/blog/1.png</code></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201212226422.png" alt="image-20251201212226422"></p>
+<p>添加后稍等一段时间就可以生效。在此期间，可以将之前的博客中图片文件上传到桶内，并修改源博客的图片路径。</p>
+<p>除此之外，如果还担心流量被盗刷，可以添加CORC策略和WAF。在桶的设置中找到 <code>CORC 策略</code>，点击添加，修改允许的源服务器，然后保存。</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201212938159.png" alt="image-20251201212938159"></p>
+<p>然后返回到用户主页，找到域名，在左侧 <code>安全性</code> 中进入 <code>安全规则</code>，点击创建规则。具体的规则内容需要自己发挥（拷打ai）</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E9%83%A8%E7%BD%B2hexo/image-20251201213151507.png" alt="image-20251201213151507"></p>
+<h2 id="Step-3-Github-Action-自动部署">Step 3. Github Action 自动部署</h2>
+<blockquote>
+<p><strong>GitHub Actions</strong> 是 GitHub 提供的一种持续集成和持续部署（CI/CD）服务，允许开发者在代码仓库中自动化执行各种任务。通过编写工作流文件，开发者可以实现代码测试、构建、部署等操作，从而简化软件开发流程。</p>
+</blockquote>
+<p>参考文章：<a target="_blank" rel="noopener" href="https://alanlee.fun/2024/07/05/deploy-hexo-with-github-action/">https://alanlee.fun/2024/07/05/deploy-hexo-with-github-action/</a></p>
+<p>如果使用本地hexo，每次写完博客都要<code>hexo cl</code> <code>hexo g</code> <code>hexo d</code>，尽管可以写脚本一键完成这三个步骤，但是等待时间还是很长，非常麻烦。而且当电脑环境发生变化，需要重新安装hexo环境，也是非常折磨的一步。如果我们能够只需要将markdown文件上传到github，让github自己帮我们完成这些重复步骤，无疑能减轻负担。github action就很好的解决了这一点。</p>
+<p>进行Step 3时，建议使用测试仓库作为github pages仓库来模拟一次，如果模拟成功，再对github pages仓库进行更改。</p>
+<p>使用 Github Action 自动部署需要两个仓库，一个是github pages的prd仓库，一个是用来构建github pages的dev仓库。</p>
+<p>参考文章写的已经非常详细了。这里贴出workflow文件 <code>deploy.yml</code>。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Deploy</span> <span class="string">blog</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">main</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">build:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">strategy:</span></span><br><span class="line">      <span class="attr">matrix:</span></span><br><span class="line">        <span class="attr">node-version:</span> [<span class="number">20.</span><span class="string">x</span>] </span><br><span class="line"></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v4</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Use</span> <span class="string">Node.js</span> <span class="string">$&#123;&#123;</span> <span class="string">matrix.node-version</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/setup-node@v4</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">node-version:</span> <span class="string">$&#123;&#123;</span> <span class="string">matrix.node-version</span> <span class="string">&#125;&#125;</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Configuration</span> <span class="string">environment</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="attr">HEXO_DEPLOY_PRI:</span> <span class="string">$&#123;&#123;secrets.HEXO_DEPLOY_PRI&#125;&#125;</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          sudo timedatectl set-timezone &quot;Asia/Shanghai&quot; </span></span><br><span class="line"><span class="string">          mkdir -p ~/.ssh/</span></span><br><span class="line"><span class="string">          echo &quot;$HEXO_DEPLOY_PRI&quot; | tr -d &#x27;\r&#x27; &gt; ~/.ssh/id_rsa</span></span><br><span class="line"><span class="string">          chmod 600 ~/.ssh/id_rsa</span></span><br><span class="line"><span class="string">          ssh-keyscan github.com &gt;&gt; ~/.ssh/known_hosts</span></span><br><span class="line"><span class="string">          git config --global user.name &quot;github用户名&quot;</span></span><br><span class="line"><span class="string">          git config --global user.email &quot;github邮箱&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">dependencies</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          npm i -g hexo-cli</span></span><br><span class="line"><span class="string">          npm ci</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Deploy</span> <span class="string">hexo</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          hexo clean</span></span><br><span class="line"><span class="string">          hexo d -g</span></span><br></pre></td></tr></table></figure>
+<p>注意修改 <code>开头的分支名，如果博客仓库使用的main就不用修改了</code>、 <code>github用户名</code> 、 <code>github邮箱</code></p>
+<p>需要注意的是，参考文章作者使用的主题<code>tranquilpeak</code>需要编译，所以他在 <code>Install dependencies</code> 中包含如下步骤</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">dependencies</span></span><br><span class="line">  <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">    npm i -g hexo-cli</span></span><br><span class="line"><span class="string">    npm ci</span></span><br><span class="line"><span class="string">    # 下面是参考文章作者的hexo主题编译步骤</span></span><br><span class="line"><span class="string">    cd themes/tranquilpeak/</span></span><br><span class="line"><span class="string">    npm ci</span></span><br><span class="line"><span class="string">    npm run prod</span></span><br></pre></td></tr></table></figure>
+<p>在本地的博客根目录创建 <code>.github/workflows/deploy.yml</code> ，贴入上面内容，将本地博客先进行一次 <code>hexo cl</code> ，并按照参考文章的方式修改 <code>_config.yml</code>  的 <code>deploy</code> 字段中的 <code>repo</code> ，然后上传用来构建github pages的私有仓库dev，然后检查action执行情况。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">文章</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+          <li><a href="/categories/">分类</a></li>
+        
+          <li><a href="/links/">链接</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">如何优雅的部署 Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-0-%E8%B4%AD%E4%B9%B0%E5%9F%9F%E5%90%8D"><span class="toc-number">1.1.</span> <span class="toc-text">Step 0. 购买域名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-1-Vercel-%E5%8A%A0%E9%80%9F"><span class="toc-number">1.2.</span> <span class="toc-text">Step 1. Vercel 加速</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-2-Cloudflare-R2-%E5%9B%BE%E5%BA%8A"><span class="toc-number">1.3.</span> <span class="toc-text">Step 2. Cloudflare R2 图床</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-3-Github-Action-%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2"><span class="toc-number">1.4.</span> <span class="toc-text">Step 3. Github Action 自动部署</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/47ea0411.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/47ea0411.html&text=如何优雅的部署 Hexo"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/47ea0411.html&title=如何优雅的部署 Hexo"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/47ea0411.html&is_video=false&description=如何优雅的部署 Hexo"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=如何优雅的部署 Hexo&body=Check out this article: https://www.gubaiovo.com/posts/47ea0411.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/47ea0411.html&title=如何优雅的部署 Hexo"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/47ea0411.html&title=如何优雅的部署 Hexo"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/47ea0411.html&title=如何优雅的部署 Hexo"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/47ea0411.html&title=如何优雅的部署 Hexo"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/47ea0411.html&name=如何优雅的部署 Hexo&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/47ea0411.html&t=如何优雅的部署 Hexo"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2026
+    gubai
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

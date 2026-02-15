@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="🥧真正的国产之光">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows下使用Ollama部署DeepSeek-R1">
+<meta property="og:url" content="https://www.gubaiovo.com/posts/8c718629.html">
+<meta property="og:site_name" content="GuBai">
+<meta property="og:description" content="🥧真正的国产之光">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/ollama_github.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/github_proxy.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/ollama_show.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/path.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/ollama_body.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/expected_path.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/new_path.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/models_path.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/download_model.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/14b_test.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/32b_test.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/xb_list.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/download_models.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/exit.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/chatbox.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/chatbox_settings.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/online_test.png">
+<meta property="article:published_time" content="2025-01-28T09:29:30.000Z">
+<meta property="article:modified_time" content="2026-02-15T09:20:27.317Z">
+<meta property="article:author" content="gubai">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/ollama_github.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Windows下使用Ollama部署DeepSeek-R1</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/posts/cd2fe6a3.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/posts/86ffe598.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/8c718629.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/8c718629.html&text=Windows下使用Ollama部署DeepSeek-R1"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/8c718629.html&title=Windows下使用Ollama部署DeepSeek-R1"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/8c718629.html&is_video=false&description=Windows下使用Ollama部署DeepSeek-R1"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Windows下使用Ollama部署DeepSeek-R1&body=Check out this article: https://www.gubaiovo.com/posts/8c718629.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/8c718629.html&title=Windows下使用Ollama部署DeepSeek-R1"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/8c718629.html&title=Windows下使用Ollama部署DeepSeek-R1"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/8c718629.html&title=Windows下使用Ollama部署DeepSeek-R1"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/8c718629.html&title=Windows下使用Ollama部署DeepSeek-R1"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/8c718629.html&name=Windows下使用Ollama部署DeepSeek-R1&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/8c718629.html&t=Windows下使用Ollama部署DeepSeek-R1"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Windows下使用Ollama部署DeepSeek-R1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDOllama-%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">下载Ollama &amp; 模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ollama%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.1.</span> <span class="toc-text">Ollama安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9-Ollama-%E4%BD%8D%E7%BD%AE"><span class="toc-number">1.1.2.</span> <span class="toc-text">更改 Ollama 位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.3.</span> <span class="toc-text">下载模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E5%AE%A2%E6%88%B7%E7%AB%AFChatbox-ui%E7%95%8C%E9%9D%A2-%E6%97%A0%E6%B3%95%E8%81%94%E7%BD%91"><span class="toc-number">1.2.</span> <span class="toc-text">本地客户端Chatbox ui界面 (无法联网)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6-Page-Assist-web-ui%E7%95%8C%E9%9D%A2-%E5%8F%AF%E4%BB%A5%E8%81%94%E7%BD%91"><span class="toc-number">1.3.</span> <span class="toc-text">浏览器插件 Page Assist web-ui界面 (可以联网)</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Windows下使用Ollama部署DeepSeek-R1
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">gubai</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-01-28T09:29:30.000Z" class="dt-published" itemprop="datePublished">2025-01-28</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/AI/">AI</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/AI/" rel="tag">AI</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p><strong>今天是除夕，祝大家新年快乐！</strong></p>
+<h1>Windows下使用Ollama部署DeepSeek-R1</h1>
+<p>DeepSeek R1 的成绩完全对标 OpenAI o1，与之前的 DeepSeek V3 相比大幅提升。家用电脑可以在本地部署R1的蒸馏版本(阉割版)。如果想要体验满血版 R1 ，只需要访问官网即可。</p>
+<p><strong>主要工具</strong>：Ollama，Chatbox，谷歌浏览器/edge</p>
+<blockquote>
+<p>Ollama 是一款用于本地运行大语言模型的工具，支持对 LLM 模型进行管理、训练和推理。通过 Ollama，用户可以在本地机器上运行 GPT-4、BERT 等模型，并利用 Ollama 提供的 Web 界面或客户端 API 进行交互。此外，Ollama 还提供了便捷的 Python 和 Java API，让开发者能够轻松地将其集成到各类应用中。</p>
+</blockquote>
+<p>chatbox可以提供ui，作为附加选项</p>
+<p>Ollama：<a target="_blank" rel="noopener" href="https://ollama.com/">https://ollama.com/</a></p>
+<p>Chatbox：<a target="_blank" rel="noopener" href="https://chatboxai.app/zh">https://chatboxai.app/zh</a></p>
+<h2 id="下载Ollama-模型">下载Ollama &amp; 模型</h2>
+<h3 id="Ollama安装">Ollama安装</h3>
+<p>Ollama可以在官网下载，但是速度非常感人，700多MB在科学上网加持下都要好久</p>
+<p>这里使用github镜像加速下载，Ollama github仓库为：<a target="_blank" rel="noopener" href="https://github.com/ollama/ollama">https://github.com/ollama/ollama</a></p>
+<p>在release中找到最新版 .exe 文件</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/ollama_github.png" alt="image-20250128152306341"></p>
+<p>下载速度可能还是很慢，可以使用 github加速站 <a target="_blank" rel="noopener" href="https://github.akams.cn/">https://github.akams.cn/</a></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/github_proxy.png" alt="image-20250128152459593"></p>
+<p>将下载链接粘贴到输入框，左侧选择节点后开始下载。如果某个节点很慢，可以多试几个。下载后安装即可。</p>
+<p>安装好后打开命令行，输入 <code>ollama</code> ，出现如下输出则为安装成功。</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/ollama_show.png" alt="image-20250128155201507"></p>
+<h3 id="更改-Ollama-位置">更改 Ollama 位置</h3>
+<p>Ollama 本体和模型的默认位置都在C盘</p>
+<p>Ollama 默认安装位置在用户文件夹下的 <code>\AppData\Local\Programs\Ollama</code> 里，如果想要<strong>迁移Ollama到其他位置</strong>，需要修改<strong>用户变量</strong></p>
+<p>打开用户变量中的 <code>Path</code></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/path.png" alt="image-20250128153853969"></p>
+<p>进入这个路径，里面是Ollama本体</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/ollama_body.png" alt="image-20250128153941620"></p>
+<p>将所有文件复制到目标文件夹，比如要迁移到 <code>E:\Ollama</code></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/expected_path.png" alt="image-20250128154056584"></p>
+<p>将原本 <code>Path</code> 中Ollama路径替换为新路径</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/new_path.png" alt="image-20250128154150932"></p>
+<p>重启Ollama即可。</p>
+<p>Ollama 默认模型下载位置在用户文件夹下的 <code>.ollama/models</code> 里，如果想要改<strong>模型默认位置</strong>，需要添加系统变量。</p>
+<p><strong>变量名</strong>：OLLAMA_MODELS</p>
+<p><strong>变量值</strong>：完整路径</p>
+<p><strong>设置好变量后重启生效</strong></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/models_path.png" alt="image-20250128152754607"></p>
+<p>重启后再次打开命令行，输入 <code>ollama</code> ，如果输出正常则为迁移成功。</p>
+<blockquote>
+<p>另一种验证迁移成功的方式：在任务管理器中彻底关闭ollama，然后命令行运行模型，在任务管理器中打开新的ollama进程位置，如果是期望位置则为迁移成功</p>
+</blockquote>
+<h3 id="下载模型">下载模型</h3>
+<p>进入Ollama官网的上方Models，找到 <a target="_blank" rel="noopener" href="https://ollama.com/library/deepseek-r1">deepseek-r1</a></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/download_model.png" alt="image-20250128155534684"></p>
+<p>deepseek-r1模型有蒸馏版本(1.5b-70b)，以及满血版本671b。</p>
+<p>b：指billion(十亿)，1.5b即为有15亿参数。参数越多，运行消耗的资源越多。</p>
+<p>以天选五pro为例，验证拉格朗日定理时，14b所消耗的资源如下：</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/14b_test.png" alt="image-20250128160501055"></p>
+<p>32b消耗资源如下(明显卡顿，出字速度慢)：</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/32b_test.png" alt="image-20250128164901910"></p>
+<p>如果配置不高，可以考虑1.5b/7b 入门体验，配置尚可可以选择8b-32b，高端配置(大概服务器级别了吧?)可以选择70b甚至更高。当然，参数越多，效果也越好。</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/xb_list.png" alt="image-20250128155645555"></p>
+<p>列表中b-GB对应关系是参数与磁盘大小的关系，而不是与占用内存大小的关系。</p>
+<p>选择恰当的模型后，在选择框右侧会出现对应命令。在命令行输入后等待下载完成即可。以32b为例，对用的命令为：<code>ollama run deepseek-r1:32b</code></p>
+<p>注：下载可以<code>ctrl+c</code>暂停，再次运行run可以继续下载。科学上网下载模型很快</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/download_models.png" alt="image-20250128164326212"></p>
+<p>出现最后一行提示词即为下载成功，但是在这个页面只能输入英文，想要输入中文需要退出重进</p>
+<p>退出：<code>ctrl+d</code>，或者输入 <code>/bye</code></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/exit.png" alt="image-20250128164547800"></p>
+<h2 id="本地客户端Chatbox-ui界面-无法联网">本地客户端Chatbox ui界面 (无法联网)</h2>
+<p>下载Chatbox，打开设置页面</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/chatbox.png" alt="image-20250128170105280"></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/chatbox_settings.png" alt="image-20250128170830322"></p>
+<p>如果选择OLLAMA API作为模型提供方，但是模型列表没有下载的模型，先在命令行中使用命令：<code>ollama list</code> 查看模型列表，如果没有模型，则需要 <code>ollama run 模型</code> 来下载。</p>
+<p>如果有下载的模型但是列表没有，那么检查小托盘是否有ollama图标(ollama是否在运行)，如果ollama没有在运行，则在命令行中使用run命令运行任意一个下载好的模型后，重新打开chatbox设置页面即可。</p>
+<p>chatbox目前不支持deepseek联网查询</p>
+<h2 id="浏览器插件-Page-Assist-web-ui界面-可以联网">浏览器插件 Page Assist web-ui界面 (可以联网)</h2>
+<p>保证后台运行ollama</p>
+<p>科学上网下载插件：<a target="_blank" rel="noopener" href="https://chromewebstore.google.com/detail/page-assist-a-web-ui-for/jfgfiigpkhlkbnfnbobbkinehhfdhndo">https://chromewebstore.google.com/detail/page-assist-a-web-ui-for/jfgfiigpkhlkbnfnbobbkinehhfdhndo</a></p>
+<p>进入插件界面，右上角齿轮进入设置。侧边栏第一个设置项中，前两个选项为语言设置，可以全设为中文；下方设置搜索引擎，目前测试搜狗能完成国内联网搜索(但是有广告)。<br>
+RAG设置里选择常用的模型。</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/Windows%E4%B8%8B%E4%BD%BF%E7%94%A8Ollama%E9%83%A8%E7%BD%B2DeepSeek-R1/online_test.png" alt="online_test"></p>
+<p>完结撒花</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">文章</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+          <li><a href="/categories/">分类</a></li>
+        
+          <li><a href="/links/">链接</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Windows下使用Ollama部署DeepSeek-R1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDOllama-%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">下载Ollama &amp; 模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ollama%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.1.</span> <span class="toc-text">Ollama安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9-Ollama-%E4%BD%8D%E7%BD%AE"><span class="toc-number">1.1.2.</span> <span class="toc-text">更改 Ollama 位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.3.</span> <span class="toc-text">下载模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E5%AE%A2%E6%88%B7%E7%AB%AFChatbox-ui%E7%95%8C%E9%9D%A2-%E6%97%A0%E6%B3%95%E8%81%94%E7%BD%91"><span class="toc-number">1.2.</span> <span class="toc-text">本地客户端Chatbox ui界面 (无法联网)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6-Page-Assist-web-ui%E7%95%8C%E9%9D%A2-%E5%8F%AF%E4%BB%A5%E8%81%94%E7%BD%91"><span class="toc-number">1.3.</span> <span class="toc-text">浏览器插件 Page Assist web-ui界面 (可以联网)</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/8c718629.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/8c718629.html&text=Windows下使用Ollama部署DeepSeek-R1"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/8c718629.html&title=Windows下使用Ollama部署DeepSeek-R1"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/8c718629.html&is_video=false&description=Windows下使用Ollama部署DeepSeek-R1"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Windows下使用Ollama部署DeepSeek-R1&body=Check out this article: https://www.gubaiovo.com/posts/8c718629.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/8c718629.html&title=Windows下使用Ollama部署DeepSeek-R1"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/8c718629.html&title=Windows下使用Ollama部署DeepSeek-R1"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/8c718629.html&title=Windows下使用Ollama部署DeepSeek-R1"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/8c718629.html&title=Windows下使用Ollama部署DeepSeek-R1"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/8c718629.html&name=Windows下使用Ollama部署DeepSeek-R1&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/8c718629.html&t=Windows下使用Ollama部署DeepSeek-R1"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2026
+    gubai
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

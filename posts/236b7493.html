@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="🥧第一个AI项目！(大作业)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于OpenCV &amp; face-recognition 的实时人脸识别与身份验证">
+<meta property="og:url" content="https://www.gubaiovo.com/posts/236b7493.html">
+<meta property="og:site_name" content="GuBai">
+<meta property="og:description" content="🥧第一个AI项目！(大作业)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/%E5%9F%BA%E4%BA%8EOpenCV&amp;face-recognition%E7%9A%84%E5%AE%9E%E6%97%B6%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E4%B8%8E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81/workline.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/%E5%9F%BA%E4%BA%8EOpenCV&amp;face-recognition%E7%9A%84%E5%AE%9E%E6%97%B6%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E4%B8%8E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81/test.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/%E5%9F%BA%E4%BA%8EOpenCV&amp;face-recognition%E7%9A%84%E5%AE%9E%E6%97%B6%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E4%B8%8E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81/match.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/%E5%9F%BA%E4%BA%8EOpenCV&amp;face-recognition%E7%9A%84%E5%AE%9E%E6%97%B6%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E4%B8%8E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81/update1.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/%E5%9F%BA%E4%BA%8EOpenCV&amp;face-recognition%E7%9A%84%E5%AE%9E%E6%97%B6%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E4%B8%8E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81/before_update1.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/%E5%9F%BA%E4%BA%8EOpenCV&amp;face-recognition%E7%9A%84%E5%AE%9E%E6%97%B6%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E4%B8%8E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81/before_update2.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/%E5%9F%BA%E4%BA%8EOpenCV&amp;face-recognition%E7%9A%84%E5%AE%9E%E6%97%B6%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E4%B8%8E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81/after_update1.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/AI/%E5%9F%BA%E4%BA%8EOpenCV&amp;face-recognition%E7%9A%84%E5%AE%9E%E6%97%B6%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E4%B8%8E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81/after_update2.png">
+<meta property="article:published_time" content="2024-12-04T13:39:30.000Z">
+<meta property="article:modified_time" content="2026-02-15T09:20:27.317Z">
+<meta property="article:author" content="gubai">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image.gubaiovo.com/blog/post_img/AI/%E5%9F%BA%E4%BA%8EOpenCV&amp;face-recognition%E7%9A%84%E5%AE%9E%E6%97%B6%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E4%B8%8E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81/workline.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>基于OpenCV &amp; face-recognition 的实时人脸识别与身份验证</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/posts/86ffe598.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/posts/be30837a.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/236b7493.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/236b7493.html&text=基于OpenCV &amp; face-recognition 的实时人脸识别与身份验证"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/236b7493.html&title=基于OpenCV &amp; face-recognition 的实时人脸识别与身份验证"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/236b7493.html&is_video=false&description=基于OpenCV &amp; face-recognition 的实时人脸识别与身份验证"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=基于OpenCV &amp; face-recognition 的实时人脸识别与身份验证&body=Check out this article: https://www.gubaiovo.com/posts/236b7493.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/236b7493.html&title=基于OpenCV &amp; face-recognition 的实时人脸识别与身份验证"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/236b7493.html&title=基于OpenCV &amp; face-recognition 的实时人脸识别与身份验证"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/236b7493.html&title=基于OpenCV &amp; face-recognition 的实时人脸识别与身份验证"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/236b7493.html&title=基于OpenCV &amp; face-recognition 的实时人脸识别与身份验证"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/236b7493.html&name=基于OpenCV &amp; face-recognition 的实时人脸识别与身份验证&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/236b7493.html&t=基于OpenCV &amp; face-recognition 的实时人脸识别与身份验证"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">基于 OpenCV &amp; face-recognition 的实时人脸识别与身份验证</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%B3%BB%E7%BB%9F%E9%9C%80%E6%B1%82%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.0.1.</span> <span class="toc-text">一、系统需求设计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">1. 系统概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%8A%9F%E8%83%BD%E6%A6%82%E8%BF%B0"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">2. 功能概述</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.0.2.</span> <span class="toc-text">二、系统功能模块介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.0.3.</span> <span class="toc-text">三、系统实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%A0%B8%E5%BF%83%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="toc-number">1.0.3.1.</span> <span class="toc-text">系统核心流程图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E2%80%94%E2%80%94training-py"><span class="toc-number">1.0.3.2.</span> <span class="toc-text">训练模型——training.py</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E6%B5%81%E7%A8%8B"><span class="toc-number">1.0.3.3.</span> <span class="toc-text">主流程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E6%91%84%E5%83%8F%E5%A4%B4%E2%80%94%E2%80%94camera-py"><span class="toc-number">1.0.3.3.1.</span> <span class="toc-text">启动摄像头——camera.py</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#fps%E8%AE%A1%E7%AE%97%E2%80%94%E2%80%94fps-py"><span class="toc-number">1.0.3.3.2.</span> <span class="toc-text">fps计算——fps.py</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94main-py"><span class="toc-number">1.0.3.3.3.</span> <span class="toc-text">人脸检测——main.py</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#web%E5%AE%9E%E7%8E%B0%E2%80%94%E2%80%94app-py-index-html"><span class="toc-number">1.0.3.3.4.</span> <span class="toc-text">web实现——app.py &amp; index.html</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#app-py"><span class="toc-number">1.0.3.3.4.1.</span> <span class="toc-text">app.py</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E9%A1%B5%E9%9D%A2index-html"><span class="toc-number">1.0.3.3.4.2.</span> <span class="toc-text">前端页面index.html</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%B3%BB%E7%BB%9F%E6%95%88%E6%9E%9C"><span class="toc-number">1.0.4.</span> <span class="toc-text">四、系统效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%94%B9%E8%BF%9B%E5%8E%86%E7%A8%8B%E4%B8%8E%E4%B8%8D%E8%B6%B3"><span class="toc-number">1.0.5.</span> <span class="toc-text">五、改进历程与不足</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%90%8E%E7%BB%AD%E4%BC%98%E5%8C%96"><span class="toc-number">1.0.6.</span> <span class="toc-text">六、后续优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99%EF%BC%9A"><span class="toc-number">1.0.7.</span> <span class="toc-text">参考资料：</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        基于OpenCV &amp; face-recognition 的实时人脸识别与身份验证
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">gubai</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-12-04T13:39:30.000Z" class="dt-published" itemprop="datePublished">2024-12-04</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/AI/">AI</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/AI/" rel="tag">AI</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1>基于 OpenCV &amp; face-recognition 的实时人脸识别与身份验证</h1>
+<p><strong>项目地址：<a target="_blank" rel="noopener" href="https://github.com/gubaiovo/face-recognition-with-opencv">github</a></strong></p>
+<h3 id="一、系统需求设计">一、系统需求设计</h3>
+<h4 id="1-系统概述">1. 系统概述</h4>
+<p>本人工智能人脸识别系统旨在实现对人脸图像或视频流中的人脸进行精准识别、验证与分析，可以应用于安防监控、门禁系统、人员考勤、身份认证等多个领域，以提高安全性与管理效率。</p>
+<h4 id="2-功能概述">2. 功能概述</h4>
+<p>1). 人脸录入与图像编码</p>
+<p>2). 人脸识别与身份验证</p>
+<p>3). web端实现上述功能</p>
+<h3 id="二、系统功能模块介绍">二、系统功能模块介绍</h3>
+<p>核心环境配置：</p>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th>版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>python</td>
+<td>3.12.4</td>
+</tr>
+<tr>
+<td>opencv-python</td>
+<td>4.10.0.84</td>
+</tr>
+<tr>
+<td>face-recognition</td>
+<td>1.3.0</td>
+</tr>
+<tr>
+<td>Pillow</td>
+<td>10.0.0</td>
+</tr>
+<tr>
+<td>numpy</td>
+<td>2.1.2</td>
+</tr>
+<tr>
+<td>Flask (web需要)</td>
+<td>3.1.0</td>
+</tr>
+</tbody>
+</table>
+<p>项目架构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Face_recognition_local</span><br><span class="line">├─ camera.py</span><br><span class="line">├─ fps.py</span><br><span class="line">├─ haarcascade_frontalface_default.xml</span><br><span class="line">├─ trained_model.pkl</span><br><span class="line">├─ training.py</span><br><span class="line">├─ main.py</span><br><span class="line">└─ person</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Face_recognition_web</span><br><span class="line">├─ camera.py</span><br><span class="line">├─ fps.py</span><br><span class="line">├─ haarcascade_frontalface_default.xml</span><br><span class="line">├─ trained_model.pkl</span><br><span class="line">├─ training.py</span><br><span class="line">├─ person</span><br><span class="line">├─ app.py</span><br><span class="line">└─ templates</span><br><span class="line">   └─ index.html</span><br></pre></td></tr></table></figure>
+<p><strong><a target="_blank" rel="noopener" href="http://camera.py">camera.py</a></strong>：优化后的opencv视频捕获</p>
+<p><strong><a target="_blank" rel="noopener" href="http://fps.py">fps.py</a></strong>：用于展示当前视频画面fps</p>
+<p><strong>haarcascade_frontalface_default.xml</strong>：opencv提供的预训练集，用于捕获人脸</p>
+<p><strong>trained_model.pkl</strong>：录入的人脸图片编码后的文件</p>
+<p><strong><a target="_blank" rel="noopener" href="http://training.py">training.py</a></strong>：用于将jpg图片编码为.pkl</p>
+<p><strong>person</strong>：存放人脸图片</p>
+<p><strong><a target="_blank" rel="noopener" href="http://main.py">main.py</a></strong>：主程序</p>
+<p><strong><a target="_blank" rel="noopener" href="http://app.py">app.py</a></strong>：web后端</p>
+<p><strong>templates</strong>：web前端文件夹</p>
+<p><strong>index.html</strong>：web前端</p>
+<h3 id="三、系统实现">三、系统实现</h3>
+<h4 id="系统核心流程图">系统核心流程图</h4>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/%E5%9F%BA%E4%BA%8EOpenCV&amp;face-recognition%E7%9A%84%E5%AE%9E%E6%97%B6%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E4%B8%8E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81/workline.png" alt="workline"></p>
+<h4 id="训练模型——training-py">训练模型——<a target="_blank" rel="noopener" href="http://training.py">training.py</a></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> face_recognition</span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line">person_encodings = []</span><br><span class="line">person_names = []</span><br><span class="line"><span class="keyword">for</span> filename <span class="keyword">in</span> os.listdir(<span class="string">&#x27;person&#x27;</span>):</span><br><span class="line">    <span class="keyword">if</span> filename.endswith(<span class="string">&#x27;.jpg&#x27;</span>):</span><br><span class="line">        <span class="comment"># 编码图像</span></span><br><span class="line">        image = face_recognition.load_image_file(os.path.join(<span class="string">&#x27;person&#x27;</span>, filename))</span><br><span class="line">        encodings = face_recognition.face_encodings(image)</span><br><span class="line">        <span class="keyword">if</span> encodings:</span><br><span class="line">            encoding = encodings[<span class="number">0</span>]</span><br><span class="line">            person_encodings.append(encoding)</span><br><span class="line">            <span class="comment"># 文件名处理</span></span><br><span class="line">            person_name = <span class="string">&#x27;&#x27;</span>.join([i <span class="keyword">for</span> i <span class="keyword">in</span> os.path.splitext(filename)[<span class="number">0</span>] <span class="keyword">if</span> <span class="keyword">not</span> i.isdigit()])</span><br><span class="line">            person_names.append(person_name)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;trained_model.pkl&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    pickle.dump((person_encodings, person_names), f)</span><br></pre></td></tr></table></figure>
+<p>分段解析：</p>
+<ol>
+<li class="lvl-3">
+<p>读取person文件夹中.jpg文件，其中文件名格式为 <code>姓名+编号.jpg</code> ，如 <code>张三1.jpg</code></p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 读取person文件夹中的图像和姓名</span></span><br><span class="line">person_encodings = []</span><br><span class="line">person_names = []</span><br><span class="line"><span class="keyword">for</span> filename <span class="keyword">in</span> os.listdir(<span class="string">&#x27;person&#x27;</span>):</span><br><span class="line">    <span class="keyword">if</span> filename.endswith(<span class="string">&#x27;.jpg&#x27;</span>):</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li class="lvl-3">
+<p>使用face-recognition编码图片</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用face-recognition加载图像并进行编码，并处理文件名中的编号</span></span><br><span class="line">        image = face_recognition.load_image_file(os.path.join(<span class="string">&#x27;person&#x27;</span>, filename))</span><br><span class="line">        encodings = face_recognition.face_encodings(image)</span><br><span class="line">        <span class="keyword">if</span> encodings:</span><br><span class="line">            encoding = encodings[<span class="number">0</span>]</span><br><span class="line">            person_encodings.append(encoding)</span><br><span class="line">            <span class="comment"># 去掉文件名中的编号，只保留姓名部分</span></span><br><span class="line">            person_name = <span class="string">&#x27;&#x27;</span>.join([i <span class="keyword">for</span> i <span class="keyword">in</span> os.path.splitext(filename)[<span class="number">0</span>] <span class="keyword">if</span> <span class="keyword">not</span> i.isdigit()])</span><br><span class="line">            person_names.append(person_name)</span><br></pre></td></tr></table></figure>
+<p>在person文件夹中放入目标人脸的jpg图片后运行脚本，得到模型trained_model.pkl</p>
+<p>经测试，每人9个图片识别准确率为 65％-90％</p>
+<h4 id="主流程">主流程</h4>
+<h5 id="启动摄像头——camera-py">启动摄像头——<a target="_blank" rel="noopener" href="http://camera.py">camera.py</a></h5>
+<p>来源：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43229348/article/details/122688684">基于cv2.VideoCapture 和 OpenCV 得到更快的 FPS之文件篇</a></p>
+<p>主要优化函数：cv2.VideoCapture</p>
+<blockquote>
+<p><code>.read</code> 方法是一个阻塞操作，通过将这些阻塞 I/O 操作移至单独的线程并维护解码帧队列，我们实际上可以将 FPS 处理速率提高 52% 以上</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread, Lock</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">time_cycle = <span class="number">80</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CameraThread</span>(<span class="title class_ inherited__">Thread</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, kill_event, src = <span class="number">0</span>, width = <span class="number">320</span>, height = <span class="number">240</span></span>):</span><br><span class="line">        <span class="variable language_">self</span>.kill_event = kill_event</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">self</span>.stream = cv2.VideoCapture(src)</span><br><span class="line">        <span class="variable language_">self</span>.stream.<span class="built_in">set</span>(cv2.CAP_PROP_FRAME_WIDTH, width)</span><br><span class="line">        <span class="variable language_">self</span>.stream.<span class="built_in">set</span>(cv2.CAP_PROP_FRAME_HEIGHT, height)</span><br><span class="line"></span><br><span class="line">        (<span class="variable language_">self</span>.grabbed, <span class="variable language_">self</span>.frame) = <span class="variable language_">self</span>.stream.read()</span><br><span class="line">        <span class="variable language_">self</span>.read_lock = Lock()</span><br><span class="line"></span><br><span class="line">        Thread.__init__(<span class="variable language_">self</span>, args = kill_event)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">update</span>(<span class="params">self</span>):</span><br><span class="line">        (grabbed, frame) = <span class="variable language_">self</span>.stream.read()</span><br><span class="line">        <span class="variable language_">self</span>.read_lock.acquire()</span><br><span class="line">        <span class="variable language_">self</span>.grabbed, <span class="variable language_">self</span>.frame = grabbed, frame</span><br><span class="line">        <span class="variable language_">self</span>.read_lock.release()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">read</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.read_lock.acquire()</span><br><span class="line">        frame = <span class="variable language_">self</span>.frame.copy()</span><br><span class="line">        <span class="variable language_">self</span>.read_lock.release()</span><br><span class="line">        <span class="keyword">return</span> frame</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">not</span> <span class="variable language_">self</span>.kill_event.is_set():</span><br><span class="line">            start_time = datetime.now()</span><br><span class="line">            <span class="variable language_">self</span>.update()</span><br><span class="line"></span><br><span class="line">            finish_time = datetime.now()</span><br><span class="line">            dt = finish_time - start_time</span><br><span class="line">            ms = (dt.days * <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span> + dt.seconds) * <span class="number">1000</span> + dt.microseconds / <span class="number">1000.0</span></span><br><span class="line">            <span class="keyword">if</span> ms &lt; time_cycle:</span><br><span class="line">                time.sleep((time_cycle - ms) / <span class="number">1000.0</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>CameraThread</code> 类继承自 <code>Thread</code> 类，可以在<strong>单独的线程</strong>中捕获摄像头图像</p>
+<ol>
+<li class="lvl-3">
+<p>初始化方法 <code>__init__</code>：</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, kill_event, src=<span class="number">0</span>, width=<span class="number">320</span>, height=<span class="number">240</span></span>):</span><br><span class="line">    <span class="variable language_">self</span>.kill_event = kill_event</span><br><span class="line">    </span><br><span class="line">    <span class="variable language_">self</span>.stream = cv2.VideoCapture(src)</span><br><span class="line">    <span class="variable language_">self</span>.stream.<span class="built_in">set</span>(cv2.CAP_PROP_FRAME_WIDTH, width)</span><br><span class="line">    <span class="variable language_">self</span>.stream.<span class="built_in">set</span>(cv2.CAP_PROP_FRAME_HEIGHT, height)</span><br><span class="line"></span><br><span class="line">    (<span class="variable language_">self</span>.grabbed, <span class="variable language_">self</span>.frame) = <span class="variable language_">self</span>.stream.read()</span><br><span class="line">    <span class="variable language_">self</span>.read_lock = Lock()</span><br><span class="line"></span><br><span class="line">    Thread.__init__(<span class="variable language_">self</span>, args=(kill_event,))</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>kill_event</code>：用于停止线程的事件对象。</p>
+</li>
+<li class="lvl-2">
+<p><code>src</code>：摄像头索引，默认值为 0。</p>
+</li>
+<li class="lvl-2">
+<p><code>width</code> 和 <code>height</code>：视频帧的宽度和高度。</p>
+</li>
+<li class="lvl-2">
+<p><code>self.stream</code>：创建一个视频捕获对象。</p>
+</li>
+<li class="lvl-2">
+<p><code>self.stream.set</code>：设置视频帧的宽度和高度。</p>
+</li>
+<li class="lvl-2">
+<p><code>self.grabbed</code> 和 <code>self.frame</code>：读取第一帧图像。</p>
+</li>
+<li class="lvl-2">
+<p><code>self.read_lock</code>：创建一个锁对象，用于线程同步。</p>
+</li>
+</ul>
+<ol start="2">
+<li class="lvl-3">
+<p>更新方法 <code>update</code>：</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">update</span>(<span class="params">self</span>):</span><br><span class="line">    (grabbed, frame) = <span class="variable language_">self</span>.stream.read()</span><br><span class="line">    <span class="variable language_">self</span>.read_lock.acquire()</span><br><span class="line">    <span class="variable language_">self</span>.grabbed, <span class="variable language_">self</span>.frame = grabbed, frame</span><br><span class="line">    <span class="variable language_">self</span>.read_lock.release()</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>self.stream.read()</code>：读取一帧图像。</p>
+</li>
+<li class="lvl-2">
+<p><code>self.read_lock.acquire()</code> 和 <code>self.read_lock.release()</code>：在更新 <code>self.grabbed</code>和 <code>self.frame</code> 时加锁和解锁，以确保线程安全。</p>
+</li>
+</ul>
+<ol start="3">
+<li class="lvl-3">
+<p>读取方法 <code>read</code> ：</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">read</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="variable language_">self</span>.read_lock.acquire()</span><br><span class="line">    frame = <span class="variable language_">self</span>.frame.copy()</span><br><span class="line">    <span class="variable language_">self</span>.read_lock.release()</span><br><span class="line">    <span class="keyword">return</span> frame</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>self.read_lock.acquire()</code>和 <code>self.read_lock.release()</code>：在读取 <code>self.frame</code> 时加锁和解锁，以确保线程安全。</p>
+</li>
+<li class="lvl-2">
+<p><code>self.frame.copy()</code>：返回当前帧的副本。</p>
+</li>
+</ul>
+<ol start="4">
+<li class="lvl-3">
+<p>运行方法 <code>run</code> ：</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> <span class="variable language_">self</span>.kill_event.is_set():</span><br><span class="line">        start_time = datetime.now()</span><br><span class="line">        <span class="variable language_">self</span>.update()</span><br><span class="line"></span><br><span class="line">        finish_time = datetime.now()</span><br><span class="line">        dt = finish_time - start_time</span><br><span class="line">        ms = (dt.days * <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span> + dt.seconds) * <span class="number">1000</span> + dt.microseconds / <span class="number">1000.0</span></span><br><span class="line">        <span class="keyword">if</span> ms &lt; time_cycle:</span><br><span class="line">            time.sleep((time_cycle - ms) / <span class="number">1000.0</span>)</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>while not self.kill_event.is_set()</code>：循环运行，直到 <code>kill_event</code>被设置。</p>
+</li>
+<li class="lvl-2">
+<p><code>start_time</code> 和 <code>finish_time</code>：记录每次循环的开始和结束时间。</p>
+</li>
+<li class="lvl-2">
+<p><code>dt</code>：计算每次循环的时间差。</p>
+</li>
+<li class="lvl-2">
+<p><code>ms</code>：将时间差转换为毫秒。</p>
+</li>
+<li class="lvl-2">
+<p><code>time.sleep((time_cycle - ms) / 1000.0)</code>：如果循环时间小于 <code>time_cycle</code>，则延时以控制帧率。</p>
+</li>
+</ul>
+<h5 id="fps计算——fps-py">fps计算——<a target="_blank" rel="noopener" href="http://fps.py">fps.py</a></h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FPS</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.prev_time = time.time()</span><br><span class="line">        <span class="variable language_">self</span>.fps = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">update</span>(<span class="params">self</span>):</span><br><span class="line">        current_time = time.time()</span><br><span class="line">        <span class="variable language_">self</span>.fps = <span class="number">1</span> / (current_time - <span class="variable language_">self</span>.prev_time)</span><br><span class="line">        <span class="variable language_">self</span>.prev_time = current_time</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.fps</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>获取当前时间戳 <code>current_time</code>。</p>
+</li>
+<li class="lvl-2">
+<p>计算当前帧率 <code>self.fps</code></p>
+</li>
+</ul>
+<p>$$<br>
+fps = {1\over(current_time-self.prev_time)}<br>
+$$</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>更新 <code>self.prev_time</code> 为当前时间戳 <code>current_time</code>。</p>
+</li>
+<li class="lvl-2">
+<p>返回计算得到的帧率 <code>self.fps</code>。</p>
+</li>
+</ul>
+<h5 id="人脸检测——main-py">人脸检测——<a target="_blank" rel="noopener" href="http://main.py">main.py</a></h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> tkinter <span class="keyword">as</span> tk</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image, ImageTk, ImageDraw</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> ImageFont</span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Event</span><br><span class="line"><span class="keyword">from</span> camera <span class="keyword">import</span> CameraThread</span><br><span class="line"><span class="keyword">import</span> face_recognition</span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">from</span> fps <span class="keyword">import</span> FPS</span><br><span class="line"></span><br><span class="line">choose_camera = <span class="number">0</span> <span class="comment"># 选择摄像头，0为内置摄像头，1为外置摄像头</span></span><br><span class="line">min_matching_degree = <span class="number">0.65</span> <span class="comment"># 最小匹配度</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># --------------------输出文本--------------------</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cv2AddChineseText</span>(<span class="params">img, text, position, textColor=(<span class="params"><span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span></span>), textSize=<span class="number">30</span></span>):</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">isinstance</span>(img, np.ndarray)): </span><br><span class="line">        img = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))</span><br><span class="line">    </span><br><span class="line">    draw = ImageDraw.Draw(img)</span><br><span class="line">    </span><br><span class="line">    fontStyle = ImageFont.truetype(<span class="string">&quot;simsun.ttc&quot;</span>, textSize, encoding=<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    draw.text(position, text, textColor, font=fontStyle)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> cv2.cvtColor(np.asarray(img), cv2.COLOR_RGB2BGR)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># --------------------加载模型，初始化摄像头，初始化窗口--------------------</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载opencv Haar Cascade分类器</span></span><br><span class="line">face_cascade = cv2.CascadeClassifier(<span class="string">&#x27;haarcascade_frontalface_default.xml&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># GUI窗口</span></span><br><span class="line">root = tk.Tk()</span><br><span class="line">root.geometry(<span class="string">&#x27;640x480&#x27;</span>)</span><br><span class="line">root.title(<span class="string">&#x27;人脸识别&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建标签用于显示图像</span></span><br><span class="line">image_label = tk.Label(root)</span><br><span class="line">image_label.pack()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 PhotoImage 对象</span></span><br><span class="line">photo = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载模型</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;trained_model.pkl&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    person_encodings, person_names = pickle.load(f)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 事件对象用于停止线程</span></span><br><span class="line">kill_event = Event()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动摄像头</span></span><br><span class="line">camera_thread = CameraThread(kill_event, src=choose_camera, width=<span class="number">640</span>, height=<span class="number">480</span>)</span><br><span class="line">camera_thread.start()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化FPS计算</span></span><br><span class="line">fps_calculator = FPS()</span><br><span class="line"></span><br><span class="line"><span class="comment"># --------------------打开摄像头，开始检测--------------------</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 处理捕获的图像</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">update_frame</span>():</span><br><span class="line">    <span class="keyword">global</span> photo</span><br><span class="line">    frame = camera_thread.read()</span><br><span class="line">    frame = cv2.flip(frame, <span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 转换图像格式</span></span><br><span class="line">    rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 检测人脸</span></span><br><span class="line">    face_locations = face_recognition.face_locations(rgb_frame)</span><br><span class="line">    face_encodings = face_recognition.face_encodings(rgb_frame, face_locations)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 在图像中框出检测到的人脸</span></span><br><span class="line">    <span class="keyword">for</span> (top, right, bottom, left), face_encoding <span class="keyword">in</span> <span class="built_in">zip</span>(face_locations, face_encodings):</span><br><span class="line">        <span class="comment"># 检查人脸是否属于模型中的某个人</span></span><br><span class="line">        matches = face_recognition.compare_faces(person_encodings, face_encoding) <span class="comment"># 比较人脸编码</span></span><br><span class="line">        face_distances = face_recognition.face_distance(person_encodings, face_encoding) <span class="comment"># 计算距离</span></span><br><span class="line">        best_match_index = np.argmin(face_distances) <span class="comment"># 找到最小距离的索引</span></span><br><span class="line">        name = <span class="string">&quot;Unknown&quot;</span> <span class="comment"># 默认为未知人脸</span></span><br><span class="line">        matching_degree = <span class="number">1</span> - face_distances[best_match_index] <span class="comment"># 计算准确率</span></span><br><span class="line">             </span><br><span class="line">        <span class="keyword">if</span> matches[best_match_index] <span class="keyword">and</span> matching_degree &gt; min_matching_degree:</span><br><span class="line">            name = person_names[best_match_index]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 在图像中框出人脸并显示姓名</span></span><br><span class="line">        cv2.rectangle(frame, (left, top), (right, bottom), (<span class="number">0</span>, <span class="number">255</span>, <span class="number">255</span>), <span class="number">2</span>)</span><br><span class="line">        frame = cv2AddChineseText(frame, name, (left + (right-left)//<span class="number">2</span> - <span class="number">10</span>, top - <span class="number">30</span>), (<span class="number">0</span>, <span class="number">255</span>, <span class="number">255</span>), <span class="number">30</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 计算并显示帧率</span></span><br><span class="line">    fps = fps_calculator.update()</span><br><span class="line">    cv2.putText(frame, <span class="string">f&quot;FPS: <span class="subst">&#123;fps:<span class="number">.2</span>f&#125;</span>&quot;</span>, (<span class="number">10</span>, <span class="number">30</span>), cv2.FONT_HERSHEY_SIMPLEX, <span class="number">1</span>, (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将图像转换为PIL Image格式</span></span><br><span class="line">    image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))</span><br><span class="line">    photo = ImageTk.PhotoImage(image)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 更新标签</span></span><br><span class="line">    image_label.configure(image=photo)</span><br><span class="line">    image_label.image = photo</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 处理GUI事件，避免程序挂起</span></span><br><span class="line">    root.after(<span class="number">10</span>, update_frame)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 图像更新循环</span></span><br><span class="line">update_frame()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭程序</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">on_closing</span>():</span><br><span class="line">    <span class="comment"># 停止摄像头线程</span></span><br><span class="line">    kill_event.<span class="built_in">set</span>()</span><br><span class="line">    camera_thread.join()</span><br><span class="line">    <span class="comment"># 释放摄像头并关闭所有窗口</span></span><br><span class="line">    camera_thread.stream.release()</span><br><span class="line">    cv2.destroyAllWindows()</span><br><span class="line">    <span class="comment"># 关闭Tkinter窗口</span></span><br><span class="line">    root.destroy()</span><br><span class="line">root.protocol(<span class="string">&quot;WM_DELETE_WINDOW&quot;</span>, on_closing)</span><br><span class="line">root.mainloop()</span><br></pre></td></tr></table></figure>
+<h5 id="web实现——app-py-index-html">web实现——<a target="_blank" rel="noopener" href="http://app.py">app.py</a> &amp; index.html</h5>
+<h6 id="app-py"><a target="_blank" rel="noopener" href="http://app.py">app.py</a></h6>
+<p>app.py是main.py使用Flask框架后的后端服务</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, render_template, Response</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> face_recognition</span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> fps <span class="keyword">import</span> FPS</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image, ImageDraw, ImageFont</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">choose_camera = <span class="number">1</span>  <span class="comment"># 选择摄像头，0为内置摄像头，1为外置摄像头</span></span><br><span class="line">min_matching_degree = <span class="number">0.65</span>  <span class="comment"># 最小匹配度</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载训练好的模型</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;trained_model.pkl&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    person_encodings, person_names = pickle.load(f)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化摄像头</span></span><br><span class="line">cap = cv2.VideoCapture(choose_camera)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化FPS计算</span></span><br><span class="line">fps_calculator = FPS()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cv2AddChineseText</span>(<span class="params">img, text, position, textColor=(<span class="params"><span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span></span>), textSize=<span class="number">30</span></span>):</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">isinstance</span>(img, np.ndarray)): </span><br><span class="line">        img = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))</span><br><span class="line">    </span><br><span class="line">    draw = ImageDraw.Draw(img)</span><br><span class="line">    </span><br><span class="line">    fontStyle = ImageFont.truetype(<span class="string">&quot;simsun.ttc&quot;</span>, textSize, encoding=<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    draw.text(position, text, textColor, font=fontStyle)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> cv2.cvtColor(np.asarray(img), cv2.COLOR_RGB2BGR)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">generate_frames</span>():</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        success, frame = cap.read()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> success:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            frame = cv2.flip(frame, <span class="number">1</span>)</span><br><span class="line">            rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 使用face_recognition库检测人脸</span></span><br><span class="line">            face_locations = face_recognition.face_locations(rgb_frame)</span><br><span class="line">            face_encodings = face_recognition.face_encodings(rgb_frame, face_locations)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 在图像中框出检测到的人脸</span></span><br><span class="line">            <span class="keyword">for</span> (top, right, bottom, left), face_encoding <span class="keyword">in</span> <span class="built_in">zip</span>(face_locations, face_encodings):</span><br><span class="line">                matches = face_recognition.compare_faces(person_encodings, face_encoding)</span><br><span class="line">                face_distances = face_recognition.face_distance(person_encodings, face_encoding)</span><br><span class="line">                best_match_index = np.argmin(face_distances)</span><br><span class="line">                name = <span class="string">&quot;Unknown&quot;</span></span><br><span class="line">                matching_degree = <span class="number">1</span> - face_distances[best_match_index]</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> matches[best_match_index] <span class="keyword">and</span> matching_degree &gt; min_matching_degree:</span><br><span class="line">                    name = person_names[best_match_index]</span><br><span class="line"></span><br><span class="line">                cv2.rectangle(frame, (left, top), (right, bottom), (<span class="number">0</span>, <span class="number">255</span>, <span class="number">255</span>), <span class="number">2</span>)</span><br><span class="line">                frame = cv2AddChineseText(frame, name, (left + (right-left)//<span class="number">2</span> - <span class="number">10</span>, top - <span class="number">30</span>), (<span class="number">0</span>, <span class="number">255</span>, <span class="number">255</span>), <span class="number">30</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 计算并显示帧率</span></span><br><span class="line">            fps = fps_calculator.update()</span><br><span class="line">            cv2.putText(frame, <span class="string">f&quot;FPS: <span class="subst">&#123;fps:<span class="number">.2</span>f&#125;</span>&quot;</span>, (<span class="number">10</span>, <span class="number">30</span>), cv2.FONT_HERSHEY_SIMPLEX, <span class="number">1</span>, (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">            ret, buffer = cv2.imencode(<span class="string">&#x27;.jpg&#x27;</span>, frame)</span><br><span class="line">            frame = buffer.tobytes()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">yield</span> (<span class="string">b&#x27;--frame\r\n&#x27;</span></span><br><span class="line">                   <span class="string">b&#x27;Content-Type: image/jpeg\r\n\r\n&#x27;</span> + frame + <span class="string">b&#x27;\r\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>():</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;index.html&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/video_feed&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">video_feed</span>():</span><br><span class="line">    <span class="keyword">return</span> Response(generate_frames(), mimetype=<span class="string">&#x27;multipart/x-mixed-replace; boundary=frame&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<h6 id="前端页面index-html">前端页面index.html</h6>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>人脸识别<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>人脸识别<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;&#123;&#123; url_for(&#x27;video_feed&#x27;) &#125;&#125;&quot;</span> <span class="attr">width</span>=<span class="string">&quot;640&quot;</span> <span class="attr">height</span>=<span class="string">&quot;480&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="四、系统效果">四、系统效果</h3>
+<p>预先使用本人9张照片进行训练</p>
+<table>
+<thead>
+<tr>
+<th>CPU</th>
+<th>i9-14900HX</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内存</td>
+<td>32GB</td>
+</tr>
+<tr>
+<td>显卡</td>
+<td>RTX4060</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/%E5%9F%BA%E4%BA%8EOpenCV&amp;face-recognition%E7%9A%84%E5%AE%9E%E6%97%B6%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E4%B8%8E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81/test.png" alt="test"></p>
+<p>平均帧率：2.6</p>
+<p>平均准确率：70％</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/%E5%9F%BA%E4%BA%8EOpenCV&amp;face-recognition%E7%9A%84%E5%AE%9E%E6%97%B6%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E4%B8%8E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81/match.png" alt="match"></p>
+<h3 id="五、改进历程与不足">五、改进历程与不足</h3>
+<p>在刚开始制作时，并没有使用face-recognition训练模型进行人脸验证，采取的验证手段的为读取文件夹内所有图片，寻找与捕获人脸匹配度更高的图片。发现每次验证都要遍历文件夹内所有图片，严重影响系统性能（以至于卡死），于是对代码进行重构，使用face-recognition训练模型，将捕获的人脸与模型对比，大大缓解了性能问题。同时，由于cv2.VideoCapture的read方法阻塞，性能仍然不佳，搜集资料后采用<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43229348/article/details/122688684">一位博主的方法</a>，将这些阻塞 I/O 操作移至单独的线程。</p>
+<p>虽然系统已经能正常运行，但帧率仍然很低，还需要进一步优化。除此之外，目前系统使用的opencv官方提供的分类器 <code>haarcascade_frontalface_default.xml</code> 对于捕获正脸方面较优，但捕获其他方向和复杂表情方面效果很差。需要训练一个新的分类器来适应更复杂的环境。</p>
+<h3 id="六、后续优化">六、后续优化</h3>
+<p>根据实际情况来看，并不需要每一帧都检测人脸，因此可以通过增加检测人脸间隔来提升流畅度。</p>
+<p>大致思路：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">detection_interval = <span class="number">5</span> //间隔帧率</span><br><span class="line">frame_count = <span class="number">0</span> //计算帧率</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">detect_faces</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> <span class="variable language_">self</span>.kill_event.is_set():</span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.frame_count % <span class="variable language_">self</span>.detection_interval == <span class="number">0</span>:</span><br><span class="line">            frame = <span class="variable language_">self</span>.camera_thread.read()</span><br><span class="line">            ...</span><br><span class="line">        <span class="variable language_">self</span>.frame_count += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>此外，还可以将人脸检测放到独立的线程中，避免阻塞线程</p>
+<p>结合以上两点，创建新的python文件 <code>FaceDetector.py</code> ，主程序通过在新的线程调用人脸检测来缓解卡顿</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># FaceDetect.py</span></span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> face_recognition</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FaceDetector</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, camera_thread, detection_interval</span>):</span><br><span class="line">        <span class="variable language_">self</span>.camera_thread = camera_thread</span><br><span class="line">        <span class="variable language_">self</span>.detection_interval = detection_interval</span><br><span class="line">        <span class="variable language_">self</span>.frame_count = <span class="number">0</span></span><br><span class="line">        <span class="variable language_">self</span>.face_locations = []</span><br><span class="line">        <span class="variable language_">self</span>.face_encodings = []</span><br><span class="line">        <span class="variable language_">self</span>.kill_event = threading.Event()</span><br><span class="line">        <span class="variable language_">self</span>.lock = threading.Lock()  <span class="comment"># 添加锁</span></span><br><span class="line">        <span class="variable language_">self</span>.detection_thread = threading.Thread(target=<span class="variable language_">self</span>.detect_faces)</span><br><span class="line">        <span class="variable language_">self</span>.detection_thread.start()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">detect_faces</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">not</span> <span class="variable language_">self</span>.kill_event.is_set():</span><br><span class="line">            <span class="keyword">if</span> <span class="variable language_">self</span>.frame_count % <span class="variable language_">self</span>.detection_interval == <span class="number">0</span>:</span><br><span class="line">                frame = <span class="variable language_">self</span>.camera_thread.read()</span><br><span class="line">                rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)</span><br><span class="line">                face_locations = face_recognition.face_locations(rgb_frame)</span><br><span class="line">                face_encodings = face_recognition.face_encodings(rgb_frame, <span class="variable language_">self</span>.face_locations)</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">with</span> <span class="variable language_">self</span>.lock:  <span class="comment"># 使用锁保护共享数据</span></span><br><span class="line">                    <span class="variable language_">self</span>.face_locations = face_locations</span><br><span class="line">                    <span class="variable language_">self</span>.face_encodings = face_encodings</span><br><span class="line">            <span class="variable language_">self</span>.frame_count += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">stop</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.kill_event.<span class="built_in">set</span>()</span><br><span class="line">        <span class="variable language_">self</span>.detection_thread.join()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_faces</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">with</span> <span class="variable language_">self</span>.lock:  <span class="comment"># 使用锁保护共享数据</span></span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">self</span>.face_locations, <span class="variable language_">self</span>.face_encodings</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="http://xn--main-486fx14i.py">修改main.py</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#main.py </span></span><br><span class="line"></span><br><span class="line">detection_interval = <span class="number">20</span> <span class="comment"># 人脸检测间隔</span></span><br><span class="line"><span class="comment"># 添加初始化人脸检测</span></span><br><span class="line">face_detector = FaceDetector(camera_thread, detection_interval)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">update_frame</span>():</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;替换</span></span><br><span class="line"><span class="string">    # 转换图像格式</span></span><br><span class="line"><span class="string">    rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    # 检测人脸</span></span><br><span class="line"><span class="string">    face_locations = face_recognition.face_locations(rgb_frame)</span></span><br><span class="line"><span class="string">    face_encodings = face_recognition.face_encodings(rgb_frame, face_locations)</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="comment"># 获取人脸位置和编码</span></span><br><span class="line">    face_locations, face_encodings = face_detector.get_faces()</span><br></pre></td></tr></table></figure>
+<p>这样修改后帧率大大提高，但是出现了框选人脸位置错误的问题，如下图：</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/%E5%9F%BA%E4%BA%8EOpenCV&amp;face-recognition%E7%9A%84%E5%AE%9E%E6%97%B6%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E4%B8%8E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81/update1.png" alt="image-20241210221815041"></p>
+<p>人脸位置和框选位置刚好对称</p>
+<p>原因是main.py中通过 <code>frame = cv2.flip(frame, 1)</code> 进行了镜像处理，<a target="_blank" rel="noopener" href="http://FaceDetect.py">FaceDetect.py</a> 中调用 <a target="_blank" rel="noopener" href="http://camera.py">camera.py</a> 后没有镜像处理，返回的人脸位置是没有经过处理的人脸位置，所以可以在 <a target="_blank" rel="noopener" href="http://FaceDetect.py">FaceDetect.py</a> 中添加 <code>frame = cv2.flip(frame, 1)</code> ，或者删除 <a target="_blank" rel="noopener" href="http://main.py">main.py</a> 中的镜像处理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#添加镜像处理后的FaceDetect.py</span></span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> face_recognition</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FaceDetector</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, camera_thread, detection_interval</span>):</span><br><span class="line">        <span class="variable language_">self</span>.camera_thread = camera_thread</span><br><span class="line">        <span class="variable language_">self</span>.detection_interval = detection_interval</span><br><span class="line">        <span class="variable language_">self</span>.frame_count = <span class="number">0</span></span><br><span class="line">        <span class="variable language_">self</span>.face_locations = []</span><br><span class="line">        <span class="variable language_">self</span>.face_encodings = []</span><br><span class="line">        <span class="variable language_">self</span>.kill_event = threading.Event()</span><br><span class="line">        <span class="variable language_">self</span>.lock = threading.Lock()  </span><br><span class="line">        <span class="variable language_">self</span>.detection_thread = threading.Thread(target=<span class="variable language_">self</span>.detect_faces)</span><br><span class="line">        <span class="variable language_">self</span>.detection_thread.start()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">detect_faces</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">not</span> <span class="variable language_">self</span>.kill_event.is_set():</span><br><span class="line">            <span class="keyword">if</span> <span class="variable language_">self</span>.frame_count % <span class="variable language_">self</span>.detection_interval == <span class="number">0</span>:</span><br><span class="line">                frame = <span class="variable language_">self</span>.camera_thread.read()</span><br><span class="line">                frame = cv2.flip(frame, <span class="number">1</span>) <span class="comment"># 镜像处理</span></span><br><span class="line">                rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)</span><br><span class="line">                face_locations = face_recognition.face_locations(rgb_frame)</span><br><span class="line">                face_encodings = face_recognition.face_encodings(rgb_frame, <span class="variable language_">self</span>.face_locations)</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">with</span> <span class="variable language_">self</span>.lock:  </span><br><span class="line">                    <span class="variable language_">self</span>.face_locations = face_locations</span><br><span class="line">                    <span class="variable language_">self</span>.face_encodings = face_encodings</span><br><span class="line">            <span class="variable language_">self</span>.frame_count += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">stop</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.kill_event.<span class="built_in">set</span>()</span><br><span class="line">        <span class="variable language_">self</span>.detection_thread.join()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_faces</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">with</span> <span class="variable language_">self</span>.lock:  </span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">self</span>.face_locations, <span class="variable language_">self</span>.face_encodings</span><br></pre></td></tr></table></figure>
+<p>改进效果比对如下</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>改进前无人脸</p>
+</li>
+</ul>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/%E5%9F%BA%E4%BA%8EOpenCV&amp;face-recognition%E7%9A%84%E5%AE%9E%E6%97%B6%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E4%B8%8E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81/before_update1.png" alt="image-20241210223920330"></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>改进前有人脸</p>
+</li>
+</ul>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/%E5%9F%BA%E4%BA%8EOpenCV&amp;face-recognition%E7%9A%84%E5%AE%9E%E6%97%B6%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E4%B8%8E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81/before_update2.png" alt="image-20241210223943508"></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>改进后无人脸</p>
+</li>
+</ul>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/%E5%9F%BA%E4%BA%8EOpenCV&amp;face-recognition%E7%9A%84%E5%AE%9E%E6%97%B6%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E4%B8%8E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81/after_update1.png" alt="image-20241210224041308"></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>改进后有人脸</p>
+</li>
+</ul>
+<p><img src="https://image.gubaiovo.com/blog/post_img/AI/%E5%9F%BA%E4%BA%8EOpenCV&amp;face-recognition%E7%9A%84%E5%AE%9E%E6%97%B6%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E4%B8%8E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81/after_update2.png" alt="image-20241210224106642"></p>
+<p>可见通过添加新的线程和增加间隔的改进效果非常显著。</p>
+<h3 id="参考资料：">参考资料：</h3>
+<p>[1] <strong>OpenCV Tutorials</strong>: <a target="_blank" rel="noopener" href="https://docs.opencv.org/4.x/d9/df8/tutorial_root.html">https://docs.opencv.org/4.x/d9/df8/tutorial_root.html</a></p>
+<p>[2] <strong>face-recognition</strong>: <a target="_blank" rel="noopener" href="https://github.com/ageitgey/face_recognition">https://github.com/ageitgey/face_recognition</a></p>
+<p>[3] <strong>基于cv2.VideoCapture 和 OpenCV 得到更快的 FPS之文件篇</strong>: <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43229348/article/details/122688684">https://blog.csdn.net/weixin_43229348/article/details/122688684</a></p>
+<p>[4] <strong>OpenCV 中文文档</strong>: <a target="_blank" rel="noopener" href="https://apachecn.github.io/opencv-doc-zh/#/">https://apachecn.github.io/opencv-doc-zh/#/</a></p>
+<p>[5] <strong>Flask框架入门教程</strong>: <a target="_blank" rel="noopener" href="https://blog.csdn.net/wly55690/article/details/131683846">https://blog.csdn.net/wly55690/article/details/131683846</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">文章</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+          <li><a href="/categories/">分类</a></li>
+        
+          <li><a href="/links/">链接</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">基于 OpenCV &amp; face-recognition 的实时人脸识别与身份验证</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%B3%BB%E7%BB%9F%E9%9C%80%E6%B1%82%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.0.1.</span> <span class="toc-text">一、系统需求设计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">1. 系统概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%8A%9F%E8%83%BD%E6%A6%82%E8%BF%B0"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">2. 功能概述</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.0.2.</span> <span class="toc-text">二、系统功能模块介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.0.3.</span> <span class="toc-text">三、系统实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%A0%B8%E5%BF%83%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="toc-number">1.0.3.1.</span> <span class="toc-text">系统核心流程图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E2%80%94%E2%80%94training-py"><span class="toc-number">1.0.3.2.</span> <span class="toc-text">训练模型——training.py</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E6%B5%81%E7%A8%8B"><span class="toc-number">1.0.3.3.</span> <span class="toc-text">主流程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E6%91%84%E5%83%8F%E5%A4%B4%E2%80%94%E2%80%94camera-py"><span class="toc-number">1.0.3.3.1.</span> <span class="toc-text">启动摄像头——camera.py</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#fps%E8%AE%A1%E7%AE%97%E2%80%94%E2%80%94fps-py"><span class="toc-number">1.0.3.3.2.</span> <span class="toc-text">fps计算——fps.py</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94main-py"><span class="toc-number">1.0.3.3.3.</span> <span class="toc-text">人脸检测——main.py</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#web%E5%AE%9E%E7%8E%B0%E2%80%94%E2%80%94app-py-index-html"><span class="toc-number">1.0.3.3.4.</span> <span class="toc-text">web实现——app.py &amp; index.html</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#app-py"><span class="toc-number">1.0.3.3.4.1.</span> <span class="toc-text">app.py</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E9%A1%B5%E9%9D%A2index-html"><span class="toc-number">1.0.3.3.4.2.</span> <span class="toc-text">前端页面index.html</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%B3%BB%E7%BB%9F%E6%95%88%E6%9E%9C"><span class="toc-number">1.0.4.</span> <span class="toc-text">四、系统效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%94%B9%E8%BF%9B%E5%8E%86%E7%A8%8B%E4%B8%8E%E4%B8%8D%E8%B6%B3"><span class="toc-number">1.0.5.</span> <span class="toc-text">五、改进历程与不足</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%90%8E%E7%BB%AD%E4%BC%98%E5%8C%96"><span class="toc-number">1.0.6.</span> <span class="toc-text">六、后续优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99%EF%BC%9A"><span class="toc-number">1.0.7.</span> <span class="toc-text">参考资料：</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/236b7493.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/236b7493.html&text=基于OpenCV &amp; face-recognition 的实时人脸识别与身份验证"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/236b7493.html&title=基于OpenCV &amp; face-recognition 的实时人脸识别与身份验证"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/236b7493.html&is_video=false&description=基于OpenCV &amp; face-recognition 的实时人脸识别与身份验证"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=基于OpenCV &amp; face-recognition 的实时人脸识别与身份验证&body=Check out this article: https://www.gubaiovo.com/posts/236b7493.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/236b7493.html&title=基于OpenCV &amp; face-recognition 的实时人脸识别与身份验证"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/236b7493.html&title=基于OpenCV &amp; face-recognition 的实时人脸识别与身份验证"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/236b7493.html&title=基于OpenCV &amp; face-recognition 的实时人脸识别与身份验证"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/236b7493.html&title=基于OpenCV &amp; face-recognition 的实时人脸识别与身份验证"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/236b7493.html&name=基于OpenCV &amp; face-recognition 的实时人脸识别与身份验证&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/236b7493.html&t=基于OpenCV &amp; face-recognition 的实时人脸识别与身份验证"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2026
+    gubai
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

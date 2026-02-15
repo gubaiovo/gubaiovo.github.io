@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="🥧有没有更简单强势的语言(?)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安卓环境下Lua安卓开发初体验">
+<meta property="og:url" content="https://www.gubaiovo.com/posts/cd2fe6a3.html">
+<meta property="og:site_name" content="GuBai">
+<meta property="og:description" content="🥧有没有更简单强势的语言(?)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%AE%89%E5%8D%93%E7%8E%AF%E5%A2%83%E4%B8%8BLua%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91%E5%88%9D%E4%BD%93%E9%AA%8C/Screenshot_20250209_085812.jpg">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%AE%89%E5%8D%93%E7%8E%AF%E5%A2%83%E4%B8%8BLua%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91%E5%88%9D%E4%BD%93%E9%AA%8C/image-20250209091439376.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%AE%89%E5%8D%93%E7%8E%AF%E5%A2%83%E4%B8%8BLua%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91%E5%88%9D%E4%BD%93%E9%AA%8C/Screenshot_20250209_092427.jpg">
+<meta property="article:published_time" content="2025-02-09T02:41:30.000Z">
+<meta property="article:modified_time" content="2026-02-15T09:20:27.317Z">
+<meta property="article:author" content="gubai">
+<meta property="article:tag" content="Dev">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image.gubaiovo.com/blog/post_img/dev/%E5%AE%89%E5%8D%93%E7%8E%AF%E5%A2%83%E4%B8%8BLua%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91%E5%88%9D%E4%BD%93%E9%AA%8C/Screenshot_20250209_085812.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>安卓环境下Lua安卓开发初体验</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/posts/4338f95.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/posts/8c718629.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/cd2fe6a3.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/cd2fe6a3.html&text=安卓环境下Lua安卓开发初体验"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/cd2fe6a3.html&title=安卓环境下Lua安卓开发初体验"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/cd2fe6a3.html&is_video=false&description=安卓环境下Lua安卓开发初体验"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=安卓环境下Lua安卓开发初体验&body=Check out this article: https://www.gubaiovo.com/posts/cd2fe6a3.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/cd2fe6a3.html&title=安卓环境下Lua安卓开发初体验"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/cd2fe6a3.html&title=安卓环境下Lua安卓开发初体验"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/cd2fe6a3.html&title=安卓环境下Lua安卓开发初体验"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/cd2fe6a3.html&title=安卓环境下Lua安卓开发初体验"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/cd2fe6a3.html&name=安卓环境下Lua安卓开发初体验&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/cd2fe6a3.html&t=安卓环境下Lua安卓开发初体验"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">安卓环境下Lua安卓开发初体验</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-number">1.1.</span> <span class="toc-text">环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.2.</span> <span class="toc-text">创建项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E5%B8%83%E5%B1%80"><span class="toc-number">1.3.</span> <span class="toc-text">编写布局</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E9%80%BB%E8%BE%91"><span class="toc-number">1.4.</span> <span class="toc-text">编写逻辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E7%94%B3%E8%AF%B7"><span class="toc-number">1.5.</span> <span class="toc-text">权限申请</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E5%AF%BC%E5%87%BA"><span class="toc-number">1.6.</span> <span class="toc-text">构建导出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BE%8E%E5%8C%96%E5%B8%83%E5%B1%80"><span class="toc-number">1.7.</span> <span class="toc-text">美化布局</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        安卓环境下Lua安卓开发初体验
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">gubai</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-02-09T02:41:30.000Z" class="dt-published" itemprop="datePublished">2025-02-09</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Dev/">Dev</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Dev/" rel="tag">Dev</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1>安卓环境下Lua安卓开发初体验</h1>
+<blockquote>
+<p>家里老人年纪大了，记不住手机怎么操作，两天问了五遍怎么全删图片，遂尝试安卓开发，一键清空图片/视频。一开始尝试 Java，虽然有过 Java 学习经验，但短时间上手安卓实在头大，选择了更简单灵活的Lua</p>
+</blockquote>
+<p>推荐阅读：<a target="_blank" rel="noopener" href="https://doc.kulipai.top/posts/10%E5%88%86%E9%92%9F%E7%94%A8%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E5%BC%80%E5%8F%91%E5%AE%89%E5%8D%93.html">10分钟用安卓手机开发安卓</a></p>
+<h2 id="环境">环境</h2>
+<p><strong>工具</strong>：NeLuaJ+，可选 MT 管理器，一个好用的ai(ds，copilot…)</p>
+<p><strong>环境</strong>：安卓</p>
+<p><strong>所有用到的工具和成果  蓝奏云</strong>：<a target="_blank" rel="noopener" href="https://wwre.lanzouq.com/b0ul17nve">https://wwre.lanzouq.com/b0ul17nve</a>  密码:8rqk</p>
+<p>NeLuaJ+ Builder为配套构建工具，NeLuaJ+为编写工具</p>
+<p><strong>目标安卓版本</strong>：安卓9 &amp; 安卓12</p>
+<h2 id="创建项目">创建项目</h2>
+<p>进入 NeLuaJ+ ，右上角 <code>竖着的三个点</code> 选择 <code>项目...</code> → <code>创建项目</code></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%AE%89%E5%8D%93%E7%8E%AF%E5%A2%83%E4%B8%8BLua%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91%E5%88%9D%E4%BD%93%E9%AA%8C/Screenshot_20250209_085812.jpg" alt="Screenshot_20250209_085812"></p>
+<p>根据需要修改软件名称和包名，选择需要的模块。以 <code>一键清空图片/视频</code> 为例，修改名字后直接创建</p>
+<p>起名为 <code>imgCleaner</code> ，右上角 <code>横着的三条杠</code> 下进入根目录 <code>/storage/emulated/0/LuaJ/Project/imgCleaner/</code></p>
+<p>下文所有 <code>./</code> 即为 <code>/storage/emulated/0/LuaJ/Project/imgCleaner/</code>，也就是项目根目录下</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%AE%89%E5%8D%93%E7%8E%AF%E5%A2%83%E4%B8%8BLua%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91%E5%88%9D%E4%BD%93%E9%AA%8C/image-20250209091439376.png" alt="image-20250209091439376"></p>
+<h2 id="编写布局">编写布局</h2>
+<p>预期效果为：两个按钮，一个一键删掉图片，一个一键删掉视频</p>
+<p>先创建两个按钮(Button)，进入 <code>./res/layout/main.lua</code> ，这里编写布局</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> &#123;  </span><br><span class="line">  LinearLayout,  <span class="comment">--线性布局</span></span><br><span class="line">  orientation=<span class="string">&quot;vertical&quot;</span>,  <span class="comment">--竖向排列</span></span><br><span class="line">  layout_width=<span class="string">&quot;match&quot;</span>,  <span class="comment">--宽度最大</span></span><br><span class="line">  layout_height=<span class="string">&quot;match&quot;</span>,  <span class="comment">--高度最大</span></span><br><span class="line">  gravity=<span class="string">&quot;center&quot;</span>,  <span class="comment">--子空间居中</span></span><br><span class="line">  &#123;</span><br><span class="line">    AppCompatTextView, <span class="comment">--文本控件</span></span><br><span class="line">    text=<span class="string">&quot;Hello NeLuaJ+&quot;</span>, <span class="comment">--文字</span></span><br><span class="line">   &#125;,</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>默认提供了在屏幕正中央显示 <code>Hello NeLuaJ+</code> 的样例文字。编写过程中可以随时在 <code>屏幕正上方的黑色三角形</code> → <code>运行工程</code> 中测试软件。</p>
+<p>删掉文本，添加两个Button控件</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import <span class="string">&quot;android.widget.*&quot;</span>, <span class="string">&quot;androidx.appcompat.widget.*&quot;</span>;</span><br><span class="line"><span class="keyword">return</span> &#123;</span><br><span class="line">  LinearLayout, <span class="comment">--线性布局</span></span><br><span class="line">  orientation=<span class="string">&quot;vertical&quot;</span>, <span class="comment">--竖向排列</span></span><br><span class="line">  layout_width=<span class="string">&quot;match&quot;</span>, <span class="comment">--宽度最大</span></span><br><span class="line">  layout_height=<span class="string">&quot;match&quot;</span>, <span class="comment">--高度最大</span></span><br><span class="line">  gravity=<span class="string">&quot;center&quot;</span>, <span class="comment">--子空间居中</span></span><br><span class="line">  &#123;</span><br><span class="line">    Button, <span class="comment">--按钮控件</span></span><br><span class="line">    text=<span class="string">&quot;清理图片&quot;</span>, <span class="comment">--按钮显示的文字(可选，没有text的话会显示没有文字的按钮)</span></span><br><span class="line">    id=<span class="string">&quot;imgclean&quot;</span>, <span class="comment">--按钮id，这个id是独一无二指向这个button，支持中文(不建议中文编程)</span></span><br><span class="line">    layout_width = <span class="string">&quot;200dp&quot;</span>, <span class="comment">--按钮宽度(可选)</span></span><br><span class="line">    layout_height = <span class="string">&quot;100dp&quot;</span>, <span class="comment">--按钮高度(可选)</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    Button,</span><br><span class="line">    text=<span class="string">&quot;清理视频&quot;</span>,</span><br><span class="line">    id=<span class="string">&quot;movclean&quot;</span>,</span><br><span class="line">    layout_width = <span class="string">&quot;200dp&quot;</span>,</span><br><span class="line">    layout_height = <span class="string">&quot;100dp&quot;</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>添加好控件后尝试运行，成功显示两个按钮</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/dev/%E5%AE%89%E5%8D%93%E7%8E%AF%E5%A2%83%E4%B8%8BLua%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91%E5%88%9D%E4%BD%93%E9%AA%8C/Screenshot_20250209_092427.jpg" alt="Screenshot_20250209_092427"></p>
+<h2 id="编写逻辑">编写逻辑</h2>
+<p>现在按钮没有功能，需要返回到 <code>./main.lua</code> 编写</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import <span class="string">&quot;java.lang.*&quot;</span>,<span class="string">&quot;java.util.*&quot;</span></span><br><span class="line">import <span class="string">&quot;android.os.*&quot;</span>,<span class="string">&quot;android.app.*&quot;</span></span><br><span class="line">import <span class="string">&quot;android.content.*&quot;</span>,<span class="string">&quot;android.provider.*&quot;</span></span><br><span class="line">activity &#123;</span><br><span class="line">  Title = res.<span class="built_in">string</span>.app_title,</span><br><span class="line">  ContentView = res.layout.main</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在默认提供的模板<strong>下方</strong>编写逻辑</p>
+<p>首先编写两个按钮点击逻辑</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">imgclean.onClick=<span class="function"><span class="keyword">function</span><span class="params">()</span></span> <span class="comment">-- ButtonId.onClick=function() 为起始语句</span></span><br><span class="line">  deleteMedia(<span class="string">&quot;image&quot;</span>) <span class="comment">-- 调用函数，deleteMedia稍后编写</span></span><br><span class="line"><span class="keyword">end</span> <span class="comment">-- end为结束语句</span></span><br><span class="line"></span><br><span class="line">movclean.onClick=<span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">  deleteMedia(<span class="string">&quot;vedio&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>这段相对好理解，当按下对应id的按钮后，对应的事件为：调用deleteMedia()函数，传入一个参数(需要删除的文件类型)，然后end结束</p>
+<p>下面编写 deleteMedia()，首先写个架子</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deleteMedia</span><span class="params">(type)</span></span></span><br><span class="line">  <span class="keyword">local</span> uri</span><br><span class="line">  <span class="keyword">if</span> <span class="built_in">type</span> == <span class="string">&quot;image&quot;</span> <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;正在清理图片&quot;</span>)</span><br><span class="line">    uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">if</span> <span class="built_in">type</span> == <span class="string">&quot;vedio&quot;</span> <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;正在清理视频&quot;</span>)</span><br><span class="line">    uri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">        </span><br><span class="line">  ......</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>type即为按钮传进来的参数，如果学过其他语言，这里type应该好理解，就是形参</p>
+<p>对文件进行操作，需要知道文件在哪。安卓提供了 <code>访问共享存储空间中的媒体文件</code> 的方法</p>
+<p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/training/data-storage/shared/media?hl=zh-cn#java">访问共享存储空间中的媒体文件</a></p>
+<blockquote>
+<p>科普</p>
+<p>URI（Uniform Resource <strong>Identifier</strong>）统一资源标识符，<strong>一条用来标识抽象或物理资源的紧凑字符串，通过这个标识可以访问一个唯一的资源</strong><br>
+URL（Uniform Resource <strong>Locator</strong>）统一资源定位符</p>
+</blockquote>
+<p>访问媒体资源，可以通过 <code>MediaStore.media-type.Media.EXTERNAL_CONTENT_URI</code> 得到媒体资源uri</p>
+<p>其中 <code>media-type</code> 就是媒体资源的类型</p>
+<table>
+<thead>
+<tr>
+<th>文件类型</th>
+<th>media-type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>图片</td>
+<td>Images</td>
+</tr>
+<tr>
+<td>视频</td>
+<td>Video</td>
+</tr>
+<tr>
+<td>音频</td>
+<td>Audio</td>
+</tr>
+<tr>
+<td>下载的文件</td>
+<td>Downloads</td>
+</tr>
+</tbody>
+</table>
+<p>以视频为例，视频的uri为 <code>MediaStore.Video.Media.EXTERNAL_CONTENT_URI</code></p>
+<p>lua 定义变量参考 <a target="_blank" rel="noopener" href="https://www.runoob.com/lua/lua-variables.html">Lua 变量</a></p>
+<p>知道文件在哪(uri)了以后，就可以删除了。继续编写</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deleteMedia</span><span class="params">(type)</span></span></span><br><span class="line">  <span class="keyword">local</span> uri</span><br><span class="line">  <span class="keyword">local</span> Type</span><br><span class="line">  <span class="keyword">if</span> <span class="built_in">type</span> == <span class="string">&quot;image&quot;</span> <span class="keyword">then</span></span><br><span class="line">    Type = <span class="string">&quot;图片&quot;</span></span><br><span class="line">    uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">if</span> <span class="built_in">type</span> == <span class="string">&quot;vedio&quot;</span> <span class="keyword">then</span></span><br><span class="line">    Type = <span class="string">&quot;视频&quot;</span></span><br><span class="line">    uri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">        </span><br><span class="line">  <span class="keyword">local</span> contentResolver = activity.getContentResolver() </span><br><span class="line">  <span class="keyword">local</span> rowsDeleted = contentResolver.delete(uri, <span class="literal">nil</span>, <span class="literal">nil</span>)</span><br><span class="line">  <span class="built_in">print</span>(<span class="built_in">tostring</span>(rowsDeleted)..<span class="string">&quot;个&quot;</span>..Type..清理完成)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p><code>local contentResolver = activity.getContentResolver()</code> 获得了当前活动的内容解析器（Content Resolver）。内容解析器是一个接口，提供对应用程序内数据的访问。</p>
+<p><code>local rowsDeleted = contentResolver.delete(uri, nil, nil)</code>：使用内容解析器删除指定 URI 的数据。</p>
+<p><code>Content Resolver</code> 的 <code>delete()</code> 函数有三个参数</p>
+<p>原型：<code>delete(Uri uri,  String where, selectionArgs)</code></p>
+<p>第一个参数为uri，第二三个参数为约束条件，返回被删除的行数，<code>nil</code> 表示没有选择条件</p>
+<p>print内容为字符串，需要转换 <code>rowsDeleted</code> 类型，使用 <code>tostring()</code> 函数即可</p>
+<p>在print内容中添加变量使用 <code>..</code>  （个人理解<code>..</code> 相当于 <code>+</code>）</p>
+<p>主要逻辑便编写完成</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deleteMedia</span><span class="params">(type)</span></span></span><br><span class="line">  <span class="keyword">local</span> uri</span><br><span class="line">  <span class="keyword">local</span> Type</span><br><span class="line">  <span class="keyword">if</span> <span class="built_in">type</span> == <span class="string">&quot;image&quot;</span> <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;正在清理图片&quot;</span>)</span><br><span class="line">    Type = <span class="string">&quot;图片&quot;</span></span><br><span class="line">    uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">if</span> <span class="built_in">type</span> == <span class="string">&quot;vedio&quot;</span> <span class="keyword">then</span></span><br><span class="line">    <span class="comment">--print(&quot;正在清理视频&quot;)</span></span><br><span class="line">    Type = <span class="string">&quot;视频&quot;</span></span><br><span class="line">    uri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">  <span class="keyword">local</span> contentResolver = activity.getContentResolver()</span><br><span class="line">  <span class="keyword">local</span> rowsDeleted = contentResolver.delete(uri, <span class="literal">nil</span>, <span class="literal">nil</span>)</span><br><span class="line">  <span class="built_in">print</span>(<span class="built_in">tostring</span>(rowsDeleted)..<span class="string">&quot;个&quot;</span>..Type..<span class="string">&quot;清理完毕&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">imgclean.onClick=<span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">  deleteMedia(<span class="string">&quot;image&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">movclean.onClick=<span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">  deleteMedia(<span class="string">&quot;vedio&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="权限申请">权限申请</h2>
+<p>安卓历代文件保护可以看这篇文章 <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_48179608/article/details/122838494">【安卓基础】一文搞懂Android历代版本文件访问权限变化</a></p>
+<p><code>./init.lua</code> 中，有 <code>target_sdk</code>   <code>min_sdk</code>   <code>user_permission</code> 三个选项</p>
+<p><code>target_sdk</code>   <code>min_sdk</code> 分别为目标sdk和最低sdk</p>
+<blockquote>
+<p>科普：SDK是什么</p>
+<p>“SDK” 是 Software Development Kit 的缩写，中文译为软件开发工具包。它是一组用于开发软件的工具、库、示例代码和文档的集合，旨在帮助开发者更容易地构建、集成和使用特定的软件或服务。</p>
+</blockquote>
+<p>不同安卓版本对应不同的sdk，参考文章 <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42690281/article/details/131640670">Android版本与SDK/API版本、JDK对应关系</a></p>
+<p>target_sdk过高，对文件操作不能只在<code>user_permission</code> 加 <code>WRITE_EXTERNAL_STORAGE</code> ，需要动态申请权限，也就是在程序运行时申请权限，诸如平常安装新应用，弹窗申请调用xxxx，申请xxxx访问权限一样</p>
+<p>这里是动态申请权限模板</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--Android动态权限申请,回调和检查</span></span><br><span class="line"><span class="comment">--权限的申请应当遵循“谁需要，谁申请”，权限通过则执行，不通过则不执行</span></span><br><span class="line"><span class="comment">--既不应该一启动就全申请，也不应该申请不应需要的权限</span></span><br><span class="line"><span class="comment">--假设有某个需求需要权限</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun</span><span class="params">()</span></span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;某个需要权限的操作&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">--定义请求码</span></span><br><span class="line"><span class="keyword">local</span> permissionRequestCode = <span class="number">10</span></span><br><span class="line"><span class="comment">--申请权限</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">requestPermissions</span><span class="params">(permissions, requestCode)</span></span></span><br><span class="line">  <span class="keyword">local</span> ActivityCompat = luajava.bindClass <span class="string">&quot;androidx.core.app.ActivityCompat&quot;</span></span><br><span class="line">  <span class="keyword">return</span> ActivityCompat.requestPermissions(activity, permissions, requestCode);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">--申请权限的回调在这里执行</span></span><br><span class="line">onRequestPermissionsResult=<span class="function"><span class="keyword">function</span><span class="params">(requestCode, permissions, grantResults)</span></span></span><br><span class="line">  <span class="keyword">local</span> PackageManager = luajava.bindClass <span class="string">&quot;android.content.pm.PackageManager&quot;</span></span><br><span class="line">  <span class="comment">--判断是不是自己的权限申请</span></span><br><span class="line">  <span class="keyword">if</span> requestCode==permissionRequestCode <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">local</span> count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">local</span> Manifest = luajava.bindClass <span class="string">&quot;android.Manifest&quot;</span></span><br><span class="line">    <span class="keyword">for</span> i=<span class="number">0</span>,#permissions<span class="number">-1</span> <span class="keyword">do</span></span><br><span class="line">      <span class="keyword">if</span> grantResults[i] == PackageManager.PERMISSION_GRANTED <span class="keyword">then</span></span><br><span class="line">        <span class="comment">--print(permissions[i]..&quot;权限通过&quot;)</span></span><br><span class="line">        count = count + <span class="number">1</span></span><br><span class="line">        <span class="comment">--假如需要的权限被通过了</span></span><br><span class="line">        <span class="keyword">if</span> permissions[i]==Manifest.permission.READ_EXTERNAL_STORAGE <span class="keyword">then</span></span><br><span class="line">          fun()</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">       <span class="keyword">else</span></span><br><span class="line">        <span class="comment">--print(permissions[i]..&quot;权限拒绝&quot;)</span></span><br><span class="line">        <span class="keyword">if</span> permissions[i]==Manifest.permission.READ_EXTERNAL_STORAGE <span class="keyword">then</span></span><br><span class="line">          <span class="built_in">print</span>(<span class="string">&quot;执行fun()需要的权限未通过&quot;</span>)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;申请了&quot;</span>..#permissions..<span class="string">&quot;个权限，通过了&quot;</span>..count..<span class="string">&quot;个权限&quot;</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">--示例</span></span><br><span class="line"><span class="comment">--要申请的权限列表，请写成常量以免自己写错</span></span><br><span class="line"><span class="comment">--所有的权限常量定义在Manifest的内部类permission里，写法如下</span></span><br><span class="line"><span class="keyword">local</span> Manifest = luajava.bindClass <span class="string">&quot;android.Manifest&quot;</span></span><br><span class="line"><span class="comment">--以储存权限为例</span></span><br><span class="line"><span class="keyword">local</span> requirePermissions =</span><br><span class="line">&#123;</span><br><span class="line">  Manifest.permission.WRITE_EXTERNAL_STORAGE,</span><br><span class="line">  Manifest.permission.READ_EXTERNAL_STORAGE</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">--发起请求</span></span><br><span class="line">requestPermissions(requirePermissions, permissionRequestCode)</span><br><span class="line"><span class="comment">--检查权限</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkPermission</span><span class="params">(permission)</span></span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>==activity.checkSelfPermission(permission)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">--单纯检查一下有没有指定权限</span></span><br><span class="line"><span class="keyword">local</span> flag = checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;WRITE_EXTERNAL_STORAGE检查结果&quot;</span>..<span class="built_in">tostring</span>(flag))</span><br></pre></td></tr></table></figure>
+<p>将这些添加到 <code>./main.lua</code> 中即可</p>
+<p><code>./main.lua</code> 完整代码如下</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">import <span class="string">&quot;java.lang.*&quot;</span>,<span class="string">&quot;java.util.*&quot;</span></span><br><span class="line">import <span class="string">&quot;android.os.*&quot;</span>,<span class="string">&quot;android.app.*&quot;</span></span><br><span class="line">import <span class="string">&quot;android.content.*&quot;</span>,<span class="string">&quot;android.provider.*&quot;</span></span><br><span class="line">activity &#123;</span><br><span class="line">  Title = res.<span class="built_in">string</span>.app_title,</span><br><span class="line">  ContentView = res.layout.main</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">--Android动态权限申请,回调和检查</span></span><br><span class="line"><span class="comment">--权限的申请应当遵循“谁需要，谁申请”，权限通过则执行，不通过则不执行</span></span><br><span class="line"><span class="comment">--既不应该一启动就全申请，也不应该申请不应需要的权限</span></span><br><span class="line"><span class="comment">--假设有某个需求需要权限</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun</span><span class="params">()</span></span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;某个需要权限的操作&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">--定义请求码</span></span><br><span class="line"><span class="keyword">local</span> permissionRequestCode = <span class="number">10</span></span><br><span class="line"><span class="comment">--申请权限</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">requestPermissions</span><span class="params">(permissions, requestCode)</span></span></span><br><span class="line">  <span class="keyword">local</span> ActivityCompat = luajava.bindClass <span class="string">&quot;androidx.core.app.ActivityCompat&quot;</span></span><br><span class="line">  <span class="keyword">return</span> ActivityCompat.requestPermissions(activity, permissions, requestCode);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">--申请权限的回调在这里执行</span></span><br><span class="line">onRequestPermissionsResult=<span class="function"><span class="keyword">function</span><span class="params">(requestCode, permissions, grantResults)</span></span></span><br><span class="line">  <span class="keyword">local</span> PackageManager = luajava.bindClass <span class="string">&quot;android.content.pm.PackageManager&quot;</span></span><br><span class="line">  <span class="comment">--判断是不是自己的权限申请</span></span><br><span class="line">  <span class="keyword">if</span> requestCode==permissionRequestCode <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">local</span> count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">local</span> Manifest = luajava.bindClass <span class="string">&quot;android.Manifest&quot;</span></span><br><span class="line">    <span class="keyword">for</span> i=<span class="number">0</span>,#permissions<span class="number">-1</span> <span class="keyword">do</span></span><br><span class="line">      <span class="keyword">if</span> grantResults[i] == PackageManager.PERMISSION_GRANTED <span class="keyword">then</span></span><br><span class="line">        <span class="comment">--print(permissions[i]..&quot;权限通过&quot;)</span></span><br><span class="line">        count = count + <span class="number">1</span></span><br><span class="line">        <span class="comment">--假如需要的权限被通过了</span></span><br><span class="line">        <span class="keyword">if</span> permissions[i]==Manifest.permission.READ_EXTERNAL_STORAGE <span class="keyword">then</span></span><br><span class="line">          fun()</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">       <span class="keyword">else</span></span><br><span class="line">        <span class="comment">--print(permissions[i]..&quot;权限拒绝&quot;)</span></span><br><span class="line">        <span class="keyword">if</span> permissions[i]==Manifest.permission.READ_EXTERNAL_STORAGE <span class="keyword">then</span></span><br><span class="line">          <span class="built_in">print</span>(<span class="string">&quot;执行fun()需要的权限未通过&quot;</span>)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;申请了&quot;</span>..#permissions..<span class="string">&quot;个权限，通过了&quot;</span>..count..<span class="string">&quot;个权限&quot;</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">--示例</span></span><br><span class="line"><span class="comment">--要申请的权限列表，请写成常量以免自己写错</span></span><br><span class="line"><span class="comment">--所有的权限常量定义在Manifest的内部类permission里，写法如下</span></span><br><span class="line"><span class="keyword">local</span> Manifest = luajava.bindClass <span class="string">&quot;android.Manifest&quot;</span></span><br><span class="line"><span class="comment">--以储存权限为例</span></span><br><span class="line"><span class="keyword">local</span> requirePermissions =</span><br><span class="line">&#123;</span><br><span class="line">  Manifest.permission.WRITE_EXTERNAL_STORAGE,</span><br><span class="line">  Manifest.permission.READ_EXTERNAL_STORAGE</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">--发起请求</span></span><br><span class="line">requestPermissions(requirePermissions, permissionRequestCode)</span><br><span class="line"><span class="comment">--检查权限</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkPermission</span><span class="params">(permission)</span></span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>==activity.checkSelfPermission(permission)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">--单纯检查一下有没有指定权限</span></span><br><span class="line"><span class="keyword">local</span> flag = checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;WRITE_EXTERNAL_STORAGE检查结果&quot;</span>..<span class="built_in">tostring</span>(flag))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deleteMedia</span><span class="params">(type)</span></span></span><br><span class="line">  <span class="keyword">local</span> uri</span><br><span class="line">  <span class="keyword">local</span> Type</span><br><span class="line">  <span class="keyword">if</span> <span class="built_in">type</span> == <span class="string">&quot;image&quot;</span> <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;正在清理图片&quot;</span>)</span><br><span class="line">    Type = <span class="string">&quot;图片&quot;</span></span><br><span class="line">    uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">if</span> <span class="built_in">type</span> == <span class="string">&quot;vedio&quot;</span> <span class="keyword">then</span></span><br><span class="line">    <span class="comment">--print(&quot;正在清理视频&quot;)</span></span><br><span class="line">    Type = <span class="string">&quot;视频&quot;</span></span><br><span class="line">    uri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">local</span> contentResolver = activity.getContentResolver()</span><br><span class="line">  <span class="keyword">local</span> rowsDeleted = contentResolver.delete(uri, <span class="literal">nil</span>, <span class="literal">nil</span>)</span><br><span class="line">  <span class="built_in">print</span>(<span class="built_in">tostring</span>(rowsDeleted)..<span class="string">&quot;个&quot;</span>..Type..<span class="string">&quot;清理完毕&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">imgclean.onClick=<span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">  deleteMedia(<span class="string">&quot;image&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">movclean.onClick=<span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">  deleteMedia(<span class="string">&quot;vedio&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>这样一个简单的删除全部图片/视频程序便写好了</p>
+<p><strong>注意：调试时候默认获得权限，无需弹窗申请</strong></p>
+<p><strong>如果在自己手机测试该程序，一定要提前备份文件！！！</strong></p>
+<h2 id="构建导出">构建导出</h2>
+<p>在右上角 <code>竖着的三个点</code> 选择 <code>项目...</code> → <code>构建</code></p>
+<p>会自动跳到 NeLuaJ+ Builder 中，选择你的项目 → <code>下一步</code> → <code>开始</code></p>
+<p>构建的apk位于 <code>/storage/emulated/0/LuaJ/Builds</code></p>
+<h2 id="美化布局">美化布局</h2>
+<p>如果想要简单美化，参考最开头推荐阅读的那篇文章，这里只做隐藏标题处理</p>
+<p>在<code>./main.lua</code>中添加</p>
+<p><code>activity.getSupportActionBar().hide() </code></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">文章</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+          <li><a href="/categories/">分类</a></li>
+        
+          <li><a href="/links/">链接</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">安卓环境下Lua安卓开发初体验</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-number">1.1.</span> <span class="toc-text">环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.2.</span> <span class="toc-text">创建项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E5%B8%83%E5%B1%80"><span class="toc-number">1.3.</span> <span class="toc-text">编写布局</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E9%80%BB%E8%BE%91"><span class="toc-number">1.4.</span> <span class="toc-text">编写逻辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E7%94%B3%E8%AF%B7"><span class="toc-number">1.5.</span> <span class="toc-text">权限申请</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E5%AF%BC%E5%87%BA"><span class="toc-number">1.6.</span> <span class="toc-text">构建导出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BE%8E%E5%8C%96%E5%B8%83%E5%B1%80"><span class="toc-number">1.7.</span> <span class="toc-text">美化布局</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/cd2fe6a3.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/cd2fe6a3.html&text=安卓环境下Lua安卓开发初体验"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/cd2fe6a3.html&title=安卓环境下Lua安卓开发初体验"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/cd2fe6a3.html&is_video=false&description=安卓环境下Lua安卓开发初体验"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=安卓环境下Lua安卓开发初体验&body=Check out this article: https://www.gubaiovo.com/posts/cd2fe6a3.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/cd2fe6a3.html&title=安卓环境下Lua安卓开发初体验"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/cd2fe6a3.html&title=安卓环境下Lua安卓开发初体验"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/cd2fe6a3.html&title=安卓环境下Lua安卓开发初体验"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/cd2fe6a3.html&title=安卓环境下Lua安卓开发初体验"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/cd2fe6a3.html&name=安卓环境下Lua安卓开发初体验&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/cd2fe6a3.html&t=安卓环境下Lua安卓开发初体验"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2026
+    gubai
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

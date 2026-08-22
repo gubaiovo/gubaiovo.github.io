@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="🥧神秘流量包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用wireshark从FTP流量中提取文件">
+<meta property="og:url" content="https://www.gubaiovo.com/posts/86ffe598.html">
+<meta property="og:site_name" content="GuBai">
+<meta property="og:description" content="🥧神秘流量包">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/1.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/2.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/3.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/4.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/5.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/6.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/7.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/8.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/9.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/10.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/11.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/12.png">
+<meta property="og:image" content="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/13.png">
+<meta property="article:published_time" content="2024-12-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-12-21T16:00:00.000Z">
+<meta property="article:author" content="gubai">
+<meta property="article:tag" content="CTF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/1.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>利用wireshark从FTP流量中提取文件</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/posts/8c718629.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/posts/236b7493.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/86ffe598.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/86ffe598.html&text=利用wireshark从FTP流量中提取文件"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/86ffe598.html&title=利用wireshark从FTP流量中提取文件"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/86ffe598.html&is_video=false&description=利用wireshark从FTP流量中提取文件"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=利用wireshark从FTP流量中提取文件&body=Check out this article: https://www.gubaiovo.com/posts/86ffe598.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/86ffe598.html&title=利用wireshark从FTP流量中提取文件"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/86ffe598.html&title=利用wireshark从FTP流量中提取文件"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/86ffe598.html&title=利用wireshark从FTP流量中提取文件"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/86ffe598.html&title=利用wireshark从FTP流量中提取文件"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/86ffe598.html&name=利用wireshark从FTP流量中提取文件&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/86ffe598.html&t=利用wireshark从FTP流量中提取文件"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">利用wireshark从FTP流量中提取文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#key-zip"><span class="toc-number">1.1.</span> <span class="toc-text">key.zip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pub-key"><span class="toc-number">1.2.</span> <span class="toc-text">pub.key</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#test-key"><span class="toc-number">1.3.</span> <span class="toc-text">test.key</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E5%85%85-%E6%8F%90%E5%8F%96pdf"><span class="toc-number">1.4.</span> <span class="toc-text">(补充)提取pdf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tips"><span class="toc-number">1.5.</span> <span class="toc-text">tips</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        利用wireshark从FTP流量中提取文件
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">gubai</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-12-21T16:00:00.000Z" class="dt-published" itemprop="datePublished">2024-12-22</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CTF/">CTF</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CTF/" rel="tag">CTF</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1>利用wireshark从FTP流量中提取文件</h1>
+<blockquote>
+<p>FTP协议也是通过TCP协议来承载，wireshark对于这个流量包解析成了三种协议来显示：TCP,FTP,FTP-DATA。wireshark把带有FTP控制信息的解析为FTP，对于至传输了文件内容或者命令执行结果的FTP数据包解析称FTP-DATA。</p>
+</blockquote>
+<p>使用wireshark打开流量包，过滤 <code>ftp-data</code></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/1.png" alt="image-20241222122027779"></p>
+<p>在右侧可以看到有四个文件</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>key.zip</p>
+</li>
+<li class="lvl-2">
+<p>pub.key</p>
+</li>
+<li class="lvl-2">
+<p>test.key</p>
+</li>
+<li class="lvl-2">
+<p>____.pdf （乱码了）</p>
+</li>
+</ul>
+<p>依次提取文件</p>
+<h2 id="key-zip">key.zip</h2>
+<p>追踪TCP流，用原始数据显示</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/2.png" alt="image-20241222123040079"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">504b0304140000000000f7590949a29009868000000080000000070000006b65792e7478741205c9b3b40c16ee4f6691ad71f680cd3f3a5c98f10e3338feb4937a964ca10dd4c2ba97e24ae1d9e21fe9f5d3540320f147687e4d1ca09764d67d0fea5616558053adaec680c1d4120fa050e1682d05aa448fe5d80ccae5847eda6643ae1fde09b3a1339a3a9d55cc936da2760134269937cd7b724b705672516cd7fec4ea13504b01021400140000000000f7590949a290098680000000800000000700000000000000000020000000000000006b65792e747874504b0506000000000100010035000000a50000000000</span><br></pre></td></tr></table></figure>
+<p>导出，后缀改为 <code>.zip</code></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/3.png" alt="image-20241222123238788"></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/4.png" alt="image-20241222123411251"></p>
+<p>发现文件乱码，需要进一步解密。目前信息有限，继续提取文件</p>
+<h2 id="pub-key">pub.key</h2>
+<p>继续追踪对应TCP流，在UTF-8中可以看到公钥</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/5.png" alt="image-20241222123620160"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN PUBLIC KEY-----</span><br><span class="line">MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQD0UN0A+70iM0VCJ1ni0n/U1BRj</span><br><span class="line">0u8yMWH4Qi+xTbjHgbE7wOukOaO+2PyQXiqIzZnf5jCkJuVDYjALGcKrZM4OCQBB</span><br><span class="line">d85B/LTc36XZ7JVfX5kGy5tIR3tquuPIVKNdAsHlSqh9S7YSS39RdnSa5rOUyGhr</span><br><span class="line">LzxwzzM9IO4e+QQ+CQIDAQAB</span><br><span class="line">-----END PUBLIC KEY-----</span><br></pre></td></tr></table></figure>
+<p>使用<a target="_blank" rel="noopener" href="https://www.ssleye.com/ssltool/pub_asysi.html">在线工具</a>解析</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/6.png" alt="image-20241222123825861"></p>
+<h2 id="test-key">test.key</h2>
+<p>和pub.key步骤相同，得到私钥</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN RSA PRIVATE KEY-----</span><br><span class="line">MIICXgIBAAKBgQD0UN0A+70iM0VCJ1ni0n/U1BRj0u8yMWH4Qi+xTbjHgbE7wOuk</span><br><span class="line">OaO+2PyQXiqIzZnf5jCkJuVDYjALGcKrZM4OCQBBd85B/LTc36XZ7JVfX5kGy5tI</span><br><span class="line">R3tquuPIVKNdAsHlSqh9S7YSS39RdnSa5rOUyGhrLzxwzzM9IO4e+QQ+CQIDAQAB</span><br><span class="line">AoGADiaw5mGubtCxbkeBOVYf+V/fXnjVSf76QbrzsD1kOooUjfV6sKR2C5Pd7S7H</span><br><span class="line">H+1owENBBgEKvoBtb/cqA2tvU9vQ4l5TMBJcHv6LEcb9WPpnMxPV2GNjO+DTPGPy</span><br><span class="line">Xnu1UZlZjwx+NaF5rESoSSVS2ZaaIixBs4RWRXk+lHEbTFECQQD6Rp6jMweRgPHO</span><br><span class="line">pR3mgIK83zL+kzqYM5isIPv3DIC5JQN2kXqK73IDQCFVlfXnr9lAAVRzLDsAXLqv</span><br><span class="line">le/o6yQLAkEA+edY+GERlLuD1t2k9Js0Dc7EwnLcxoFUE60ivj8Gf9jzLskGHxsv</span><br><span class="line">0IV6J5OHwPh54kAxAnqCjSqNRAWGNzr+uwJBALYEjDUm1LdGrxXZ0jAkgHC6Z0zs</span><br><span class="line">aK3uwHdXGcinqCp+t9EQpq3KzQF+L4AeKxRQONEq5m9I2LQ/vGocwrmD4dcCQQDb</span><br><span class="line">rTyOinWz8upAFPKOe2hUwvA/pkzgyosoCMhDyI9kD0gmVlvlODbd7Jem9o8dWM97</span><br><span class="line">zcXHUf41LbSkmN6U6m1FAkEAqmZbr35bPfkeoiikwNl6OVQytg12TZjw2vIbvfub</span><br><span class="line">f9Rvti8Lh/tbrmhZroiz8/l3aAZmugI1NBcbeZR0gz8ggg==</span><br><span class="line">-----END RSA PRIVATE KEY-----</span><br></pre></td></tr></table></figure>
+<p>使用<a target="_blank" rel="noopener" href="https://www.ssleye.com/ssltool/priv_get.html">在线工具</a>解析</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/7.png" alt="image-20241222124043866"></p>
+<p>尝试以key.txt的16进制为密文进行解密</p>
+<p>使用010editor打开key.txt，获取十六进制数据</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/8.png" alt="image-20241222124408568"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">12 05 C9 B3 B4 0C 16 EE 4F 66 91 AD 71 F6 80 CD</span><br><span class="line">3F 3A 5C 98 F1 0E 33 38 FE B4 93 7A 96 4C A1 0D</span><br><span class="line">D4 C2 BA 97 E2 4A E1 D9 E2 1F E9 F5 D3 54 03 20</span><br><span class="line">F1 47 68 7E 4D 1C A0 97 64 D6 7D 0F EA 56 16 55</span><br><span class="line">80 53 AD AE C6 80 C1 D4 12 0F A0 50 E1 68 2D 05</span><br><span class="line">AA 44 8F E5 D8 0C CA E5 84 7E DA 66 43 AE 1F DE</span><br><span class="line">09 B3 A1 33 9A 3A 9D 55 CC 93 6D A2 76 01 34 26</span><br><span class="line">99 37 CD 7B 72 4B 70 56 72 51 6C D7 FE C4 EA 13</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># RSA参数</span></span><br><span class="line">n = <span class="number">171564439954497216675768413953835569169744870521923941237304224433236499730629920633302799836863759824245577710773498119568181026335038584320641144215097129520996051634323993425856922224234683255676795474474502157940113864934282828740227389849908591389963794217637935199351304931352200910561925740911401385481</span></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">d = <span class="number">9937266186539991676476141711838500702936532470226334451329887482621507743373532183713283003200250733064318064453609394111430416039303087814229424347170432034113193190833030069901831137256791793745782217103476219351831386347398299123883138090715324312420650276465474501757462292263213648181367569336785128529</span></span><br><span class="line">p = <span class="number">13108010293446761340196632179613357635987885161740190449406207540374275902270524889036958918167981833207018535542419157628046922388279842487382660916913163</span></span><br><span class="line">q = <span class="number">13088518860888399246566644050502763674299741757769502566717048439252763374675791226334700471400894138975721568725124324655217397612193189858170783443648187</span></span><br><span class="line">dP = <span class="number">9533043847239772735367686643833429436869105550513796746723958527196226747179761474986169231375261579201765788173983006698896813430468012458246788337623511</span></span><br><span class="line">dQ = <span class="number">11505402621050409396138126001334577647380992762334269845561578353988612509194383822102661003057898764764809490429137927329402845361222663041170923816906053</span></span><br><span class="line">qInv = <span class="number">8924563590703900106842685814387665916541700812430476060674809923936560651318359405279262418182232089852584767661307777487338282244935435432054792625528962</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">hex_ciphertext = <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">12 05 C9 B3 B4 0C 16 EE 4F 66 91 AD 71 F6 80 CD</span></span><br><span class="line"><span class="string">3F 3A 5C 98 F1 0E 33 38 FE B4 93 7A 96 4C A1 0D</span></span><br><span class="line"><span class="string">D4 C2 BA 97 E2 4A E1 D9 E2 1F E9 F5 D3 54 03 20</span></span><br><span class="line"><span class="string">F1 47 68 7E 4D 1C A0 97 64 D6 7D 0F EA 56 16 55</span></span><br><span class="line"><span class="string">80 53 AD AE C6 80 C1 D4 12 0F A0 50 E1 68 2D 05</span></span><br><span class="line"><span class="string">AA 44 8F E5 D8 0C CA E5 84 7E DA 66 43 AE 1F DE</span></span><br><span class="line"><span class="string">09 B3 A1 33 9A 3A 9D 55 CC 93 6D A2 76 01 34 26</span></span><br><span class="line"><span class="string">99 37 CD 7B 72 4B 70 56 72 51 6C D7 FE C4 EA 13</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 去除空格和换行符</span></span><br><span class="line">hex_ciphertext = hex_ciphertext.replace(<span class="string">&quot; &quot;</span>, <span class="string">&quot;&quot;</span>).replace(<span class="string">&quot;\n&quot;</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将十六进制密文转换为整数</span></span><br><span class="line">c = <span class="built_in">int</span>(hex_ciphertext, <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用RSA私钥解密</span></span><br><span class="line">m1 = <span class="built_in">pow</span>(c, dP, p)</span><br><span class="line">m2 = <span class="built_in">pow</span>(c, dQ, q)</span><br><span class="line">h = (qInv * (m1 - m2)) % p</span><br><span class="line">m = m2 + h * q</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将明文转换为字节并打印</span></span><br><span class="line">plaintext_bytes = m.to_bytes((m.bit_length() + <span class="number">7</span>) // <span class="number">8</span>, byteorder=<span class="string">&#x27;big&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;明文: <span class="subst">&#123;plaintext_bytes.decode(<span class="string">&#x27;utf-8&#x27;</span>, errors=<span class="string">&#x27;ignore&#x27;</span>)&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>明文: R0Vׁv/{Is}wn}pKAJ9YTJ]|誴J_У?tդAQ+J6~n hi, boys and girls! flag is {haPPy_Use_0penSsI}</p>
+</blockquote>
+<h2 id="补充-提取pdf">(补充)提取pdf</h2>
+<p>pdf文件有多条流量数据，对任意pdf流量追踪TCP流可以看到完整pdf信息。显示为原始数据并导出</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/9.png" alt="image-20241222125346387"></p>
+<p>导出文件正常</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/10.png" alt="image-20241222125451891"></p>
+<h2 id="tips">tips</h2>
+<p>流程大体为：</p>
+<ol>
+<li class="lvl-3">
+<p>过滤 <code>ftp-data</code></p>
+</li>
+<li class="lvl-3">
+<p>追踪 TCP 流</p>
+</li>
+<li class="lvl-3">
+<p>显示为原始数据</p>
+</li>
+<li class="lvl-3">
+<p>另存为对应后缀的文件</p>
+</li>
+</ol>
+<p><strong>不要将非原始数据的信息直接复制到任意新建文件中再改后缀</strong></p>
+<p>比如在 wireshark 中将 pdf 的 utf-8 信息导出</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/11.png" alt="image-20241222125959436"></p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/12.png" alt="image-20241222130036367"></p>
+<p>放到010中对比看一下</p>
+<p><img src="https://image.gubaiovo.com/blog/post_img/ctf/%E5%88%A9%E7%94%A8wireshark%E4%BB%8EFTP%E6%B5%81%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6/13.png" alt="image-20241222130438957"></p>
+<p>导出 原始数据(raw) 会保留数据的原始二进制形式，不会进行任何转换或编码；utf-8 是文本编码格式，适用于纯文本数据。如果数据包含非文本内容（如二进制数据、加密数据等），使用这些编码格式可能会导致数据解释错误或丢失信息</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">文章</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+          <li><a href="/categories/">分类</a></li>
+        
+          <li><a href="/links/">链接</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">利用wireshark从FTP流量中提取文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#key-zip"><span class="toc-number">1.1.</span> <span class="toc-text">key.zip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pub-key"><span class="toc-number">1.2.</span> <span class="toc-text">pub.key</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#test-key"><span class="toc-number">1.3.</span> <span class="toc-text">test.key</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E5%85%85-%E6%8F%90%E5%8F%96pdf"><span class="toc-number">1.4.</span> <span class="toc-text">(补充)提取pdf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tips"><span class="toc-number">1.5.</span> <span class="toc-text">tips</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/86ffe598.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/86ffe598.html&text=利用wireshark从FTP流量中提取文件"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/86ffe598.html&title=利用wireshark从FTP流量中提取文件"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/86ffe598.html&is_video=false&description=利用wireshark从FTP流量中提取文件"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=利用wireshark从FTP流量中提取文件&body=Check out this article: https://www.gubaiovo.com/posts/86ffe598.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/86ffe598.html&title=利用wireshark从FTP流量中提取文件"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/86ffe598.html&title=利用wireshark从FTP流量中提取文件"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/86ffe598.html&title=利用wireshark从FTP流量中提取文件"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/86ffe598.html&title=利用wireshark从FTP流量中提取文件"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/86ffe598.html&name=利用wireshark从FTP流量中提取文件&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/86ffe598.html&t=利用wireshark从FTP流量中提取文件"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2026
+    gubai
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="🥧端序以及例题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IDA 大小端序问题(BUUCTF SimpleRev)">
+<meta property="og:url" content="https://www.gubaiovo.com/posts/f40c38f0.html">
+<meta property="og:site_name" content="GuBai">
+<meta property="og:description" content="🥧端序以及例题">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-10-18T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-18T16:00:00.000Z">
+<meta property="article:author" content="gubai">
+<meta property="article:tag" content="CTF">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>IDA 大小端序问题(BUUCTF SimpleRev)</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/posts/1ab99abf.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/posts/475edca7.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/f40c38f0.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/f40c38f0.html&text=IDA 大小端序问题(BUUCTF SimpleRev)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/f40c38f0.html&title=IDA 大小端序问题(BUUCTF SimpleRev)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/f40c38f0.html&is_video=false&description=IDA 大小端序问题(BUUCTF SimpleRev)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=IDA 大小端序问题(BUUCTF SimpleRev)&body=Check out this article: https://www.gubaiovo.com/posts/f40c38f0.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/f40c38f0.html&title=IDA 大小端序问题(BUUCTF SimpleRev)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/f40c38f0.html&title=IDA 大小端序问题(BUUCTF SimpleRev)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/f40c38f0.html&title=IDA 大小端序问题(BUUCTF SimpleRev)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/f40c38f0.html&title=IDA 大小端序问题(BUUCTF SimpleRev)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/f40c38f0.html&name=IDA 大小端序问题(BUUCTF SimpleRev)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/f40c38f0.html&t=IDA 大小端序问题(BUUCTF SimpleRev)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">IDA 大小端序问题(BUUCTF SimpleRev)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%A4%A7%E5%B0%8F%E7%AB%AF%E5%BA%8F%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">什么是大小端序？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98"><span class="toc-number">1.2.</span> <span class="toc-text">解题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">1.3.</span> <span class="toc-text">扩展</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        IDA 大小端序问题(BUUCTF SimpleRev)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">gubai</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-10-18T16:00:00.000Z" class="dt-published" itemprop="datePublished">2024-10-19</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CTF/">CTF</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CTF/" rel="tag">CTF</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1>IDA 大小端序问题(BUUCTF SimpleRev)</h1>
+<p>在 BUUCTF 刷题时，遇到下面一个十六进制内容：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">src[0] = 0x534C43444ELL;</span><br></pre></td></tr></table></figure>
+<p>右键转换为字符后，内容如下：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">src[0] = &#x27;SLCDN&#x27;;</span><br></pre></td></tr></table></figure>
+<p>然后使用 <code>SLCDN</code> 发现解不出来题。后来查资料在知道涉及大小端序问题</p>
+<h2 id="什么是大小端序？">什么是大小端序？</h2>
+<p>大端（存储）模式，是指数据的低位保存在内存的高地址中，而数据的高位保存在内存的低地址中小端（存储）模式，是指数据的低位保存在内存的低地址中，而数据的高位保存在内存的高地址中</p>
+<p>下面举个例子</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>  a  =  <span class="number">0x12345678</span>；</span><br></pre></td></tr></table></figure>
+<p>在十六进制中，高位在左边，低位在右边</p>
+<p>int 占据的类型大小时 <strong>四个字节</strong>，a 从低位到高位分为 <code>78</code>，<code>56</code>，<code>34</code>，<code>12</code></p>
+<p>一共四个字节的地址，假设从 0x1001 ~ 0x1004</p>
+<p>![](/img-post/端序.png)</p>
+<p>对于小端序，是这样存储的：</p>
+<table>
+<thead>
+<tr>
+<th>地址</th>
+<th>存储内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x1001</td>
+<td>78</td>
+</tr>
+<tr>
+<td>0x1002</td>
+<td>56</td>
+</tr>
+<tr>
+<td>0x1003</td>
+<td>34</td>
+</tr>
+<tr>
+<td>0x1004</td>
+<td>12</td>
+</tr>
+</tbody>
+</table>
+<p>小端序**<em>数据的低位存储在低地址位，数据的高位存储在高地址位,小端字节序称为 LSB</em>**</p>
+<p>对于大端序，是这样存储的：</p>
+<table>
+<thead>
+<tr>
+<th>地址</th>
+<th>存储内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x1001</td>
+<td>12</td>
+</tr>
+<tr>
+<td>0x1002</td>
+<td>34</td>
+</tr>
+<tr>
+<td>0x1003</td>
+<td>56</td>
+</tr>
+<tr>
+<td>0x1004</td>
+<td>78</td>
+</tr>
+</tbody>
+</table>
+<p>大端序**<em>数据的低位存储在高地址位，数据的高位存储在低地址位,大端字节序称为 MSB</em>**</p>
+<p>在网络编程中，计算机的 IP 地址，在系统中都是以大端字节序来存储的(网络字节序)，以确保不同系统之间的数据一致性。</p>
+<p>数据在内存中具体按照小端序还是大端序，取决于架构：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>小端序</strong>：x86、x86-64（Intel 和 AMD 处理器）等大多数现代桌面和服务器处理器使用小端序。</p>
+</li>
+<li class="lvl-2">
+<p><strong>大端序</strong>：一些网络协议和某些处理器（如早期的 PowerPC、SPARC）使用大端序。</p>
+</li>
+<li class="lvl-2">
+<p><strong>双端序（Bi-endian）</strong>：一些处理器（如 ARM、PowerPC）可以配置为使用小端序或大端序。</p>
+</li>
+</ul>
+<h2 id="解题">解题</h2>
+<p>die 查壳</p>
+<blockquote>
+<p>操作系统: Ubuntu Linux(ABI: 3.2.0)[AMD64, 64 位, DYN]</p>
+</blockquote>
+<p>所以内存在数据中应该是小端序，也就是数据的低位存储在低地址位，数据的高位存储在高地址位</p>
+<p>IDA 中转换为：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">src[0] = 0x534C43444ELL;</span><br><span class="line">src[0] = &#x27;SLCDN&#x27;;</span><br></pre></td></tr></table></figure>
+<p>十六进制对应字符：</p>
+<table>
+<thead>
+<tr>
+<th>hex</th>
+<th>char</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>53</td>
+<td>S</td>
+</tr>
+<tr>
+<td>4c</td>
+<td>L</td>
+</tr>
+<tr>
+<td>43</td>
+<td>C</td>
+</tr>
+<tr>
+<td>44</td>
+<td>D</td>
+</tr>
+<tr>
+<td>4E</td>
+<td>N</td>
+</tr>
+</tbody>
+</table>
+<p>IDA 将十六进制按照大端序转换为字符串，和小端序完全相反</p>
+<p>所以正确解题需要将<code>SLCDN</code>反转为<code>NDCLS</code>。</p>
+<h2 id="扩展">扩展</h2>
+<p>在本题的反汇编中还发现了<code>v8[0] = 0x776F646168LL;</code></p>
+<p>在 IDA 转化后为 <code>wodah</code></p>
+<p>十六进制对应字符：</p>
+<table>
+<thead>
+<tr>
+<th>HEX</th>
+<th>CHAR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>77</td>
+<td>w</td>
+</tr>
+<tr>
+<td>6F</td>
+<td>o</td>
+</tr>
+<tr>
+<td>64</td>
+<td>d</td>
+</tr>
+<tr>
+<td>64</td>
+<td>a</td>
+</tr>
+<tr>
+<td>68</td>
+<td>h</td>
+</tr>
+</tbody>
+</table>
+<p>所以也是按照大端序转换的，使用时候也需要反转为 <code>hadow</code></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">文章</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+          <li><a href="/categories/">分类</a></li>
+        
+          <li><a href="/links/">链接</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">IDA 大小端序问题(BUUCTF SimpleRev)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%A4%A7%E5%B0%8F%E7%AB%AF%E5%BA%8F%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">什么是大小端序？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98"><span class="toc-number">1.2.</span> <span class="toc-text">解题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">1.3.</span> <span class="toc-text">扩展</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/f40c38f0.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/f40c38f0.html&text=IDA 大小端序问题(BUUCTF SimpleRev)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/f40c38f0.html&title=IDA 大小端序问题(BUUCTF SimpleRev)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/f40c38f0.html&is_video=false&description=IDA 大小端序问题(BUUCTF SimpleRev)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=IDA 大小端序问题(BUUCTF SimpleRev)&body=Check out this article: https://www.gubaiovo.com/posts/f40c38f0.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/f40c38f0.html&title=IDA 大小端序问题(BUUCTF SimpleRev)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/f40c38f0.html&title=IDA 大小端序问题(BUUCTF SimpleRev)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/f40c38f0.html&title=IDA 大小端序问题(BUUCTF SimpleRev)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/f40c38f0.html&title=IDA 大小端序问题(BUUCTF SimpleRev)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/f40c38f0.html&name=IDA 大小端序问题(BUUCTF SimpleRev)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/f40c38f0.html&t=IDA 大小端序问题(BUUCTF SimpleRev)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2026
+    gubai
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

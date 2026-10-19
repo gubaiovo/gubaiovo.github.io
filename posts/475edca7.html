@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="🥧JE server基础教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从0 → ∞ 成为 Minecraft JE腐竹">
+<meta property="og:url" content="https://www.gubaiovo.com/posts/475edca7.html">
+<meta property="og:site_name" content="GuBai">
+<meta property="og:description" content="🥧JE server基础教程">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-10-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-12T16:00:00.000Z">
+<meta property="article:author" content="gubai">
+<meta property="article:tag" content="Minecraft">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>从0 → ∞ 成为 Minecraft JE腐竹</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/posts/f40c38f0.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/posts/9825a8eb.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/475edca7.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/475edca7.html&text=从0 → ∞ 成为 Minecraft JE腐竹"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/475edca7.html&title=从0 → ∞ 成为 Minecraft JE腐竹"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/475edca7.html&is_video=false&description=从0 → ∞ 成为 Minecraft JE腐竹"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=从0 → ∞ 成为 Minecraft JE腐竹&body=Check out this article: https://www.gubaiovo.com/posts/475edca7.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/475edca7.html&title=从0 → ∞ 成为 Minecraft JE腐竹"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/475edca7.html&title=从0 → ∞ 成为 Minecraft JE腐竹"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/475edca7.html&title=从0 → ∞ 成为 Minecraft JE腐竹"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/475edca7.html&title=从0 → ∞ 成为 Minecraft JE腐竹"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/475edca7.html&name=从0 → ∞ 成为 Minecraft JE腐竹&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/475edca7.html&t=从0 → ∞ 成为 Minecraft JE腐竹"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">从 0 → ∞ 成为 Minecraft JE 腐竹</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">基础教程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.2.1.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#java-%E7%8E%AF%E5%A2%83"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">java 环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E4%B8%80%E4%B8%AA%E5%90%88%E9%80%82%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A0%B8%E5%BF%83"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">选择一个合适的服务器核心</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">编写启动脚本</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">启动</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#EULA"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">EULA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">服务器结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#logs-%E5%92%8C-crash-reports"><span class="toc-number">1.2.2.2.1.</span> <span class="toc-text">logs 和 crash-reports</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9C%B0%E5%9B%BE%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.2.2.2.</span> <span class="toc-text">地图结构</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9C%B0%E5%9B%BE"><span class="toc-number">1.2.2.2.2.1.</span> <span class="toc-text">更改服务器地图</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#mods-plugins"><span class="toc-number">1.2.2.2.3.</span> <span class="toc-text">mods &#x2F; plugins</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#mod"><span class="toc-number">1.2.2.2.3.1.</span> <span class="toc-text">mod</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#plugin"><span class="toc-number">1.2.2.2.3.2.</span> <span class="toc-text">plugin</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#server-properties-%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.2.2.2.4.</span> <span class="toc-text">server.properties 详解</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E5%8F%B0%E6%8C%87%E4%BB%A4%E5%92%8C%E9%87%8D%E8%A6%81%E6%8C%87%E4%BB%A4"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">控制台指令和重要指令</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E3%80%81%E7%89%A9%E7%90%86%E6%9C%BA"><span class="toc-number">1.2.3.</span> <span class="toc-text">云服务器、物理机</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E6%9C%BA%E5%AD%90%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%80%8E%E4%B9%88%E7%9C%8B"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">如何选择机子，配置怎么看</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E7%AB%AF%E5%8F%A3"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">如何配置端口</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%BF%9B%E5%85%A5%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.2.4.</span> <span class="toc-text">如何进入服务器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%E6%95%99%E7%A8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">进阶教程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E5%9F%9F%E5%90%8D%E6%9B%BF%E4%BB%A3-ip-%E7%AB%AF%E5%8F%A3-%E7%9A%84%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.3.1.</span> <span class="toc-text">如何使用自己的域名替代 ip:端口 的格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%B7%BB%E5%8A%A0-MCDR"><span class="toc-number">1.3.2.</span> <span class="toc-text">如何为服务器添加 MCDR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%8E%E5%9F%BA%E5%B2%A9%E7%89%88%E4%BA%92%E9%80%9A"><span class="toc-number">1.3.3.</span> <span class="toc-text">如何实现与基岩版互通</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E9%9D%A2%E6%9D%BF%E6%8E%A7%E5%88%B6%E6%9C%8D%E5%8A%A1%E5%99%A8-%E4%BD%BF%E7%94%A8-MCSM"><span class="toc-number">1.3.4.</span> <span class="toc-text">如何使用面板控制服务器(使用 MCSM)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%82%E8%B0%88-EULA"><span class="toc-number">1.4.</span> <span class="toc-text">杂谈 EULA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%82%A8%E5%8F%AF%E4%BB%A5%E5%92%8C%E4%B8%8D%E5%8F%AF%E4%BB%A5%E7%94%A8-Minecraft-%E8%BD%AF%E4%BB%B6%E5%92%8C%E5%86%85%E5%AE%B9%E5%81%9A%E7%9A%84%E4%BA%8B%E6%83%85"><span class="toc-number">1.5.</span> <span class="toc-text">您可以和不可以用 Minecraft 软件和内容做的事情</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%82%E8%B0%88%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BB%8F%E6%B5%8E%E4%BD%93%E7%B3%BB"><span class="toc-number">1.6.</span> <span class="toc-text">杂谈服务器经济体系</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        从0 → ∞ 成为 Minecraft JE腐竹
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">gubai</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-10-12T16:00:00.000Z" class="dt-published" itemprop="datePublished">2024-10-13</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Minecraft/">Minecraft</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Minecraft/" rel="tag">Minecraft</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1>从 0 → ∞ 成为 Minecraft JE 腐竹</h1>
+<blockquote>
+<p>本文写于 2024.10.13 ，技术与时俱进，但是基础永恒不变。——顾白</p>
+</blockquote>
+<h2 id="前言">前言</h2>
+<p>Minecraft 至今已经有 15 个年头了，15 年内优秀服务器不断涌现。已经 2024 年了，mc 服务器门槛已经相当的低。网络上虽然各种资料都有，但质量参差不齐。这篇教程将从头到尾介绍创建 mc java 服务器所有基础流程，已经我对 mc 服务器的一些看法。所以这篇教程会非常长<s>而且没有图片</s>。</p>
+<blockquote>
+<p>注意：不是所有联机情况都需要开服。如果只是一两个人联机，或者宿舍一起玩，那么局域网联机、联机 mod、内网穿透等联机方式就完全足够了</p>
+</blockquote>
+<blockquote>
+<p>阅读本篇教程你需要准备的是：</p>
+<ol>
+<li class="lvl-3">能分辨问题的脑子，没断掉的且能自由活动的手，能感知光照的眼睛</li>
+<li class="lvl-3">能联网的电脑</li>
+<li class="lvl-3">一款好用的浏览器，推荐谷歌、edge</li>
+<li class="lvl-3">会解压，有一款能用来解压的软件，比如 7-zip 等等</li>
+<li class="lvl-3">打开隐藏目录和文件扩展名显示</li>
+<li class="lvl-3">一款趁手的文本编辑器，如 vscode 等等</li>
+<li class="lvl-3">初中英语水平，以及能够上网找翻译的能力</li>
+<li class="lvl-3">不奢求开服赚米回本、敢于试错的心态</li>
+<li class="lvl-3">敢于自主解决问题的心态</li>
+<li class="lvl-4">耐心</li>
+<li class="lvl-4">钱</li>
+</ol>
+</blockquote>
+<p>基础教程不涉及 java 编程，其实大多数服主都没有编程基础。如果只是开个基友服，看完本篇教程绰绰有余</p>
+<p>在开始之前，还是要说，这篇教程着重教的不是固定模板开服，那会失去自主探索的能力；也不是教某个 mod 或者插件具体怎么用，因为优质教程贴数不胜数。如果只是想找个整合包一键无脑开，那还请选择其他教程。</p>
+<blockquote>
+<p>授人以鱼不如授人以渔</p>
+</blockquote>
+<hr>
+<h2 id="基础教程">基础教程</h2>
+<h3 id="准备工作">准备工作</h3>
+<h4 id="java-环境">java 环境</h4>
+<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/downloads/">Java Downloads</a></p>
+<p>首先要明确的是，mc java 版是使用 java 语言开发的，java 版服务器也是基于 java 的。至于 java 语言是什么，零基础者只需要知道这是一个能跨平台(win、linux、mac os 等等)的编程语言即可。</p>
+<p>既然是 java 语言开发的，那么就要配置一下 java 环境，不然有关 java 的都无法运行。</p>
+<p>下面是 mc 各个版本对应的 java 版本。</p>
+<table>
+<thead>
+<tr>
+<th>mc 版本</th>
+<th>java 版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.12(17w13a)开始</td>
+<td>java 8</td>
+</tr>
+<tr>
+<td>1.17(21w19a)开始</td>
+<td>java 16</td>
+</tr>
+<tr>
+<td>1.18(1.18-pre2)开始</td>
+<td>java 17</td>
+</tr>
+<tr>
+<td>1.20.5(24w14a)开始</td>
+<td>java 21</td>
+</tr>
+</tbody>
+</table>
+<p>根据想要开的服务器的版本选择 java 环境。</p>
+<p>假设这里要开一个 1.21 的服务器，那么就需要下载 JDK 21。要开 1.12 的服务器，就需要 JDK 8</p>
+<blockquote>
+<p>这里可能会有疑惑，为什么我要把 java 写为 JDK，这涉及到 java 的几个版本问题。</p>
+<p>实际上，Java 是一种编程语言，而 JDK（Java Development Kit）是用于开发 Java 应用程序的一套工具。</p>
+<p>也许有了解过 java 的同学想问，为什么不安装 JRE。这就涉及到 JRE 和 JDK 的区别了</p>
+<p>JDK 包括了编译器（javac）、解释器（java）、调试器（jdb）、文档生成工具（javadoc）等开发工具，以及 Java 运行环境（JRE）和 Java 基础类库（Java API）。</p>
+<p>JRE 中包含了 Java 虚拟机（JVM）和 Java 标准类库，是运行 Java 程序所必需的环境。</p>
+<p>换句话说，JDK 是 JRE plus，JRE 能实现的功能，JDK 都能实现。JRE 没有的功能 ，JDK 也能实现。如果有想要从事 Java 开发的同学，JDK 是刚需。所以果断装全面的，避免以后出现各种麻烦。</p>
+</blockquote>
+<p>注意：同一电脑可以安装多个版本 java。</p>
+<p><strong>安装 java 过程要注意安装路径！一定要记住！</strong></p>
+<p>下载有两种方案</p>
+<ol>
+<li class="lvl-3">
+<p>下载 exe 安装包，常规安装</p>
+</li>
+<li class="lvl-3">
+<p>下载 zip 压缩包，压缩包 <strong>解压</strong> 后包含所有安装内容</p>
+</li>
+</ol>
+<p>两者实际上都可以。压缩包方便拷贝但是没有注册表，安装包一键安装有注册表。如果使用压缩包版本，一定要<strong>完整解压</strong>再使用！</p>
+<p>在<strong>windows</strong>下安装完 JDK 后还需要配置环境变量，使终端能在任何位置下都能检测到 java。也可以不配置环境变量，但是需要在服务器启动程序中标注 java 路径。<a target="_blank" rel="noopener" href="https://blog.csdn.net/xhmico/article/details/122390181">java 环境配置(详细教程)_java 环境配置-CSDN 博客</a></p>
+<p>至于<strong>linux</strong>，可以参考这篇教程<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43520670/article/details/106344655">Linux 配置 Java 环境（图文详细）_⑤ 配置 java 运行环境 linux-CSDN 博客</a></p>
+<p>至于<strong>Mac OS</strong>，可以参考这篇教程<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_61536532/article/details/126791735">超详细的 Java 安装教程（Mac 版）_mac 安装 java-CSDN 博客</a></p>
+<p><s>linux 比 windows 优化好多了，为什么不用 linux 开服呢？因为我当初不会 linux</s></p>
+<p>至此你已经完成了 1/4</p>
+<hr>
+<h4 id="选择一个合适的服务器核心">选择一个合适的服务器核心</h4>
+<p>推荐镜像站：<a target="_blank" rel="noopener" href="https://www.fastmirror.net/#/download/">FastMirror.</a>(镜像站没有 fabric 核心)</p>
+<p>服务器不会被 java 自己生出来的。</p>
+<blockquote>
+<p>什么是服务器核心？</p>
+<p>服务端核心(简称核心，有时也被叫做服务端)是指开服时用于直接或间接启动 Minecraft 服务器的一类文件，文件名一般以 .jar 结尾。</p>
+<p>换句话说，没有核心，就没有服务器</p>
+</blockquote>
+<p>选择一个合适自己的核心是很重要的。</p>
+<p>目前服务器模式有：</p>
+<ol>
+<li class="lvl-3">
+<p>官服，纯原版，只支持数据包，这种属于官方核心：vanilla 核心(也被称为香草、官核)</p>
+</li>
+<li class="lvl-3">
+<p>纯 fabric / forge 模组服</p>
+</li>
+<li class="lvl-3">
+<p>forge + spigot 混合服</p>
+</li>
+<li class="lvl-3">
+<p>插件服</p>
+</li>
+</ol>
+<p>下面逐一介绍每个模式对应的核心</p>
+<blockquote>
+<p>官服：bugjiang(mojang)发布的服务端，不支持 mod 和插件，支持数据包 <a target="_blank" rel="noopener" href="https://www.minecraft.net/zh-hans/download/server">下载官核</a></p>
+</blockquote>
+<blockquote>
+<p>纯 fabric 端：生电首选，保留了绝大部分原版特性。能安装 fabric mod 以及数据包，不支持插件和 forge mod。兼容性非常好。<a target="_blank" rel="noopener" href="https://fabricmc.net/use/server/">Download Minecraft Server Launcher | Fabric (fabricmc.net)</a></p>
+</blockquote>
+<blockquote>
+<p>纯 forge 端：整合包首选，修复了部分原版特性。能安装 forge mod 和数据包，不兼容 fabric mod。兼容性较差。<a target="_blank" rel="noopener" href="https://files.minecraftforge.net/net/minecraftforge/forge/index_1.16.5.html">Downloads for Minecraft Forge for Minecraft 1.16.5</a></p>
+</blockquote>
+<blockquote>
+<p>forge + spigot 混合服：既能装 forge mod，又能装 spigot 插件，虽然五脏俱全但是兼容性更差了，崩服、forge mod 不兼容是常见的事</p>
+</blockquote>
+<blockquote>
+<p>插件服：只能装插件，技术难度无上限。好处是没有了 mod 莫名其妙报错的干扰，容易确定报错点，也没有 mod 服不能随便卸 mod 的困扰。插件服核心种类丰富，如一家独大的 Paper 以及一些分支，老牌 spigot。不同插件服有不同的优势。</p>
+<p>paper：优化很好，修复了很多特性，性能更强，支持的插件极为丰富。更新速度比 spigot 慢几个小时或者几天。</p>
+<p>folia(paper 分支)：paper 团队新产品，为数不多支持多线程的服务器，配置后生电限制少，插件库正在发展，未来可期。</p>
+<p>purpur：做了大量优化，可以通过配置选择性打开生电选项，插件丰富，插件生电服首选。</p>
+<p>spigot：优化略微逊色，特性修复较少(不足以生电)，支持的插件极为丰富，更新速度非常快，新版本发布后几个小时内就能用上 spigot。</p>
+<p>还有很多很多核心。但这几款以及足够新手腐竹用了。</p>
+<p>插件服发展史放到后面说。</p>
+</blockquote>
+<p>现在，新建文件夹，将你的核心 .jar 文件放进去，就到达了新世界的门口</p>
+<hr>
+<h4 id="编写启动脚本">编写启动脚本</h4>
+<p>？？什么？编写？不是说不用编程的吗？</p>
+<p>编写启动脚本可不是编程，而且相当简单。</p>
+<p>为什么要编写脚本？主要是给 java 提供参数设置，给 java 一些设置，让 java 的运行符合预期。</p>
+<p>如何编写？在<strong>windows</strong>下，需要新建文本文件，在文件内填入以下内容后将文件后缀的 txt 改为 bat。在<strong>linux</strong>下，<a target="_blank" rel="noopener" href="http://xn--b0t52m507a3jl.sh">需要新建.sh</a> 文件，填入的内容需要去掉 <code>@ECHO OFF</code> 和 <code>pause</code>，其他内容相同。</p>
+<p>这是一个最简单的启动程序。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;C:\Program Files\Java\jdk1.8.0_301\bin\java&quot;</span> -jar server.jar</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>看不懂没关系，下面对这些内容逐一解释</p>
+<p>首先是最开始引号内的路径，这是指定 java 路径的语句，如果没有配置环境变量，或者是想要指定这个服务器用哪个版本的 java，就可以用这个语句来指定 java。这个路径可以是绝对路径，也可以是相对路径。如果配置好了环境变量，连同引号在内所有内容都可以用 java 代替，比如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java -jar server.jar</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>然后是 <code>-jar</code> ，作用是启动 jar 文件(在这里就是指服务器核心)，后面的 server.jar 是指定的核心名。</p>
+<p>然后是 <code>pause</code> ，代指程序暂停，这是一个系统命令，与 java 无关。这个命令最大的用处在于，他会让终端在服务器关闭后不会直接消失，这样会很方便查看崩服的原因，不然只能看日志了。</p>
+<p>这是一个最简单的启动示例，还有各种各样的启动参数，比如 <code>-Xms</code> <code>Xmx</code> <code>Xincgc</code> 等等，下面是一个很常见的启动参数，相比上面的参数，增加了内存控制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java -Xms1G -Xmx4G -jar server.jar</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>-Xmx</strong>：最大内存，默认为物理内存的 1/4 或者 1G，必须大于 2M，可以指定单位 k(K),m(M),g(G)</p>
+<p><strong>-Xms</strong>：初始化内存大小(可以理解为最小内存大小)，默认为物理内存的 1/64，需大于 1M，单位上同</p>
+<p><strong>-Xincgc</strong>：开启增量 GC[垃圾收集(Garbage Collection)通常被称为 “GC”]；这有助于减少长时间 GC 时应用程序出现的停顿。但可能会降低 CPU 对应用的处理能力。</p>
+<p>对于 forge mod 服(包括 sponge)，建议将-Xmx 和-Xms 设为同值</p>
+</blockquote>
+<p>下面是推荐的启动脚本(具体内存数按需更改，分配的内存不要过少)</p>
+<p>纯净：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@ECHO OFF</span><br><span class="line">java -server -Xms4g -Xmx8g -XX:+AggressiveOpts -XX:+UseFastAccessorMethods -XX:+UseG1GC -XX:SurvivorRatio=6 -XX:G1ReservePercent=15 -XX:ParallelGCThreads=4 -XX:ConcGCThreads=1 -XX:InitiatingHeapOccupancyPercent=40 -jar 核心名.jar</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>mod：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@ECHO OFF</span><br><span class="line">java -server -Xms8g -Xmx8g -XX:+AggressiveOpts -XX:+UseFastAccessorMethods -XX:+UseG1GC -XX:SurvivorRatio=6 -XX:G1ReservePercent=15 -XX:ParallelGCThreads=4 -XX:ConcGCThreads=1 -XX:InitiatingHeapOccupancyPercent=40 -jar 核心名.jar</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>这样就完成了启动脚本的编写。启动脚本需要放到核心同级目录里（也就是在一个文件夹内既要看到核心，又要看到启动脚本）</p>
+<hr>
+<h3 id="启动">启动</h3>
+<h4 id="EULA">EULA</h4>
+<p>一切准备就绪，windows 下直接双击启动脚本，linux <a target="_blank" rel="noopener" href="http://xn--ghq9tqo683d8wuci0a18k.sh">下使用指令运行.sh</a> 文件</p>
+<p>如果一切是从头开始且没有报错的话，不出意外，你的程序会暂停。</p>
+<p>这是因为你需要同意 EULA 协议，你可以在终端看到 EULA 提示。</p>
+<blockquote>
+<p><strong><a href="https://link.zhihu.com/?target=https%3A//account.mojang.com/documents/minecraft_eula">Minecraft® EULA 协议</a></strong>，官方网址 <a href="https://link.zhihu.com/?target=https%3A//account.mojang.com/documents/minecraft_eula">https://account.mojang.com/documents/minecraft_eula</a>。其 EULA 协议本质上就是 Minecraft 的发行工作室 Mojang AB 对于 Minecraft 所有用户的一个使用协议。</p>
+</blockquote>
+<p>在服务器文件夹可以看到有个名为 eula.txt 的文件，打开后将 false 改为 true，就代表你同意了协议，然后再次打开服务器即可。<s>没人会憨到改为 true 后把这个文件删掉吧</s></p>
+<p>虽然这是一个无关紧要的必须同意协议，但是我希望所有服主都认认真真看一遍。在最后也会谈到这个问题。</p>
+<h4 id="服务器结构">服务器结构</h4>
+<p>在终端看到 <code>Done</code> 时，代表服务器启动完毕。在这过程中服务器会自动补全所有必要的文件。</p>
+<p>不同服务器核心，结构略微有所区别。下面是官核结构</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">服务器文件夹</span><br><span class="line">├─crash-reports 		//崩溃报告</span><br><span class="line">├─logs 					//日志，存储终端所有内容</span><br><span class="line">├─world 				//地图文件</span><br><span class="line">├─banned-ips.json		//被ban的ip列表</span><br><span class="line">├─banned-players.json	//被ban的玩家</span><br><span class="line">├─eula.txt				//EULA协议</span><br><span class="line">├─server.jar			//服务器核心</span><br><span class="line">├─ops.json				//op以及op等级列表</span><br><span class="line">├─server.properties		//服务器配置文件</span><br><span class="line">├─usercache				//玩家id、uid、最近一次入服的记录</span><br><span class="line">├─whitelist				//白名单列表</span><br><span class="line">├─启动脚本</span><br></pre></td></tr></table></figure>
+<p>其他核心结构与官核大差不差，比如 mod 服会多出一个 mods 文件夹，插件服会多出一个 plugins 文件夹，混合服则多出上述两种文件夹。</p>
+<h5 id="logs-和-crash-reports">logs 和 crash-reports</h5>
+<p>用于记录服务器日志和崩溃原因。这是日后对服务器崩溃进行处理、寻找崩溃原因、抓熊孩子等等重要取证文件。</p>
+<p>如果在这些目录中发现了.tar.gz 格式，这是压缩格式的一种，用解压软件打开即可。</p>
+<h5 id="地图结构">地图结构</h5>
+<p>地图结构在不同服务器核心会有变化。如果使用 paper 核心，会发现还有 <code>world_nether</code> <code>world_the_end</code> 两个文件夹，分别代表地狱和末地文件夹。而 world 文件夹相比其他核心，少了 <code>DIM1</code> 和 <code>DIM-1</code> 文件夹。</p>
+<p>这是核心对地图结构的改变，DIM1 相当于 world_the_end，DIM-1 相当于 world_nether。</p>
+<p>如果后续使用了多地图插件，或者是能生成更多维度世界的 mod，在两种地图结构中会发现，生成的地图(假设名为 DIM3)位置也不同，在类似于 paper 一样的地图结构中，会生成在 world 文件夹外面，和 world、world_nether、world_the_end 并列；在类似于原版的地图结构中，DIM3 会生成在 world 文件夹内，和 DIM1、DIM-1 并列，被 world 文件夹包含</p>
+<p>如果想要在两种地图结构中互相改变，只需要将文件夹重命名后放到对应结构位置即可。</p>
+<h6 id="更改服务器地图">更改服务器地图</h6>
+<p>如果想将预设地图放到服务器内，首先要按照服务器地图结构将原地图进行结构变化</p>
+<p>结构变化后，将服务器关闭，删除现有服务器地图，将预设地图拷贝进来即可</p>
+<p>需要注意的是，如果一些插件强制规定了进入服务器时的位置，需要及时更改这个设置。常规方法是先记住预设坐标，在服务器中 tp 到坐标位置，然后将强制规定的进入服务器时的位置在游戏内用指令更改为这个坐标；或者是直接修改插件配置文件。</p>
+<h5 id="mods-plugins">mods / plugins</h5>
+<p>用于安装 mod 和插件的文件夹，将需要安装的.jar 文件直接拖入即可。</p>
+<h6 id="mod">mod</h6>
+<p>要注意模组加载器是否匹配，游戏版本是否匹配，是否有冲突，是否缺少前置。forge 模组报错首先搜一下报错内容，或者全部复制下来问 ai。没用解决方案的话就需要联系模组作者了。</p>
+<p><strong>下载 mod 推荐<a target="_blank" rel="noopener" href="https://www.mcmod.cn/download/">mcmod</a>、<a target="_blank" rel="noopener" href="https://www.curseforge.com/">CurseForge</a>、<a target="_blank" rel="noopener" href="https://modrinth.com/">Modrinth</a></strong></p>
+<h6 id="plugin">plugin</h6>
+<p>同 mod 要求。插件一般情况下会在 plugins 文件夹生成一个以插件名命名的文件夹，里面存放插件各种配置文件。这些配置文件需要按照插件文档进行修改。可以在后台使用指令 <code>plugins</code> 查看插件情况。</p>
+<p><strong>下载插件推荐<a target="_blank" rel="noopener" href="https://www.spigotmc.org/">SpigotMC</a>、<a target="_blank" rel="noopener" href="https://www.curseforge.com/">CurseForge</a></strong></p>
+<h5 id="server-properties-详解">server.properties 详解</h5>
+<blockquote>
+<p><strong>server.properties</strong>是储存多人游戏（Minecraft 或 Minecraft Classic）服务器所有设置的文件。</p>
+<p>在编辑 server.properties 时，行之间的顺序可以打乱，但文件结构不能改变。每一行的等号之前的文本为变量名，你不应该修改这些内容。等号后面为变量的值，你可以按照规则自行编辑。以<code>#</code>开头的行为注释，添加、修改或移除注释行不会对游戏造成影响。</p>
+<p>保存了 server.properties 的更改之后，服务端必须重启才能使更改生效，另一种选择是在服务器后台或游戏中使用<code>/reload</code>命令重新加载，但有时候会产生卡顿。</p>
+<p>如果 server.properties 文件未列出一些属性（例如服务端版本更新加入新属性，或该文件还未创建），那么服务器在启动时会重写 server.properties 补全缺失的属性，并将缺失的属性值设为默认值。</p>
+<p>尽管有扩展名，server.properties 文件只是一个普通的 UTF-8 编码文本文件，因此可以使用任何文本编辑器进行编辑，比如 Windows 上的记事本、macOS 上的 TextEdit 或者 Linux 上的 nano 和 vim。</p>
+</blockquote>
+<p>下面是 server.properties 配置文件的重要部分的注释，还有一部分翻译一下就出来了~~(blog 好像炸了)~~</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">#Minecraft server properties</span><br><span class="line">#（文件修改时间戳）</span><br><span class="line">enable-jmx-monitoring=false</span><br><span class="line">rcon.port=25575</span><br><span class="line">level-seed=			// 地图种子，空为随机</span><br><span class="line">gamemode=survival			// 默认游戏模式，可能被其他插件/mod取代</span><br><span class="line">enable-command-block=false			// 是否启用命令方块</span><br><span class="line">enable-query=false</span><br><span class="line">generator-settings=&#123;&#125;</span><br><span class="line">enforce-secure-profile=false			// 强制安全验证</span><br><span class="line">level-name=world			// 主世界地图文件夹名</span><br><span class="line">motd=A Minecraft Server			// motd文本，没啥用，很鸡肋，可以被mod/插件取代</span><br><span class="line">query.port=25565</span><br><span class="line">pvp=true			// 是否启用pvp，也可以被mod/插件取代</span><br><span class="line">generate-structures=true			// 是否生成结构</span><br><span class="line">max-chained-neighbor-updates=1000000</span><br><span class="line">difficulty=easy			// 游戏难度</span><br><span class="line">network-compression-threshold=256</span><br><span class="line">max-tick-time=60000			// 最大延迟</span><br><span class="line">require-resource-pack=false			// 是否需要资源包</span><br><span class="line">use-native-transport=true</span><br><span class="line">max-players=20			// 最大玩家数(鸡肋，没用)</span><br><span class="line">online-mode=false			// 是否开启正版验证</span><br><span class="line">enable-status=true</span><br><span class="line">allow-flight=false			// 是否允许飞行(用来防飞行挂的，但是会防生存使用飞行类mod)</span><br><span class="line">initial-disabled-packs=</span><br><span class="line">broadcast-rcon-to-ops=true</span><br><span class="line">view-distance=10				// 最大视距</span><br><span class="line">server-ip=</span><br><span class="line">resource-pack-prompt=</span><br><span class="line">allow-nether=true			// 是否生成地狱(false的话将不会加载地狱，也无法进入)</span><br><span class="line">server-port=25565			// 服务器端口</span><br><span class="line">enable-rcon=false</span><br><span class="line">sync-chunk-writes=true</span><br><span class="line">op-permission-level=4			// op等级权限</span><br><span class="line">prevent-proxy-connections=false</span><br><span class="line">hide-online-players=false</span><br><span class="line">resource-pack=			// 资源包链接</span><br><span class="line">entity-broadcast-range-percentage=100</span><br><span class="line">simulation-distance=10</span><br><span class="line">rcon.password=</span><br><span class="line">player-idle-timeout=0</span><br><span class="line">force-gamemode=false</span><br><span class="line">rate-limit=0</span><br><span class="line">hardcore=false</span><br><span class="line">white-list=false			// 是否启用白名单</span><br><span class="line">broadcast-console-to-ops=true</span><br><span class="line">spawn-npcs=true</span><br><span class="line">spawn-animals=true</span><br><span class="line">log-ips=true</span><br><span class="line">function-permission-level=2</span><br><span class="line">initial-enabled-packs=vanilla</span><br><span class="line">level-type=minecraft\:normal</span><br><span class="line">text-filtering-config=</span><br><span class="line">spawn-monsters=true</span><br><span class="line">enforce-whitelist=false</span><br><span class="line">spawn-protection=16</span><br><span class="line">resource-pack-sha1=</span><br><span class="line">max-world-size=29999984</span><br></pre></td></tr></table></figure>
+<p>也可以参考这篇文章<a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv7149916/">Minecraft 服务器 server.properties 属性文件介绍 (最详细 最全 汉化) - 哔哩哔哩 (bilibili.com)</a></p>
+<h4 id="控制台指令和重要指令">控制台指令和重要指令</h4>
+<p>后台使用指令时候，在原版指令的基础上，去掉了最开始的 <code>/</code></p>
+<p>比如，<code>/gamemode</code> 在后台只需要 <code>gamemode</code></p>
+<p>如果指令是双斜杠开头，比如 worldedit 中的 <code>//copy</code>，需要删掉一个 <code>/</code>，也就是在后台输入 <code>/copy</code> <s>(不过这个指令好像不能在后台执行)</s></p>
+<p>几个很重要的指令(这些指令游戏内也可以用，需要 op 权限)：</p>
+<ol>
+<li class="lvl-3">
+<p><code>stop</code> 关服指令，尽量不要直接 x 掉或强制关闭进程，很可能回档、丢数据</p>
+</li>
+<li class="lvl-3">
+<p><code>reload</code> 重载指令，重新加载服务器配置文件以及数据包，但会产生卡顿</p>
+</li>
+<li class="lvl-3">
+<p><code>list</code> 列出所有在线玩家(包括 carpet 的假人)，这个指令也可以用来检测服务器是否正在运行</p>
+</li>
+<li class="lvl-3">
+<p><code>kick id</code> 踢出玩家，id 为玩家名</p>
+</li>
+<li class="lvl-3">
+<p><code>ban id</code> ban 掉玩家，id 为玩家名</p>
+</li>
+<li class="lvl-3">
+<p><code>ban-ip ip/id</code> ban 掉一个玩家所在的 ip，或直接 ban 掉某个 ip</p>
+</li>
+<li class="lvl-3">
+<p><code>pardon id</code> 解 ban 指令，id 为玩家名</p>
+</li>
+<li class="lvl-3">
+<p><code>pardon-ip ip</code> 解 ban 指令，ip 为有效地址</p>
+</li>
+<li class="lvl-3">
+<p><code>banlist</code> ban 列表</p>
+</li>
+<li class="lvl-4">
+<p><code>op id</code> 给玩家 op 权限，id 为玩家名</p>
+</li>
+<li class="lvl-4">
+<p><code>deop id</code> 撤掉 op 权限，id 为玩家名</p>
+</li>
+<li class="lvl-4">
+<p><code>plugins</code> 查看插件情况，绿色为正常，黄色为存在部分问题，红色为出现的问题影响正常功能，基本不能使用</p>
+</li>
+</ol>
+<p>虽然控制台权限至高无上，但是有些指令不能在后台用(比如涉及插件的 gui 界面)</p>
+<hr>
+<h3 id="云服务器、物理机">云服务器、物理机</h3>
+<p>现在整个服务器运行在你的本地，如果想要一直开服，需要 24h 保持运行，这对大部分人来说是不可能的。那么如何解决这个问题呢，那就是云服务器 / 物理机了</p>
+<p>下面将云服务器称为机子，我的世界服务器称为服务器，一是方便区分，二是习惯称呼</p>
+<p>什么是机子？简单来说，就是远程电脑，这个电脑能保持开机状态，并且服务商提供了公网 ip 和端口让你能从外部连接到机子后台，还会提供一些开放端口让你能够进入服务器。</p>
+<h4 id="如何选择机子，配置怎么看">如何选择机子，配置怎么看</h4>
+<p>选择机子三要素：稳定，价格，配置</p>
+<p>稳定性不用多说，谁都不希望玩着玩着突然机子关机了。当然，大多数服务商不会烂到这种地步。</p>
+<p>价格方面，配置越高，价格越高。阿里、华为、腾讯等等大厂的价格极高，在没有优惠的情况下不建议购买。小厂商推荐剑客云、蓝夜科技等。一般来说，一个服务商如果有浏览器控制机子后台的功能(并不是指浏览器控制 mc 服务器后台)，那么这个厂商就可以纳入考虑范围之内。<s>因为实现这个功能很麻烦，跑路服务商才不会做</s></p>
+<p>配置方面，看服务器规模。配置几大要素分别是：cpu、内存、硬盘、宽带。</p>
+<p>cpu：mc 作为单核游戏，不用过多考虑服务器核心太少，只需要单核性能足够强大。当然，如果是 folia，可以选择降低单核性能，选择更多核心，这样可以利用 folia 多核心性质来降低成本。</p>
+<p>内存：2g 起步。生电服推荐 10g 左右，给服务器分 8g(再多点就更好了，8g 有点勉强)。如果是插件服或者模组服，按照插件和模组的多少进行调动。不要担心内存占用太高，内存就是拿来用的，除了系统运行需要外，空 1、2g 内存就是在浪费。</p>
+<p>硬盘：10g 起步，服务器开到后期会发现占用硬盘的大头不是插件和模组，而是地图。可以一开始选择较小硬盘，逐渐增加。适当时候开启新周目。</p>
+<p>宽带：1Mbps(M) = 128 kb/s。这个绝对是值得花钱的地方。如何估算呢？而一个用户，在不大规模加载地图时候，大概是消耗服务器带宽 20kb/s 左右。玩家加载地图时候的瞬时带宽可能会突破 200kb/s。所以，1M=2.5 人左右~~(有点诡异)~~，推荐 3M 起步。</p>
+<p>以上都是云服务器需求，如果物理机，考虑因素更多了。<s>物理机一般比较昂贵，没钱，所以没有经验</s></p>
+<h4 id="如何配置端口">如何配置端口</h4>
+<p>假设现在将服务器已经完整放到机子上，并且能正常运行了。</p>
+<p>在 server.properties 配置文件中查看 server-port 项，默认 25565，这是内网端口，现在需要将内网端口开放出去。</p>
+<p>开放端口有两种类型，一是对称开放，也就是内网端口和对应的外网端口相同；二是非对称开放，内网端口和对应的外网端口不同。</p>
+<p>服务商规定不一定相同，一般有下面几种情况</p>
+<ol>
+<li class="lvl-3">
+<p>规定给某一部分端口开放</p>
+<p>这种属于规定开放的对称端口，只需要将 server-port 值修改为规定端口，然后在游戏内使用 ip:端口的形式进入即可(也有可能是 域名:端口)</p>
+<p>比如规定 30000 为开放端口，将 server-port 改为 30000，然后使用 ip:30000 作为服务器地址即可进入游戏</p>
+</li>
+<li class="lvl-3">
+<p>自由开放端口，但是开放的外网端口和内部端口不同</p>
+<p>这种属于非对称开放端口，假设 server-port 设为 25565，外网端口生成为 30000，那么就使用 ip:30000 进入游戏</p>
+</li>
+<li class="lvl-3">
+<p>自由开放端口，开放的外网端口和内网端口相同</p>
+<p>属于对称开放端口，和第一种情况相同，只是没用端口数量和端口号的限制</p>
+</li>
+</ol>
+<h3 id="如何进入服务器">如何进入服务器</h3>
+<p>如果是在自己电脑上开服，自己只需要在服务器地址输入 <code>0.0.0.0</code> 即可，也可以是 <code>127.0.0.1:25565</code> 、<code>localhost:25565</code> 。注意，25565 改为实际内网端口，也就是 server-port 的值。</p>
+<p>如果已经放到云服务器上，按照 <code>ip:外网端口</code> 或者 <code>域名:外网端口</code> 的格式即可</p>
+<p>比如我的域名是 <a target="_blank" rel="noopener" href="http://gubaiovo.com">gubaiovo.com</a>，外网端口是 25565，那么服务器地址填写 <code>gubaiovo.com:25565</code> 即可，如果是 ip 的话同理</p>
+<p>mod 服须知，尤其是 forge mod，要确保服务端 mod 和客户端 mod 列表相同。在 mcmod 页面可以看到 mod 安装要求，有的 mod 需要双端都装，有的只需要一端，有的只能一端。forge 要求很严格，客户端必须也是 forge 端。fabric 大部分为优化 mod，要求相对较松。</p>
+<p>正版问题，只需要更改 online-mode 项。如果使用了第三方皮肤站作为登录方式，那么需要设为 true 而不是 false。如果设为 false(离线登录)，那么 uuid 将会由本地分配而不是微软分配，再次更改为 true 时需要考虑玩家数据问题。因为这个问题不能进入服务器的玩家通常收到的提示时“无效的会话”</p>
+<hr>
+<p>基础教程结束。通过以上教程，相信开一个简单的基友服不是问题了。</p>
+<hr>
+<h2 id="进阶教程">进阶教程</h2>
+<p>锦上添花，选用外部优秀教程。<s>我对教程帖挺挑剔的，所以用的都是我觉得不错的帖子</s></p>
+<h3 id="如何使用自己的域名替代-ip-端口-的格式">如何使用自己的域名替代 ip:端口 的格式</h3>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv5920366/">Minecraft 联机中如何用域名替换 IP 和端口? - 哔哩哔哩 (bilibili.com)</a></p>
+<h3 id="如何为服务器添加-MCDR">如何为服务器添加 MCDR</h3>
+<p><a target="_blank" rel="noopener" href="https://docs.mcdreforged.com/zh-cn/latest/quick_start.html">快速上手 — MCDReforged 2.13.2 文档</a></p>
+<h3 id="如何实现与基岩版互通">如何实现与基岩版互通</h3>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv31318719/">我的世界间歇泉 Geyser 配置文件 config 注释版！ - 哔哩哔哩 (bilibili.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv8621880/">Geyser 间歇泉实现 Minecraft 基岩版/JAVA 版互通服 - 哔哩哔哩 (bilibili.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://doc.natfrp.com/offtopic/mc-geyser.html">Minecraft Geyser 互通服开服指南 | SakuraFrp 帮助文档 (natfrp.com)</a></p>
+<h3 id="如何使用面板控制服务器-使用-MCSM">如何使用面板控制服务器(使用 MCSM)</h3>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv20156621/">MCSManager——MC 服务器配置超全教程(Win) - 哔哩哔哩 (bilibili.com)</a></p>
+<h2 id="杂谈-EULA">杂谈 EULA</h2>
+<p>这里只讨论国际服，不讨论网易。</p>
+<p>从小学到现在(2024.10)，也算是 mc 腐竹圈的中年人了，也见证了国内 mc 服务器环境的变化。</p>
+<p>从最开始多玩盒子联机，到网易接手后联机难度大大降低，网易上各种服务器、联机房间兴起，再到越来越多人加入国际服，pcl、hmcl 独占一方。</p>
+<p>曾经 mcbbs 是众多服务器开发者、插件开发者、插件搬运工的聚集地，为国内提供了相当便利的资源站，也是国内很多腐竹的起点。2020 年左右算得上是国内腐竹涌现的时期，其中有良心腐竹，积极听取玩家建议，努力维护服务器，也有渣滓从 bbs 下个快餐服，圈钱跑路。</p>
+<p>良心维护也好，圈钱也好，都是个人想法，mojiang 的 eula 从来只是防君子不防小人。人家国外都一堆圈钱服，国内有什么理由不能有呢？双方自愿对吧。</p>
+<p>但是，双方自愿的前提是，双方，至少是玩家，对游戏还有足够的积极度。</p>
+<p>mc 是一款沙盒游戏，这款游戏是极度依赖社区创作的。如果 mojang 把 mod 全锁死，严格禁止光影材质包，严格禁止第三方服务器，那么这游戏已经离死不远了。</p>
+<p>而大多数玩家是没有创作能力的，真正的创作技术掌握在少数人手里，要想让少数人的技术满足大部分人的预期，那么创作者要有创作的动力，玩家要有提出意见的积极性。</p>
+<p>现在假设腐竹为 A，开发者为 B，服务器内有两个玩家 C 和 D，C 相对富裕，有赞助的能力。</p>
+<p>A 看好 B 的一个作品，花钱得到 B 作品的使用权，C 喜欢服务器的模式，在遵守 eula 的前提下为服务器赞助，D 没有赞助能力，但是他能够宣传给朋友们，带动更多人来玩服务器。</p>
+<p>这是一个很正常的发展模式，在这个过程中，A 有了玩家们的支持，愿意继续维护，B 有了 A 的投资，有了创作动力，C 和 D 在服务器也满足了自己的游戏体验，这是一个良性发展模式。</p>
+<p>而快餐服的存在，省去了 A 购买 B 使用权的过程，有的只是 A 无限收割玩家的热情。B 缺少了创作积极性，优秀作品逐渐减少。不过当然对 A 没有影响了，因为 A 已经不再购买 B。C 和 D 的热情没有得到正向反馈，热情减少，C 的赞助减少，D 的宣传作用减弱，A 收割的越来越少，直至没人愿意继续在他的服务器玩，于是 A 关掉服务器，不知从何处搞到另一个快餐服，继续以上模式。</p>
+<p>受影响的只有 B，C，D。这就是为什么快餐服会削减社区整体积极性。</p>
+<p>在 mcbbs 崩盘之后，直到现在，快餐服群体受了很大打击。为什么呢？因为没资源了，那些圈钱腐竹不懂技术，不会升级服务器版本，不会替换新版插件，不知道流行 mod 是什么。</p>
+<p>想象中是，快餐服倒闭后，大量玩家涌入良心服务器，良心服茁壮成长。</p>
+<p>可是曾经习惯快餐服的玩家，早就没了积极性，快餐服的快节奏也无法融入到良心服相对较慢的节奏。</p>
+<p>于是玩家整体规模开始下滑，市场开始缩减。良心腐竹们苦苦维持，全凭着一腔热血，但总有放弃的时候。</p>
+<p>以至于现在，出名服务器两只手可以数过来，一个服务器超过十个人常驻就谢天谢地了。</p>
+<p>mc 整体规模下降肯定还有别的原因，但我常混迹在腐竹圈，快餐服是我见到的最直接的原因。</p>
+<p>说白就是 eula 管的太松了，mojang 在当地都不怎么管，更何况山高皇帝远，mojang 几乎不可能管到中国来。</p>
+<p>eula 不只是在开服时候强制要求你同意的一个文件，更应该作为每个腐竹的规范。如何运维好服务器？eula 已经给出答案了。下面是 eula 的部分原文。</p>
+<blockquote>
+<p>本 EULA 是您和我们（Mojang AB 和微软公司或（如适用）下文的“企业信息”一节列出的其当地关联公司之一）之间达成的法律协议。您应该阅读完整内容，但此处简要总结了一些要点以便为您提供指导，完整条款和条件仍然适用。</p>
+<ul class="lvl-1">
+<li class="lvl-2">本 Minecraft EULA 和<a target="_blank" rel="noopener" href="https://www.microsoft.com/servicesagreement">微软服务协议</a>共同适用于所有 Minecraft 服务。</li>
+<li class="lvl-2">您的内容为您所有，但请负责任和安全地分享它。</li>
+<li class="lvl-2">我们的社区标准帮助我们建立一个对所有人开放和安全的社区。</li>
+<li class="lvl-2">您可以开发工具、插件和服务，前提是它们看起来不是官方项目或者看起来未经过我们批准，例如不使用我们的徽标。</li>
+<li class="lvl-2">未经我们允许，请勿分发或将我们创建的任何内容用于商业用途。</li>
+<li class="lvl-2">我们会尽可能做到公开、诚实和相信他人，希望您对我们也是如此。</li>
+</ul>
+</blockquote>
+<blockquote>
+<h2 id="您可以和不可以用-Minecraft-软件和内容做的事情"><strong>您可以和不可以用 Minecraft 软件和内容做的事情</strong></h2>
+<p>您购买我们的游戏后，可以下载、安装和畅玩这些游戏。对于 Minecraft：Java 版的 服务器版本，您可以将其安装在服务器上并主持在线游戏。</p>
+<p>但是，除非我们明确同意，否则您不得分发我们创建的任何内容。“分发我们创建的任何内容”是指：</p>
+<ul class="lvl-1">
+<li class="lvl-2">
+<p>向任何其他人提供我们的游戏软件或内容；</p>
+</li>
+<li class="lvl-2">
+<p>将我们创建的任何内容用于商业用途；</p>
+</li>
+<li class="lvl-2">
+<p>试图通过我们创建的任何内容赚钱；或者</p>
+</li>
+<li class="lvl-2">
+<p>允许其他人以不公平或不合理的方式访问我们创建的任何内容。</p>
+</li>
+</ul>
+<p>因此，为清楚起见，“游戏”或“我们提供的内容”包括但不限于服务以及我们将来可能发布的任何其他游戏。它还包括游戏的更新、补丁、可下载内容、市场内容、加载项或修改版本、这些内容的一部分、商品、视听内容，或我们提供的任何其他内容。</p>
+<p>除此之外，我们对您做的事情要求非常宽松，事实上我们鼓励您做一些很酷的事情，只是不要做我们规定不能做的那些事情即可。</p>
+</blockquote>
+<p>一句话来说，就是</p>
+<blockquote>
+<p><strong>Minecraft 这个游戏是我们的，请不要利用我们的游戏来赚钱。</strong></p>
+</blockquote>
+<p>但是 eula 的存在并不为人所知，甚至很多人不知道这到底是什么东西。不像其他应用强制要求看完的用户协议，mc 的 eula 除了开服时候提示一下之外，从来没刻意强调过自己的存在。这也是有原因的，因为 mc 的 eula 针对的不是玩家群体，而是利用 mc 去赚钱的人。</p>
+<p>服务器是整个 mc 与资本关系最密切的地方，优秀资源在外可以自由分享，但是一旦到了服务器上就开始变味了。</p>
+<p>服务器运营需要成本，需要钱去租机子，需要时间去打磨。腐竹们需要维持运营就需要收入，收入可以是自己工作获得，也可以以公益赞助方式分摊到广大玩家，更可以是吸引氪金成为商业服。</p>
+<p>前两者是完全符合 eula 的，而第三者显然违反了 eula。就像上文所说，开设服务器必须要有资本的支撑才能够运行。而这样的“资本来源”对于基于 mc 开设的商业服务器来说，从何而来，是一大难题。</p>
+<p>但是 eula 并没有完全限制死商业服的发展</p>
+<p>仔细阅读 eula，并没有说“不允许使用 mc 进行任何盈利”，而是说“试图通过<strong>我们创建的任何内容</strong>赚钱”“允许其他人以<strong>不公平或不合理的方式</strong>访问<strong>我们创建的任何内容</strong>”。</p>
+<p>以 hypixel 为例，作为全球最大的小游戏服务器，hypixel 中氪金靠着 rank、gold、items 三大类，也就是特权、金币、道具。</p>
+<p>hypixel 无疑是商业服，但是为什么说他符合 eula 呢？这三大类为什么符合 eula？</p>
+<p>首先，所谓 <code>特权</code> ，在 hypixel 中仅仅是头衔称号、特效等徒有其表的加成，而 <code>道具</code> 也仅仅用做装饰用途，在实际游戏中，不管氪金多少，考验的都只是玩家的实力。而这些装饰特效，并不是 mojiang 创作的，是 hypixel 工作室自己编写的。所以无论从哪个角度看，hypixel 的商业模式在 eula 的规范下是相当成功的，名利双收。</p>
+<p>而快餐服的特点是，吸金，氪金和不氪金的体验差距巨大，甚至能花钱买 op。</p>
+<p>所以，eula 虽然没有实权，空有其表，但是确确实实规范了服务器与资本的关系，也确确实实指导腐竹们怎么进行服务器商业化的可持续化。</p>
+<p>综上，不要仅仅将 eula 视为不同意就不让自己开服的屑文件。</p>
+<p>在商业化时代，想赚钱但是遵守空有其表的 eula 好像确实是商业傻子，来钱肯定不如随心所欲的圈来的快。但不能否认的是，eula 的规范是商业服可持续化的必然之路，我们遵守 eula，也是对 mc 最基本的尊重。</p>
+<h2 id="杂谈服务器经济体系">杂谈服务器经济体系</h2>
+<p>玩了很多服务器，发现玩着玩着，人人大富翁，想要什么直接从服务器商店买，有新人进来先给他几十万带带他。</p>
+<p>很明显，遇到通货膨胀问题了。</p>
+<p>服务器货币一般有两种模式：</p>
+<ol>
+<li class="lvl-3">
+<p>游戏矿物。比如钻石</p>
+</li>
+<li class="lvl-3">
+<p>系统商店，计分板货币</p>
+</li>
+</ol>
+<p>首先看第一种，矿物作为货币。以钻石为例，确实是一个理想货币：不可再生，一般情况需要劳动才能获得。但是忽略了劳动难度。开荒时，钻石往往是很稀缺的资源，一个开荒玩家手里一下掏出几组钻石去交易是不可能的，除非没日没夜开矿透去挖。因此，昂贵矿物作为货币往往因为<strong>产量过少</strong>导致<strong>市场缩减</strong>。</p>
+<p>再看第二种，计分板货币，很常见的货币类型。下面是知乎某帖的回复。</p>
+<blockquote>
+<p>由于这个系统为每种劳动都人为定价了，必然会造成获取物品的价值之分（划算与否），导致的结果是所有人的玩法趋同，都向着挣钱最快的游戏方式努力，建设大量相同的设施，甚至养殖大量动物导致服务器卡顿。如果不调整兑换比例，在成为“土豪”后就会迅速对游戏厌倦，导致大量玩家流失，唯一的方式就是开始新周目所有财产清零，这也是很多服务器为什么生命周期如此之短的原因。</p>
+</blockquote>
+<p>总结两个方案。一边是缺钱，一边是钱太多。</p>
+<p>针对第一个问题，直接的方案是增大钻石刷新率，并在前期提高钻石的价格。但是当附近钻石都被开采完毕，新玩家只能到更远的地方发展。这一来割裂了玩家，二来新玩家体验很差。</p>
+<p>针对第二个问题，直接的方案是继续增大兑换比例，并减少玩家生产能力(比如添加体力系统)。但前一种治标不治本，后一种会引起玩家反感。所以，如果引入了计分板货币系统，通货膨胀是必然结局。</p>
+<p>结论就是，<strong>mc 中任何经济体系都是没有用的</strong>。</p>
+<p>(写文时候突发奇想一种解决方案，让所有玩家财产公有，但是每人每天有消费上限，共有财产定期收缴一部分。这种模式还是第一次想过)</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">文章</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+          <li><a href="/categories/">分类</a></li>
+        
+          <li><a href="/links/">链接</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">从 0 → ∞ 成为 Minecraft JE 腐竹</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">基础教程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.2.1.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#java-%E7%8E%AF%E5%A2%83"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">java 环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E4%B8%80%E4%B8%AA%E5%90%88%E9%80%82%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A0%B8%E5%BF%83"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">选择一个合适的服务器核心</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">编写启动脚本</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">启动</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#EULA"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">EULA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">服务器结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#logs-%E5%92%8C-crash-reports"><span class="toc-number">1.2.2.2.1.</span> <span class="toc-text">logs 和 crash-reports</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9C%B0%E5%9B%BE%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.2.2.2.</span> <span class="toc-text">地图结构</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9C%B0%E5%9B%BE"><span class="toc-number">1.2.2.2.2.1.</span> <span class="toc-text">更改服务器地图</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#mods-plugins"><span class="toc-number">1.2.2.2.3.</span> <span class="toc-text">mods &#x2F; plugins</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#mod"><span class="toc-number">1.2.2.2.3.1.</span> <span class="toc-text">mod</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#plugin"><span class="toc-number">1.2.2.2.3.2.</span> <span class="toc-text">plugin</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#server-properties-%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.2.2.2.4.</span> <span class="toc-text">server.properties 详解</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E5%8F%B0%E6%8C%87%E4%BB%A4%E5%92%8C%E9%87%8D%E8%A6%81%E6%8C%87%E4%BB%A4"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">控制台指令和重要指令</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E3%80%81%E7%89%A9%E7%90%86%E6%9C%BA"><span class="toc-number">1.2.3.</span> <span class="toc-text">云服务器、物理机</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E6%9C%BA%E5%AD%90%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%80%8E%E4%B9%88%E7%9C%8B"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">如何选择机子，配置怎么看</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E7%AB%AF%E5%8F%A3"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">如何配置端口</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%BF%9B%E5%85%A5%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.2.4.</span> <span class="toc-text">如何进入服务器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%E6%95%99%E7%A8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">进阶教程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E5%9F%9F%E5%90%8D%E6%9B%BF%E4%BB%A3-ip-%E7%AB%AF%E5%8F%A3-%E7%9A%84%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.3.1.</span> <span class="toc-text">如何使用自己的域名替代 ip:端口 的格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%B7%BB%E5%8A%A0-MCDR"><span class="toc-number">1.3.2.</span> <span class="toc-text">如何为服务器添加 MCDR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%8E%E5%9F%BA%E5%B2%A9%E7%89%88%E4%BA%92%E9%80%9A"><span class="toc-number">1.3.3.</span> <span class="toc-text">如何实现与基岩版互通</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E9%9D%A2%E6%9D%BF%E6%8E%A7%E5%88%B6%E6%9C%8D%E5%8A%A1%E5%99%A8-%E4%BD%BF%E7%94%A8-MCSM"><span class="toc-number">1.3.4.</span> <span class="toc-text">如何使用面板控制服务器(使用 MCSM)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%82%E8%B0%88-EULA"><span class="toc-number">1.4.</span> <span class="toc-text">杂谈 EULA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%82%A8%E5%8F%AF%E4%BB%A5%E5%92%8C%E4%B8%8D%E5%8F%AF%E4%BB%A5%E7%94%A8-Minecraft-%E8%BD%AF%E4%BB%B6%E5%92%8C%E5%86%85%E5%AE%B9%E5%81%9A%E7%9A%84%E4%BA%8B%E6%83%85"><span class="toc-number">1.5.</span> <span class="toc-text">您可以和不可以用 Minecraft 软件和内容做的事情</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%82%E8%B0%88%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BB%8F%E6%B5%8E%E4%BD%93%E7%B3%BB"><span class="toc-number">1.6.</span> <span class="toc-text">杂谈服务器经济体系</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.gubaiovo.com/posts/475edca7.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.gubaiovo.com/posts/475edca7.html&text=从0 → ∞ 成为 Minecraft JE腐竹"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.gubaiovo.com/posts/475edca7.html&title=从0 → ∞ 成为 Minecraft JE腐竹"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.gubaiovo.com/posts/475edca7.html&is_video=false&description=从0 → ∞ 成为 Minecraft JE腐竹"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=从0 → ∞ 成为 Minecraft JE腐竹&body=Check out this article: https://www.gubaiovo.com/posts/475edca7.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.gubaiovo.com/posts/475edca7.html&title=从0 → ∞ 成为 Minecraft JE腐竹"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.gubaiovo.com/posts/475edca7.html&title=从0 → ∞ 成为 Minecraft JE腐竹"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.gubaiovo.com/posts/475edca7.html&title=从0 → ∞ 成为 Minecraft JE腐竹"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.gubaiovo.com/posts/475edca7.html&title=从0 → ∞ 成为 Minecraft JE腐竹"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.gubaiovo.com/posts/475edca7.html&name=从0 → ∞ 成为 Minecraft JE腐竹&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.gubaiovo.com/posts/475edca7.html&t=从0 → ∞ 成为 Minecraft JE腐竹"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2026
+    gubai
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">文章</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/gubaiovo">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/links/">链接</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
